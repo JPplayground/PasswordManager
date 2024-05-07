@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="mainView" stylesheets="@css/pages.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jp.passwordmanager.controllers.AddPageController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="650.0" opacity="0.05" pickOnBounds="true">
+         <image>
+            <Image url="@images/possiblebackground.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="225.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="311.0" layoutY="14.0" styleClass="header-label" text="Add Common Emails" textFill="#382bf0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="25.0">
+            </Label>
+            <TextField alignment="CENTER" layoutX="165.0" layoutY="69.0" prefHeight="40.0" prefWidth="300.0" promptText="example@gmail.com" styleClass="entry-box" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="70.0">
+            </TextField>
+            <Button fx:id="addCommonEmailBtn" layoutX="299.0" layoutY="123.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="70.0" styleClass="control-button" text="ADD" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
+            <Separator layoutX="225.0" layoutY="181.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="180.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <TextField fx:id="titleEntry" alignment="CENTER" layoutX="175.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" promptText="Required..." styleClass="entry-box" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="65.0" />
+            <TextField fx:id="emailEntry" alignment="CENTER" layoutX="175.0" layoutY="110.0" prefHeight="40.0" prefWidth="300.0" promptText="Required..." styleClass="entry-box" AnchorPane.topAnchor="110.0" />
+            <TextField fx:id="passwordEntry" alignment="CENTER" layoutX="175.0" layoutY="155.0" prefHeight="40.0" prefWidth="300.0" promptText="Required..." styleClass="entry-box" AnchorPane.topAnchor="155.0" />
+            <TextField fx:id="usernameEntry" alignment="CENTER" layoutX="175.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Optional..." styleClass="entry-box" AnchorPane.topAnchor="200.0" />
+            <TextField fx:id="linkEntry" alignment="CENTER" layoutX="175.0" layoutY="245.0" prefHeight="40.0" prefWidth="300.0" promptText="Optional..." styleClass="entry-box" AnchorPane.topAnchor="245.0" />
+            <TextField fx:id="groupEntry" alignment="CENTER" layoutX="175.0" layoutY="290.0" prefHeight="40.0" prefWidth="300.0" promptText="Optional..." styleClass="entry-box" AnchorPane.topAnchor="290.0" />
+            <Label alignment="CENTER" layoutX="204.0" layoutY="14.0" styleClass="header-label" text="Add New Entry" textFill="#382bf0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
+            <Button fx:id="addEntryBtn" layoutX="330.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="120.0" styleClass="control-button" text="ADD" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="200.0" />
+            <Button fx:id="clearEntryFieldsBtn" layoutX="200.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="120.0" styleClass="control-button" text="CLEAR" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="330.0" />
+            <Label layoutX="86.0" layoutY="65.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Title" />
+            <Label layoutX="86.0" layoutY="110.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Email" />
+            <Label layoutX="86.0" layoutY="155.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Password" />
+            <Label layoutX="86.0" layoutY="200.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Username" />
+            <Label layoutX="86.0" layoutY="245.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Link" />
+            <Label layoutX="86.0" layoutY="290.0" prefHeight="40.0" prefWidth="70.0" styleClass="entry-label" text="Group" />
+            <ChoiceBox fx:id="commonEmailDropdown" layoutX="490.0" layoutY="116.0" prefHeight="25.0" prefWidth="105.0" styleClass="dropbox" />
+            <Button fx:id="generatePasswordBtn" layoutX="481.0" layoutY="156.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="120.0" styleClass="control-button" text="Generate" />
+            <ChoiceBox fx:id="groupDropdown" layoutX="490.0" layoutY="297.0" prefHeight="25.0" prefWidth="105.0" styleClass="dropbox" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

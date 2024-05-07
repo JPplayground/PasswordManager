@@ -1,4 +1,4 @@
-module com.core.passwordmanager3 {
+module com.jp.passwordmanager {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
@@ -7,8 +7,10 @@ module com.core.passwordmanager3 {
     requires annotations;
 
 
-    opens com.core.passwordmanager to javafx.fxml;
-    exports com.core.passwordmanager;
-    exports com.core.passwordmanager.data;
-    opens com.core.passwordmanager.data to javafx.fxml;
+    opens com.jp.passwordmanager to javafx.fxml;
+    exports com.jp.passwordmanager;
+    exports com.jp.passwordmanager.data;
+    opens com.jp.passwordmanager.data to javafx.fxml;
+    exports com.jp.passwordmanager.controllers;
+    opens com.jp.passwordmanager.controllers to javafx.fxml;
 }

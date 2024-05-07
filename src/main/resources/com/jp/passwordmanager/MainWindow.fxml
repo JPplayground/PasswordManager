@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="mainPane" stylesheets="@css/sidebar-menu-buttons.css, @css/background.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jp.passwordmanager.controllers.MainWindowController">
+   <children>
+      <Pane layoutX="-28.0" layoutY="-29.0" prefHeight="600.0" prefWidth="15.0" style="-fx-background-color: #1a1625;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="15.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1a1625; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+               <children>
+
+                  <Button id="homeBtn" fx:id="homeBtn" alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="150.0" styleClass="button-style" text="Home">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/feather-icons/home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button id="addBtn" fx:id="addBtn" alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="150.0" styleClass="button-style" text="Add">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/feather-icons/plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button id="findBtn" fx:id="findBtn" alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="150.0" styleClass="button-style" text="Find">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/feather-icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button id="manageBtn" fx:id="manageBtn" alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="150.0" styleClass="button-style" text="Manage">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/feather-icons/tool.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button id="aboutBtn" fx:id="aboutBtn" alignment="BASELINE_LEFT" prefHeight="40.0" prefWidth="150.0" styleClass="button-style" text="About">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/feather-icons/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="pageDisplay" layoutX="150.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="650.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/possiblebackground.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+   </children>
+</AnchorPane>

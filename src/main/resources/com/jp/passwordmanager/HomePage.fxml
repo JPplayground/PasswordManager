@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jp.passwordmanager.controllers.HomePageController">
+   <children>
+      <Label alignment="CENTER" layoutX="67.0" layoutY="154.0" prefHeight="211.0" prefWidth="516.0" text="WELCOME TO THE HOME PAGE" />
+   </children>
+</AnchorPane>
