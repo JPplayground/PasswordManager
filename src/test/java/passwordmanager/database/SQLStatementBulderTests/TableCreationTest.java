@@ -1,7 +1,7 @@
-package com.jp.passwordmanager.database.SQLStatementBulderTests;
+package passwordmanager.database.SQLStatementBulderTests;
 
-import com.jp.passwordmanager.database.DatabaseConfig;
-import com.jp.passwordmanager.database.SQLStatementBuilder;
+import passwordmanager.database.DatabaseConfig;
+import passwordmanager.database.SQLStatementBuilder;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

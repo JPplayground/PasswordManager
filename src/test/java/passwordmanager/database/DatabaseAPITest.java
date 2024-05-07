@@ -1,4 +1,4 @@
-package com.jp.passwordmanager.database;
+package passwordmanager.database;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

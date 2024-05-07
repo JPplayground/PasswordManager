@@ -1,4 +1,4 @@
-package com.jp.passwordmanager.database;
+package passwordmanager.database;
 
 public class DatabaseConfig {
     public static final String DRIVER_URL = "org.h2.Driver";

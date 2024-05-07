@@ -6,9 +6,9 @@ BB8493
 DBAFA0
  */
 
-package com.jp.passwordmanager.controllers;
+package passwordmanager.controllers;
 
-import com.jp.passwordmanager.database.DatabaseAPI;
+import passwordmanager.database.DatabaseAPI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
