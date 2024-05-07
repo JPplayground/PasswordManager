@@ -134,3 +134,22 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
+
+.back-button {
+    -fx-background-color: #191269;
+    -fx-background-radius: 100;
+}
+
+.back-button:hover {
+    -fx-background-color: #0e0a41;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-scale-z: 1.05;
+}
+
+.back-button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-scale-z: 0.95;
+}

@@ -35,5 +35,23 @@
             <ChoiceBox fx:id="groupDropdown" layoutX="490.0" layoutY="297.0" prefHeight="25.0" prefWidth="105.0" styleClass="dropbox" />
          </children>
       </AnchorPane>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="45.0" styleClass="back-button">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/feather-icons/arrow-left.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="575.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="45.0" styleClass="back-button">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/feather-icons/trash-2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

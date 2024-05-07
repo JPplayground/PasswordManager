@@ -42,3 +42,5 @@ spy.log
 ### App database information ###
 test.mv.db
 test.trace.db
+
+/srcbackup

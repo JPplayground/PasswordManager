@@ -1,5 +1,12 @@
+.main-view {
+    /*-fx-background-color: #1a1625;*/
+    /*-fx-background-color: #3c0f42;*/
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #1c081f, #1a1625);
+    -fx-background-radius: 10;
+}
+
 .button-style {
-    -fx-background-color: #1a1625;
+    -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-family: "Bauhaus 93";
     -fx-font-size: 18px;

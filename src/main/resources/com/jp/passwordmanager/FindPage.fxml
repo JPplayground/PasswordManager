@@ -17,13 +17,14 @@
          </image></ImageView>
       <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="200.0" prefWidth="420.0" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="40.0" prefWidth="300.0" promptText="example@gmail.com" styleClass="entry-box" />
+            <TextField alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="40.0" prefWidth="300.0" promptText="Search..." styleClass="entry-box" />
             <ChoiceBox fx:id="commonEmailDropdown" layoutX="345.0" layoutY="81.0" prefHeight="25.0" prefWidth="105.0" styleClass="dropbox" />
             <Label alignment="CENTER" layoutX="31.0" layoutY="18.0" text="Find" textFill="#382bf0">
                <font>
                   <Font name="Bauhaus 93" size="36.0" />
                </font>
             </Label>
+            <Separator layoutX="25.0" layoutY="127.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
          </children></AnchorPane>
       <ScrollPane hbarPolicy="NEVER" layoutX="233.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" styleClass="scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
          <content>

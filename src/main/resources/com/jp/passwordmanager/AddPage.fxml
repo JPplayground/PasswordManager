@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="mainView" stylesheets="@css/pages.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jp.passwordmanager.controllers.AddPageController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="650.0" opacity="0.05" pickOnBounds="true">
+      <ImageView fitHeight="600.0" fitWidth="650.0" opacity="0.05" pickOnBounds="true" visible="false">
          <image>
             <Image url="@images/possiblebackground.png" />
          </image>
