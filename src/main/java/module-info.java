@@ -9,8 +9,8 @@ module com.jp.passwordmanager {
 
     opens com.jp.passwordmanager to javafx.fxml;
     exports com.jp.passwordmanager;
-    exports com.jp.passwordmanager.data;
-    opens com.jp.passwordmanager.data to javafx.fxml;
+    exports com.jp.passwordmanager.database;
+    opens com.jp.passwordmanager.database to javafx.fxml;
     exports com.jp.passwordmanager.controllers;
     opens com.jp.passwordmanager.controllers to javafx.fxml;
 }

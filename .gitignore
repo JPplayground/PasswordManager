@@ -43,4 +43,4 @@ spy.log
 test.mv.db
 test.trace.db
 
-/srcbackup
+/backup

@@ -8,7 +8,7 @@ DBAFA0
 
 package com.jp.passwordmanager.controllers;
 
-import com.jp.passwordmanager.data.DatabaseAPI;
+import com.jp.passwordmanager.database.DatabaseAPI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
