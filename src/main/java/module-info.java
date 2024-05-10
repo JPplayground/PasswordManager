@@ -13,4 +13,6 @@ module com.jp.passwordmanager {
     opens passwordmanager.database to javafx.fxml;
     exports passwordmanager.controllers;
     opens passwordmanager.controllers to javafx.fxml;
+    exports passwordmanager.ui;
+    opens passwordmanager.ui to javafx.fxml;
 }

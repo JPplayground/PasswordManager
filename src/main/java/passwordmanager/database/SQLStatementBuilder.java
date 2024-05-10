@@ -31,15 +31,11 @@ public class SQLStatementBuilder {
     private final Connection connection;
 
     /**
-     * Constructs an instance of {@code SQLStatementBuilder} with the specified database connection.
-     * This constructor stores the provided connection which is used later to prepare SQL statements.
+     * Constructs an instance of {@code SQLStatementBuilder}.
      *
-     * @param connection The active database connection to be used for preparing SQL statements.
-     *                   This connection should be managed (opened and closed) outside of this class,
-     *                   allowing this class to focus solely on preparing statements.
      */
-    public SQLStatementBuilder(Connection connection) {
-        this.connection = connection;
+    public SQLStatementBuilder() {
+        this.connection = DatabaseConnection.getConnection();
     }
 
     /**
@@ -52,15 +48,15 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareEntryTableCreationStatement() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConfig.ENTRIES_TABLE_NAME + "(" +
-                DatabaseConfig.EntryColumns.TITLE + " VARCHAR(255) PRIMARY KEY, " +
-                DatabaseConfig.EntryColumns.EMAIL + " VARCHAR(255), " +
-                DatabaseConfig.EntryColumns.PASSWORD + " VARCHAR(255), " +
-                DatabaseConfig.EntryColumns.USERNAME + " VARCHAR(255), " +
-                DatabaseConfig.EntryColumns.LINK + " VARCHAR(255), " +
-                DatabaseConfig.EntryColumns.CATEGORY + " VARCHAR(255), " +
-                DatabaseConfig.EntryColumns.DATE_CREATED + " DATE, " +
-                DatabaseConfig.EntryColumns.DATE_MODIFIED + " DATE);";
+        String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.ENTRIES_TABLE_NAME + "(" +
+                DatabaseConstants.EntryColumns.TITLE + " VARCHAR(255) PRIMARY KEY, " +
+                DatabaseConstants.EntryColumns.EMAIL + " VARCHAR(255), " +
+                DatabaseConstants.EntryColumns.PASSWORD + " VARCHAR(255), " +
+                DatabaseConstants.EntryColumns.USERNAME + " VARCHAR(255), " +
+                DatabaseConstants.EntryColumns.LINK + " VARCHAR(255), " +
+                DatabaseConstants.EntryColumns.CATEGORY + " VARCHAR(255), " +
+                DatabaseConstants.EntryColumns.DATE_CREATED + " DATE, " +
+                DatabaseConstants.EntryColumns.DATE_MODIFIED + " DATE);";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         return pstmt;
@@ -75,8 +71,8 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareCommonEmailsTableCreationStatement() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConfig.COMMON_EMAILS_TABLE_NAME + "(" +
-                "id INT AUTO_INCREMENT PRIMARY KEY, " + DatabaseConfig.COMMON_EMAILS_COLUMN_NAME + " VARCHAR(255));";
+        String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.COMMON_EMAILS_TABLE_NAME + "(" +
+                "id INT AUTO_INCREMENT PRIMARY KEY, " + DatabaseConstants.COMMON_EMAILS_COLUMN_NAME + " VARCHAR(255));";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         return pstmt;
@@ -101,15 +97,15 @@ public class SQLStatementBuilder {
      */
     public PreparedStatement prepareInsertEntryStatement(String title, String email, String password, String username, String link, String category) throws SQLException {
 
-        String sql = "INSERT INTO " + DatabaseConfig.ENTRIES_TABLE_NAME + " (" +
-                DatabaseConfig.EntryColumns.TITLE + ", " +
-                DatabaseConfig.EntryColumns.EMAIL + ", " +
-                DatabaseConfig.EntryColumns.PASSWORD + ", " +
-                DatabaseConfig.EntryColumns.USERNAME + ", " +
-                DatabaseConfig.EntryColumns.LINK + ", " +
-                DatabaseConfig.EntryColumns.CATEGORY + ", " +
-                DatabaseConfig.EntryColumns.DATE_CREATED + ", " +
-                DatabaseConfig.EntryColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+        String sql = "INSERT INTO " + DatabaseConstants.ENTRIES_TABLE_NAME + " (" +
+                DatabaseConstants.EntryColumns.TITLE + ", " +
+                DatabaseConstants.EntryColumns.EMAIL + ", " +
+                DatabaseConstants.EntryColumns.PASSWORD + ", " +
+                DatabaseConstants.EntryColumns.USERNAME + ", " +
+                DatabaseConstants.EntryColumns.LINK + ", " +
+                DatabaseConstants.EntryColumns.CATEGORY + ", " +
+                DatabaseConstants.EntryColumns.DATE_CREATED + ", " +
+                DatabaseConstants.EntryColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
 
         PreparedStatement stmt = this.connection.prepareStatement(sql);
         stmt.setString(1, title);
@@ -139,27 +135,27 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareEntryUpdateStatement(String title, String email, String password, String username, String link, String category) throws SQLException {
-        StringBuilder sql = new StringBuilder("UPDATE " + DatabaseConfig.ENTRIES_TABLE_NAME + " SET ");
+        StringBuilder sql = new StringBuilder("UPDATE " + DatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
 
         if (email != null) {
-            sql.append(DatabaseConfig.EntryColumns.EMAIL + " = ?, ");
+            sql.append(DatabaseConstants.EntryColumns.EMAIL + " = ?, ");
         }
         if (password != null) {
-            sql.append(DatabaseConfig.EntryColumns.PASSWORD + " = ?, ");
+            sql.append(DatabaseConstants.EntryColumns.PASSWORD + " = ?, ");
         }
         if (username != null) {
-            sql.append(DatabaseConfig.EntryColumns.USERNAME + " = ?, ");
+            sql.append(DatabaseConstants.EntryColumns.USERNAME + " = ?, ");
         }
         if (link != null) {
-            sql.append(DatabaseConfig.EntryColumns.LINK + " = ?, ");
+            sql.append(DatabaseConstants.EntryColumns.LINK + " = ?, ");
         }
         if (category != null) {
-            sql.append(DatabaseConfig.EntryColumns.CATEGORY + " = ?, ");
+            sql.append(DatabaseConstants.EntryColumns.CATEGORY + " = ?, ");
         }
 
-        sql.append(DatabaseConfig.EntryColumns.DATE_MODIFIED + " = NOW()");
+        sql.append(DatabaseConstants.EntryColumns.DATE_MODIFIED + " = NOW()");
 
-        sql.append(" WHERE " + DatabaseConfig.EntryColumns.TITLE + " = ?");
+        sql.append(" WHERE " + DatabaseConstants.EntryColumns.TITLE + " = ?");
 
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql.toString());
@@ -196,8 +192,8 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during the database access or the query preparation process.
      */
     public PreparedStatement prepareRemoveEntryStatement(String title) throws SQLException {
-        String sql = "DELETE FROM " + DatabaseConfig.ENTRIES_TABLE_NAME +
-                " WHERE " + DatabaseConfig.EntryColumns.TITLE + " = ?";
+        String sql = "DELETE FROM " + DatabaseConstants.ENTRIES_TABLE_NAME +
+                " WHERE " + DatabaseConstants.EntryColumns.TITLE + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         pstmt.setString(1, title);
@@ -215,7 +211,7 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetEntryStatement(String title) throws SQLException {
-        String sql = "SELECT * FROM " + DatabaseConfig.ENTRIES_TABLE_NAME + " WHERE " + DatabaseConfig.EntryColumns.TITLE
+        String sql = "SELECT * FROM " + DatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + DatabaseConstants.EntryColumns.TITLE
                 + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
@@ -231,7 +227,7 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetAllEntryTitlesStatement() throws SQLException {
-        String sql = "SELECT " + DatabaseConfig.EntryColumns.TITLE + " FROM " + DatabaseConfig.ENTRIES_TABLE_NAME;
+        String sql = "SELECT " + DatabaseConstants.EntryColumns.TITLE + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         return pstmt;
@@ -247,7 +243,7 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareAddCommonEmailStatement(String email) throws SQLException {
-        String sql = "INSERT INTO " + DatabaseConfig.COMMON_EMAILS_TABLE_NAME + " (" + DatabaseConfig.COMMON_EMAILS_COLUMN_NAME + ") VALUES (?)";
+        String sql = "INSERT INTO " + DatabaseConstants.COMMON_EMAILS_TABLE_NAME + " (" + DatabaseConstants.COMMON_EMAILS_COLUMN_NAME + ") VALUES (?)";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         pstmt.setString(1, email);
@@ -265,7 +261,7 @@ public class SQLStatementBuilder {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetListOfCommonEmailsStatement() throws SQLException {
-        String sql = "SELECT " + DatabaseConfig.COMMON_EMAILS_COLUMN_NAME + " FROM " + DatabaseConfig.COMMON_EMAILS_TABLE_NAME;
+        String sql = "SELECT " + DatabaseConstants.COMMON_EMAILS_COLUMN_NAME + " FROM " + DatabaseConstants.COMMON_EMAILS_TABLE_NAME;
 
         PreparedStatement stmt = this.connection.prepareStatement(sql);
         return stmt;

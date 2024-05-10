@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * to perform various operations related to managing entries and common email addresses
  * within a password manager application.
  *
- * <p>Instances of this class are obtained using the {@link #getInstance(boolean)} method.
+ * <p>Instances of this class are obtained using the {@link #getInstance()} method.
  * This class ensures safe database operations and encapsulates SQL statements for
  * adding, modifying, removing, and retrieving data related to entries and common emails.
  *
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 public class DatabaseAPI {
 
     private SQLStatementBuilder sqlStatementBuilder;
+
+    // Singleton Instance
     private static DatabaseAPI instance;
 
     /**
@@ -25,18 +27,9 @@ public class DatabaseAPI {
      * This constructor is called internally to ensure only one instance of the {@code DatabaseAPI}
      * class exists throughout the application.
      */
-    private DatabaseAPI(boolean usingTestingDatabase) {
+    private DatabaseAPI() {
         try {
-
-            Connection connection;
-
-            if (usingTestingDatabase) { // Using a test database in Junit tests
-                connection = DriverManager.getConnection(DatabaseConfig.TEST_CONNECTION_URL_WITH_PROXY);
-            } else {
-                connection = DriverManager.getConnection(DatabaseConfig.APP_CONNECTION_URL);
-            }
-
-            this.sqlStatementBuilder = new SQLStatementBuilder(connection);
+            this.sqlStatementBuilder = new SQLStatementBuilder();
 
             PreparedStatement createEntryTable = sqlStatementBuilder.prepareEntryTableCreationStatement();
             createEntryTable.execute();
@@ -54,9 +47,9 @@ public class DatabaseAPI {
      *
      * @return the singleton instance of the {@code DatabaseAPI}.
      */
-    public static DatabaseAPI getInstance(boolean usingTestingDatabase) {
+    public static DatabaseAPI getInstance() {
         if (instance == null) {
-            instance = new DatabaseAPI(usingTestingDatabase);
+            instance = new DatabaseAPI();
         }
         return instance;
     }
@@ -81,7 +74,28 @@ public class DatabaseAPI {
     }
 
     /**
+     * Adds a new entry to the database.
+     *
+     * @param entry     the entry object needing to be added.
+     */
+    public void newEntry(Entry entry) {
+
+        String title, email, password, username, link, category;
+
+        title = entry.getTitle();
+        email = entry.getEmail();
+        password = entry.getPassword();
+        username = entry.getUsername();
+        link = entry.getLink();
+        category = entry.getCategory();
+
+        this.newEntry(title, email, password, username, link, category);
+
+    }
+
+    /**
      * Modifies an existing entry in the database.
+     * Parameters that do not need to be changed should be passed in as null.
      *
      * @param title    the title of the entry to modify.
      * @param email    the new email to update.
@@ -127,16 +141,16 @@ public class DatabaseAPI {
 
                 // Retrieve entry data from the result set
                 String title, email, password, username, link, category;
-                title = resultSet.getString(DatabaseConfig.EntryColumns.TITLE.toString());
-                email = resultSet.getString(DatabaseConfig.EntryColumns.EMAIL.toString());
-                password = resultSet.getString(DatabaseConfig.EntryColumns.PASSWORD.toString());
-                username = resultSet.getString(DatabaseConfig.EntryColumns.USERNAME.toString());
-                link = resultSet.getString(DatabaseConfig.EntryColumns.LINK.toString());
-                category = resultSet.getString(DatabaseConfig.EntryColumns.CATEGORY.toString());
+                title = resultSet.getString(DatabaseConstants.EntryColumns.TITLE.toString());
+                email = resultSet.getString(DatabaseConstants.EntryColumns.EMAIL.toString());
+                password = resultSet.getString(DatabaseConstants.EntryColumns.PASSWORD.toString());
+                username = resultSet.getString(DatabaseConstants.EntryColumns.USERNAME.toString());
+                link = resultSet.getString(DatabaseConstants.EntryColumns.LINK.toString());
+                category = resultSet.getString(DatabaseConstants.EntryColumns.CATEGORY.toString());
 
                 Timestamp dateCreated, dateModified;
-                dateCreated = resultSet.getTimestamp(DatabaseConfig.EntryColumns.DATE_CREATED.toString());
-                dateModified = resultSet.getTimestamp(DatabaseConfig.EntryColumns.DATE_MODIFIED.toString());
+                dateCreated = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_CREATED.toString());
+                dateModified = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_MODIFIED.toString());
 
                 // Create and return the Entry object
                 return new Entry(title, email, password, username, link, category, dateCreated, dateModified);

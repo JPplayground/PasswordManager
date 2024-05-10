@@ -1,9 +1,12 @@
 package passwordmanager.database;
 
-public class DatabaseConfig {
+public class DatabaseConstants {
+
     public static final String DRIVER_URL = "org.h2.Driver";
+
     public static final String APP_CONNECTION_URL = "jdbc:h2:~/test";
-    public static final String TEST_CONNECTION_URL_WITH_PROXY = "jdbc:p6spy:h2:mem:test";
+    public static final String TEST_CONNECTION_URL = "jdbc:h2:mem:test";
+
     public static final String ENTRIES_TABLE_NAME = "ENTRIES";
     public static final String COMMON_EMAILS_TABLE_NAME = "COMMON_EMAILS";
     public static final String COMMON_EMAILS_COLUMN_NAME = "email";

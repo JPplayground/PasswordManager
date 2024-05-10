@@ -1,4 +1,4 @@
-package passwordmanager.database;
+package passwordmanager.ui;
 
 import java.util.Random;
 import java.util.Collections;

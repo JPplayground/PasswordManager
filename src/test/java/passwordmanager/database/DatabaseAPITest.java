@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DatabaseAPITest {
+
     private static DatabaseAPI databaseAPI;
 
     @BeforeAll
     public static void setup() {
-        databaseAPI = DatabaseAPI.getInstance(true);
+        DatabaseConnection.setConnection(true);
+        databaseAPI = DatabaseAPI.getInstance();
     }
 
     @Test

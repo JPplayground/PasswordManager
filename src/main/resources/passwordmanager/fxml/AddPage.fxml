@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controllers.AddPageController">
+  <columnConstraints>
+    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="300.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="300.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label fx:id="addCommonEmailsLabel" alignment="CENTER" prefHeight="75.0" prefWidth="250.0" styleClass="header-label" text="Add Common Emails" GridPane.columnIndex="1" />
+      <TextField fx:id="addCommonEmailEntryField" alignment="CENTER" maxWidth="300.0" minWidth="32.0" promptText="example@gmail.com" styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <Button fx:id="addCommonEmailButton" maxWidth="100.0" mnemonicParsing="false" styleClass="control-button" text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Separator maxWidth="800.0" minWidth="50.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </Separator>
+      <Label fx:id="addNewEntryLabel" alignment="CENTER" prefHeight="75.0" prefWidth="250.0" styleClass="header-label" text="Add New Entry" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="titleEntryField" alignment="CENTER" promptText="Required..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="emailEntryField" alignment="CENTER" promptText="Required..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="passwordEntryField" alignment="CENTER" promptText="Required..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="usernameEntryField" alignment="CENTER" promptText="Optional..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="linkEntryField" alignment="CENTER" promptText="Optional..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="9">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="groupEntryField" alignment="CENTER" promptText="Optional..." styleClass="text-entry" GridPane.columnIndex="1" GridPane.rowIndex="10">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <Button mnemonicParsing="false" styleClass="control-button" text="CLEAR" GridPane.columnIndex="1" GridPane.rowIndex="11">
+         <padding>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets right="150.0" />
+         </GridPane.margin>
+      </Button>
+      <Button mnemonicParsing="false" styleClass="control-button" text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="11">
+         <padding>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets left="150.0" />
+         </GridPane.margin>
+      </Button>
+      <Label fx:id="titleEntryLabel" styleClass="text-label" text="Title" GridPane.rowIndex="5">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="emailEntryLabel" styleClass="text-label" text="Email" GridPane.rowIndex="6">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="passwordEntryLabel" styleClass="text-label" text="Password" GridPane.rowIndex="7">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="usernameEntryLabel" styleClass="text-label" text="Username" GridPane.rowIndex="8">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="linkEntryLabel" styleClass="text-label" text="Link" GridPane.rowIndex="9">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="groupEntryLabel" styleClass="text-label" text="Group" GridPane.rowIndex="10">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <ChoiceBox fx:id="emailChoicebox" prefWidth="150.0" styleClass="dropbox" GridPane.columnIndex="2" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <Button fx:id="generatePasswordBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" styleClass="control-button" text="GENERATE" GridPane.columnIndex="2" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+      </Button>
+      <ChoiceBox fx:id="groupChoicebox" prefWidth="150.0" styleClass="dropbox" GridPane.columnIndex="2" GridPane.rowIndex="10">
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+   </children>
+</GridPane>

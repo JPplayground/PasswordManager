@@ -8,11 +8,14 @@ DBAFA0
 
 package passwordmanager.controllers;
 
+import javafx.scene.layout.BorderPane;
 import passwordmanager.database.DatabaseAPI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+
+
+import java.io.IOException;
 
 
 public class MainWindowController {
@@ -21,97 +24,71 @@ public class MainWindowController {
 
     // Sidebar buttons
     @FXML
-    private Button homeBtn;
-    @FXML
-    private Button addBtn;
-    @FXML
-    private Button findBtn;
-    @FXML
-    private Button manageBtn;
-    @FXML
-    private Button aboutBtn;
+    private Button homeBtn, addBtn, findBtn, manageBtn, aboutBtn;
 
     @FXML
-    private Pane pageDisplay;
-
-    private String homePagePath = "/com/jp/passwordmanager/HomePage.fxml";
-    private String addPagePath = "/com/jp/passwordmanager/AddPage.fxml";
-    private String findPagePath = "/com/jp/passwordmanager/FindPage.fxml";
-    private String managePagePath = "/com/jp/passwordmanager/ManagePage.fxml";
-    private String aboutPagePath = "/com/jp/passwordmanager/AboutPage.fxml";
+    private BorderPane mainBorderPane;
 
     @FXML
     public void initialize() {
-
-        // Set page loading callbacks
-        homeBtn.setOnMouseClicked(event -> loadHomePage());
-        addBtn.setOnMouseClicked(event -> loadAddPage());
-        findBtn.setOnMouseClicked(event -> loadFindPage());
-        manageBtn.setOnMouseClicked(event -> loadManagePage());
-        aboutBtn.setOnMouseClicked(event -> loadAboutPage());
-
-        // Load home page on startup
-        loadHomePage();
+        // Callbacks
+        homeBtn.setOnAction(event -> loadHomePage());
+        addBtn.setOnAction(event -> loadAddPage());
+        findBtn.setOnAction(event -> loadFindPage());
+        manageBtn.setOnAction(event -> loadManagePage());
+        aboutBtn.setOnAction(event -> loadAboutPage());
     }
 
-    @FXML
-    void loadHomePage() {
+    public void loadHomePage() {
+        System.out.println("Loading home page");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passwordmanager/fxml/HomePage.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(homePagePath));
-            Pane newLoadedPane = fxmlLoader.load();
-            pageDisplay.getChildren().clear();
-            pageDisplay.getChildren().add(newLoadedPane);
-        } catch (Exception e) {
+            mainBorderPane.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    void loadAddPage() {
+    public void loadAddPage() {
+        System.out.println("Loading add page");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passwordmanager/fxml/AddPage.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(addPagePath));
-            Pane newLoadedPane = fxmlLoader.load();
-            pageDisplay.getChildren().clear();
-            pageDisplay.getChildren().add(newLoadedPane);
-        } catch (Exception e) {
+            mainBorderPane.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    void loadFindPage() {
+    public void loadFindPage() {
+        System.out.println("Loading find page");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passwordmanager/fxml/FindPage.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(findPagePath));
-            Pane newLoadedPane = fxmlLoader.load();
-            pageDisplay.getChildren().clear();
-            pageDisplay.getChildren().add(newLoadedPane);
-        } catch (Exception e) {
+            mainBorderPane.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    void loadManagePage() {
+    public void loadManagePage() {
+        System.out.println("Loading manage page");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passwordmanager/fxml/ManagePage.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(managePagePath));
-            Pane newLoadedPane = fxmlLoader.load();
-            pageDisplay.getChildren().clear();
-            pageDisplay.getChildren().add(newLoadedPane);
-        } catch (Exception e) {
+            mainBorderPane.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    void loadAboutPage() {
+    public void loadAboutPage() {
+        System.out.println("Loading about page");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passwordmanager/fxml/AboutPage.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(aboutPagePath));
-            Pane newLoadedPane = fxmlLoader.load();
-            pageDisplay.getChildren().clear();
-            pageDisplay.getChildren().add(newLoadedPane);
-        } catch (Exception e) {
+            mainBorderPane.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 }

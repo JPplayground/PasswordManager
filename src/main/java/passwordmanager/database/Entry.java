@@ -131,4 +131,33 @@ public class Entry {
         }
         return dateModified;
     }
+
+    /**
+     * Returns a string representation of this Entry.
+     * The string representation includes the title, email, username, link, category, and timestamps
+     * for creation and modification, if available.
+     *
+     * @return a string representation of this Entry.
+     */
+    @Override
+    public String toString() {
+
+        StringBuilder entryAsString = new StringBuilder();
+
+        entryAsString.append("Title: " + title + "\n");
+        entryAsString.append("\tEmail: " + email + "\n");
+        entryAsString.append("\tPassword: " + password + "\n");
+        entryAsString.append("\tUsername: " + username + "\n");
+        entryAsString.append("\tLink: " + link + "\n");
+        entryAsString.append("\tCategory: " + category + "\n");
+
+        if (dateCreated != null) {
+            entryAsString.append("\tDate: " + dateCreated + "\n");
+        }
+        if (dateModified != null) {
+            entryAsString.append("\tDate: " + dateModified + "\n");
+        }
+
+        return entryAsString.toString();
+    }
 }

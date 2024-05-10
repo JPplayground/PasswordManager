@@ -1,0 +1,12 @@
+@FXML
+VBox menuBtnVbox, mainViewVbox;
+@FXML
+Button homeBtn, addBtn, findBtn, manageBtn, aboutBtn, addCommonEmailButton, generatePasswordBtn;
+@FXML
+StackPane mainViewStackPane;
+@FXML
+Label addCommonEmailsLabel, addNewEntryLabel, titleEntryLabel, emailEntryLabel, passwordEntryLabel, usernameEntryLabel, linkEntryLabel, groupEntryLabel;
+@FXML
+TextField addCommonEmailEntryField, titleEntryField, emailEntryField, passwordEntryField, usernameEntryField, linkEntryField, groupEntryField;
+@FXML
+ChoiceBox emailChoicebox, groupChoicebox;
