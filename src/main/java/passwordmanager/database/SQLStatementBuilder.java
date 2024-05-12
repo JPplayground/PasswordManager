@@ -267,4 +267,11 @@ public class SQLStatementBuilder {
         return stmt;
     }
 
+    public PreparedStatement prepareGetListOfGroupsStatement() throws SQLException {
+        String sql = "SELECT " + DatabaseConstants.EntryColumns.CATEGORY + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
+
+        PreparedStatement stmt = this.connection.prepareStatement(sql);
+        return stmt;
+    }
+
 }

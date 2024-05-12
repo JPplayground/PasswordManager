@@ -109,6 +109,7 @@ public class DatabaseAPITest {
         databaseAPI.newEntry(title2, email2, password2, username2, link2, category2);
 
         ArrayList<String> listOfTitles = databaseAPI.getListOfEntryTitles();
+
         assertEquals(2, listOfTitles.size());
         assertEquals(title1, listOfTitles.get(0));
         assertEquals(title2, listOfTitles.get(1));

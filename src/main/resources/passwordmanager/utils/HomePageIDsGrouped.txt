@@ -1,0 +1,10 @@
+@FXML
+VBox homePageRootVBox, addPageInfoBox, managePageInfoBox, searchPageInfoBox, learnPageInfoBox;
+@FXML
+Label welcomeLabel, addPageHeader, managePageHeader, searchPageHeader, learnPageHeader;
+@FXML
+GridPane infoBoxesGridPane;
+@FXML
+Text addPageInfo, managePageInfo, searchPageInfo, learnPageInfo;
+@FXML
+Button addPageGo, searchPageGo, searchPageGo, searchPageGo;

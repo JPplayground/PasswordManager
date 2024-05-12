@@ -14,7 +14,7 @@
          <left>
             <VBox fx:id="menuBtnVbox" alignment="CENTER" prefHeight="780.0" prefWidth="152.0" styleClass="sidebar" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="homeBtn" alignment="BASELINE_LEFT" styleClass="menu-button" stylesheets="@../css/DarkTheme.css" text="Home" VBox.vgrow="ALWAYS">
+                  <Button fx:id="homeBtn" alignment="CENTER" styleClass="menu-button" stylesheets="@../css/DarkTheme.css" text="Home" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -29,7 +29,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button id="addBtn" fx:id="addBtn" alignment="BASELINE_LEFT" styleClass="menu-button" text="Add" VBox.vgrow="ALWAYS">
+                  <Button id="addBtn" fx:id="addBtn" alignment="CENTER" styleClass="menu-button" text="Add" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -41,7 +41,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button id="findBtn" fx:id="findBtn" alignment="BASELINE_LEFT" styleClass="menu-button" text="Find" VBox.vgrow="ALWAYS">
+                  <Button id="findBtn" fx:id="findBtn" alignment="CENTER" styleClass="menu-button" text="Find" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -53,7 +53,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button id="manageBtn" fx:id="manageBtn" alignment="BASELINE_LEFT" styleClass="menu-button" text="Manage" VBox.vgrow="ALWAYS">
+                  <Button id="manageBtn" fx:id="manageBtn" alignment="CENTER" styleClass="menu-button" text="Manage" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,7 +65,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button id="aboutBtn" fx:id="aboutBtn" alignment="BASELINE_LEFT" styleClass="menu-button" text="About" VBox.vgrow="ALWAYS">
+                  <Button id="aboutBtn" fx:id="aboutBtn" alignment="CENTER" styleClass="menu-button" text="About" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

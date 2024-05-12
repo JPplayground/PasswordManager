@@ -1,5 +1,6 @@
 package passwordmanager.database.SQLStatementBulderTests;
 
+import org.junit.After;
 import passwordmanager.database.DatabaseConnection;
 import passwordmanager.database.DatabaseConstants;
 import passwordmanager.database.SQLStatementBuilder;
@@ -18,6 +19,11 @@ public class TableCreationTest {
     public void openConnection() throws SQLException {
         DatabaseConnection.setConnection(true);
         connection = DatabaseConnection.getConnection();
+    }
+
+    @AfterEach
+    public void closeConnection() throws SQLException {
+        connection.close();
     }
 
 

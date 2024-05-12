@@ -58,6 +58,7 @@
     -fx-background-radius: 20px;
     -fx-font-family: "Bauhaus 93";
     -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(29, 0, 121, 0.6), 5, 0, 0, 2);
 }
 
 .control-button:hover {
@@ -77,9 +78,58 @@
 .dropbox {
     -fx-background-color: #a688fa;
     -fx-background-radius: 20px;
+    -fx-font-size: 12px;
 }
 
 .dropbox:hover {
     -fx-cursor: hand;
     -fx-background-color: #5d59a8;
+}
+
+.dropbox .context-menu {
+    -fx-background-color: #a688fa;
+    -fx-background-radius: 20px;
+
+}
+
+.dropbox .menu-item {
+    -fx-background-color: #a688fa;
+    -fx-background-radius: 20px;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.message-box {
+    -fx-font-style: italic;
+    -fx-font-family: "Arial";
+    -fx-font-size: 18px;
+    -fx-text-fill: #a4dc0e;
+}
+
+.welcome-label {
+    -fx-font: 36px "Bauhaus 93";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.page-description-box {
+    -fx-background-color: #191269;
+    -fx-background-radius: 20px;
+    -fx-border-color: #a688fa;
+    -fx-border-radius: 20px;
+    -fx-border-width: 4px;
+}
+
+.page-description-header {
+    -fx-font: 18px "Arial";
+    -fx-text-fill: #a4dc0e;
+    -fx-font-weight: bold;
+}
+
+.page-description-info-text {
+    -fx-font: 14px "Arial";
+    -fx-text-fill: white;
+    -fx-font-style: italic;
 }

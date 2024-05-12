@@ -2,6 +2,8 @@ package passwordmanager.database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The {@code DatabaseAPI} class provides methods for interacting with a database
@@ -222,6 +224,27 @@ public class DatabaseAPI {
             }
 
             return emails;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Set<String> getListOfGroups() {
+
+        Set<String> groups = new HashSet<>();
+
+        try {
+            PreparedStatement stmt = sqlStatementBuilder.prepareGetListOfGroupsStatement();
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                groups.add(resultSet.getString(1));
+            }
+
+            return groups;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

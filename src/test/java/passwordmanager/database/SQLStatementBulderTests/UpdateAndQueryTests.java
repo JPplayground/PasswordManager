@@ -35,6 +35,11 @@ public class UpdateAndQueryTests {
         }
     }
 
+    @AfterEach
+    public void closeConnection() throws SQLException {
+        DatabaseConnection.closeConnection();
+    }
+
     @Test
     public void testInsertEntry() throws SQLException {
         // Insert an entry

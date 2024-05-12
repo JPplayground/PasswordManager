@@ -1,5 +1,5 @@
 # Path to the FXML file which defines the user interface
-fxml_file_path = "../fxml/MainWindow.fxml"
+fxml_file_path = "../fxml/HomePage.fxml"
 
 # Read the entire content of the FXML file
 with open(fxml_file_path, 'r') as file:
