@@ -1,0 +1,10 @@
+@FXML
+GridPane searchFunctionsGridPane;
+@FXML
+TextField searchEntryBox;
+@FXML
+Label searchLabel;
+@FXML
+ScrollPane searchResultsScrollPane;
+@FXML
+VBox searchResultsVBox;

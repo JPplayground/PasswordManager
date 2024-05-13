@@ -123,13 +123,64 @@
 }
 
 .page-description-header {
-    -fx-font: 18px "Arial";
+    -fx-font: 24px "Arial";
     -fx-text-fill: #a4dc0e;
     -fx-font-weight: bold;
 }
 
 .page-description-info-text {
-    -fx-font: 14px "Arial";
+    -fx-font: 18px "Arial";
     -fx-text-fill: white;
     -fx-font-style: italic;
 }
+
+.search-results-box {
+    -fx-background-color: #000000;
+}
+
+.search-result-title {
+    -fx-font: 24px "Bauhaus 93";
+    -fx-text-fill: #a4dc0e;
+    -fx-font-weight: bold;
+}
+
+.search-result-labels {
+    -fx-font: 18px "Bauhaus 93";
+    -fx-text-fill: white;
+    -fx-font-style: italic;
+}
+
+.search-result-text {
+    -fx-font: 14px "Arial";
+    -fx-text-fill: white;
+}
+
+.search-result-date-text {
+    -fx-font: 14px "Arial";
+    -fx-text-fill: #a4dc0e;
+
+}
+
+.search-result-button {
+    -fx-background-color: #a688fa;
+    -fx-text-fill: black;
+    -fx-background-radius: 20px;
+    -fx-font-family: "Bauhaus 93";
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(29, 0, 121, 0.6), 5, 0, 0, 2);
+}
+
+.search-result-button:hover {
+    -fx-background-color: #191269;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-scale-z: 1.05;
+}
+
+.search-result-button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-scale-z: 0.95;
+}
+

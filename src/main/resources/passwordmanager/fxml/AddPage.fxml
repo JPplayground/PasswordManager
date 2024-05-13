@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootGridPane" minHeight="600.0" minWidth="600.0" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controllers.AddPageController">
+<GridPane fx:id="rootGridPane" minHeight="600.0" minWidth="600.0" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.ui.controllers.AddPageController">
   <columnConstraints>
     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="162.0"/>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="300.0" />

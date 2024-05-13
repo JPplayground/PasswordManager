@@ -1,6 +1,6 @@
-package passwordmanager.controllers;
+package passwordmanager.ui.controllers;
 
-public class FindPageController {
+public class ManagePageController {
 
     private MainWindowController mainWindowController;
 

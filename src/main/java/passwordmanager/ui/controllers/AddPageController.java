@@ -1,4 +1,4 @@
-package passwordmanager.controllers;
+package passwordmanager.ui.controllers;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.database.Entry;
+import passwordmanager.ui.utils.PasswordGenerator;
 
 public class AddPageController {
 
@@ -104,7 +105,7 @@ public class AddPageController {
     }
 
     public void generatePassword() {
-        String randomPassword = passwordmanager.ui.PasswordGenerator.getPassword();
+        String randomPassword = PasswordGenerator.getPassword();
         passwordEntryField.setText(randomPassword);
         System.out.println("Generated password: " + randomPassword);
     }

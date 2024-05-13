@@ -8,14 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="homePageRootVBox" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controllers.HomePageController">
+<VBox fx:id="homePageRootVBox" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.ui.controllers.HomePageController">
    <children>
       <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Welcome!">
          <VBox.margin>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
          </VBox.margin>
       </Label>
-      <GridPane fx:id="infoBoxesGridPane" gridLinesVisible="true" hgap="5.0" minHeight="300.0" minWidth="300.0" vgap="5.0" VBox.vgrow="ALWAYS">
+      <GridPane fx:id="infoBoxesGridPane" hgap="5.0" minHeight="300.0" minWidth="300.0" vgap="5.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" percentWidth="50.0" />
           <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" percentWidth="50.0" />
@@ -25,16 +25,16 @@
           <RowConstraints minHeight="200.0" percentHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox fx:id="addPageInfoBox" alignment="CENTER" styleClass="page-description-box">
+            <VBox fx:id="addPageInfoBox" alignment="CENTER" maxWidth="1000.0" minWidth="200.0" styleClass="page-description-box">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
                <children>
-                  <Label fx:id="addPageHeader" alignment="CENTER" styleClass="page-description-header" text="Go Add Your Passwords!" wrapText="true">
+                  <Label fx:id="addPageHeader" alignment="CENTER" styleClass="page-description-header" text="Go Add Your Passwords!">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin></Label>
-                  <Text fx:id="addPageInfo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-description-info-text" text="This is where you can enter various website datasuch as emails, usernames, and passwords.  You can even label this content with groups for easier searching later!  " textAlignment="CENTER" wrappingWidth="200.0">
+                  <Text fx:id="addPageInfo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-description-info-text" text="Here, you can input various website data, including emails, usernames, and passwords. You also have the option to categorize this information into groups for more streamlined searching in the future." textAlignment="CENTER" wrappingWidth="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -46,7 +46,7 @@
                   </Button>
                </children>
             </VBox>
-            <VBox fx:id="managePageInfoBox" alignment="CENTER" styleClass="page-description-box" GridPane.rowIndex="1">
+            <VBox fx:id="managePageInfoBox" alignment="CENTER" maxWidth="1000.0" minWidth="200.0" styleClass="page-description-box" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
@@ -67,13 +67,13 @@
                   </Button>
                </children>
             </VBox>
-            <VBox fx:id="searchPageInfoBox" alignment="CENTER" styleClass="page-description-box" GridPane.columnIndex="1">
+            <VBox fx:id="searchPageInfoBox" alignment="CENTER" maxWidth="1000.0" minWidth="200.0" styleClass="page-description-box" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="searchPageHeader" styleClass="page-description-header" text="Search for your passwords!" wrapText="true">
+                  <Label fx:id="searchPageHeader" styleClass="page-description-header" text="Search for your passwords!">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin></Label>
-                  <Text fx:id="searchPageInfo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-description-info-text" text="Here is where you can find all of your stored credentials!  Use the search functions to find specific websites or what websites are associated with a specific email." textAlignment="CENTER" wrappingWidth="200.0">
+                  <Text fx:id="findPageInfo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-description-info-text" text="This section allows you to access all your stored credentials. Utilize the search functionality to locate specific websites or to determine which websites are linked to a particular email address." textAlignment="CENTER" wrappingWidth="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -88,21 +88,21 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
             </VBox>
-            <VBox fx:id="learnPageInfoBox" alignment="CENTER" styleClass="page-description-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox fx:id="aboutPageInfoBox" alignment="CENTER" maxWidth="1000.0" minWidth="200.0" styleClass="page-description-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
                <children>
-                  <Label fx:id="learnPageHeader" styleClass="page-description-header" text="Learn More!">
+                  <Label fx:id="aboutPageHeader" styleClass="page-description-header" text="Learn More!">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin></Label>
-                  <Text fx:id="learnPageInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="aboutPageInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Text>
-                  <Button fx:id="learnPageGo" minWidth="75.0" mnemonicParsing="false" styleClass="control-button" text="GO">
+                  <Button fx:id="aboutPageGo" minWidth="75.0" mnemonicParsing="false" styleClass="control-button" text="GO">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

@@ -6,13 +6,12 @@ BB8493
 DBAFA0
  */
 
-package passwordmanager.controllers;
+package passwordmanager.ui.controllers;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import passwordmanager.database.DatabaseAPI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -22,8 +21,6 @@ import passwordmanager.ui.UIConstants;
 import java.io.IOException;
 
 public class MainWindowController {
-
-    DatabaseAPI databaseAPI;
 
     String currentLoadedPage = UIConstants.HOME_PAGE_PATH;
 
@@ -44,6 +41,9 @@ public class MainWindowController {
         setResizeCallback();
     }
 
+    /**
+     * This method is used to set the width of the buttons in the sidebar to match the width of the left side of the border pane.
+     */
     public void setButtonWidths() {
         // Set button widths to match size of left side of border pane
         homeBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
@@ -53,6 +53,9 @@ public class MainWindowController {
         aboutBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
     }
 
+    /**
+     * This method is used to set the callbacks for the buttons in the sidebar.
+     */
     public void setButtonCallbacks() {
         homeBtn.setOnAction(event -> loadHomePage());
         addBtn.setOnAction(event -> loadAddPage());
@@ -61,6 +64,9 @@ public class MainWindowController {
         aboutBtn.setOnAction(event -> loadAboutPage());
     }
 
+    /**
+     * This method is used to load the home page.
+     */
     public void loadHomePage() {
         if (currentLoadedPage.equals(UIConstants.HOME_PAGE_PATH) && (!firstLoad)) {
             return;
@@ -76,6 +82,9 @@ public class MainWindowController {
         firstLoad = false;
     }
 
+    /**
+     * This method is used to load the add page.
+     */
     public void loadAddPage() {
         if (currentLoadedPage.equals(UIConstants.ADD_PAGE_PATH)) {
             return;
@@ -90,6 +99,9 @@ public class MainWindowController {
         currentLoadedPage = UIConstants.ADD_PAGE_PATH;
     }
 
+    /**
+     * This method is used to load the find page.
+     */
     public void loadFindPage() {
         if (currentLoadedPage.equals(UIConstants.FIND_PAGE_PATH)) {
             return;
@@ -103,6 +115,9 @@ public class MainWindowController {
         currentLoadedPage = UIConstants.FIND_PAGE_PATH;
     }
 
+    /**
+     * This method is used to load the manage page.
+     */
     public void loadManagePage() {
         if (currentLoadedPage.equals(UIConstants.MANAGE_PAGE_PATH)) {
             return;
@@ -116,6 +131,9 @@ public class MainWindowController {
         currentLoadedPage = UIConstants.MANAGE_PAGE_PATH;
     }
 
+    /**
+     * This method is used to load the about page.
+     */
     public void loadAboutPage() {
         if (currentLoadedPage.equals(UIConstants.ABOUT_PAGE_PATH)) {
             return;
@@ -129,6 +147,13 @@ public class MainWindowController {
         currentLoadedPage = UIConstants.ABOUT_PAGE_PATH;
     }
 
+    /**
+     * This method is used to load a page with a fade transition.
+     * The returned FXMLLoader object can be used to pass a reference of MainWindowController to the controller of the loaded page.
+     *
+     * @param fxmlPath The path to the FXML file.
+     * @return The FXMLLoader object.
+     */
     public FXMLLoader loadPageWithFadeTransition(String fxmlPath) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         try {
@@ -146,6 +171,7 @@ public class MainWindowController {
             // Start the transition
             ft.play();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error loading page");
         }
 
@@ -153,7 +179,9 @@ public class MainWindowController {
 
     }
 
-    // Set a callback to print window size on resize event
+    /**
+     * This method is used to set the resize callback for the main border pane.
+     */
     public void setResizeCallback() {
         mainBorderPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Width: " + newValue);
@@ -164,11 +192,4 @@ public class MainWindowController {
         });
     }
 
-    public double getBorderPaneCenterWidth() {
-        return mainBorderPane.getCenter().getBoundsInParent().getWidth();
-    }
-
-    public double getBorderPaneCenterHeight() {
-        return mainBorderPane.getCenter().getBoundsInParent().getHeight();
-    }
 }

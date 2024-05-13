@@ -1,4 +1,4 @@
-package passwordmanager.controllers;
+package passwordmanager.ui.controllers;
 
 public class AboutPageController {
 

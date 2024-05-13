@@ -111,24 +111,16 @@ public class Entry {
     /**
      * Returns the creation timestamp of this entry.
      * @return the timestamp when the entry was created.
-     * @throws IllegalAccessException if the creation date was not set.
      */
-    public Timestamp getDateCreated() throws IllegalAccessException {
-        if (dateCreated == null) {
-            throw new IllegalAccessException("This Entry was not constructed with a creation date!");
-        }
+    public Timestamp getDateCreated() {
         return dateCreated;
     }
 
     /**
      * Returns the modification timestamp of this entry.
      * @return the timestamp when the entry was last modified.
-     * @throws IllegalAccessException if the modification date was not set.
      */
-    public Timestamp getDateModified() throws IllegalAccessException {
-        if (dateModified == null) {
-            throw new IllegalAccessException("This Entry was not constructed with a modification date!");
-        }
+    public Timestamp getDateModified() {
         return dateModified;
     }
 

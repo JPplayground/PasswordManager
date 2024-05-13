@@ -166,6 +166,22 @@ public class DatabaseAPI {
     }
 
     /**
+     * Retrieves all entries from the database.
+     *
+     * @return an {@code ArrayList} containing all entries, or {@code null} if an error occurs.
+     */
+    public ArrayList<Entry> getAllEntries() {
+        ArrayList<String> entryTitles = getListOfEntryTitles();
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        for (String title : entryTitles) {
+            entries.add(getEntry(title));
+        }
+
+        return entries;
+    }
+
+    /**
      * Retrieves a list of all entry titles from the database.
      *
      * @return an {@code ArrayList} containing all entry titles, or {@code null} if an error occurs.
@@ -231,6 +247,18 @@ public class DatabaseAPI {
         }
     }
 
+    /**
+     * Retrieves a list of all groups from the database.
+     * This method executes a SQL query prepared by {@code prepareGetListOfGroupsStatement}
+     * from the {@code sqlStatementBuilder} to fetch all groups stored in the database.
+     * The groups are read from the result set and added to a HashSet.
+     *
+     * <p>This method handles any SQL exceptions by printing the stack trace and returns {@code null}
+     * if an exception occurs, indicating that the operation failed.
+     *
+     * @return A {@code Set<String>} containing all the groups retrieved from the database,
+     *         or {@code null} if an SQL exception occurs.
+     */
     public Set<String> getListOfGroups() {
 
         Set<String> groups = new HashSet<>();

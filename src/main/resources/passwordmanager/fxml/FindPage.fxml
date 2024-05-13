@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="passwordmanager.controllers.FindPageController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.ui.controllers.FindPageController">
+   <children>
+      <GridPane fx:id="searchFunctionsGridPane" minHeight="100.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="searchEntryBox" alignment="CENTER" minWidth="200.0" promptText="example@gmail.com" styleClass="text-entry" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="searchLabel" alignment="BASELINE_LEFT" styleClass="header-label" text="Search">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <ScrollPane fx:id="searchResultsScrollPane" fitToHeight="true" hbarPolicy="NEVER" styleClass="search-results-box" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox fx:id="searchResultsVBox" spacing="10.0" styleClass="search-results-box" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

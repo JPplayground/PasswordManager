@@ -1,0 +1,6 @@
+@FXML
+Label titlePlaceholder, emailsLabel, passwordLabel, usernameLabel, dateCreatedPlaceholder, dateModifiedPlaceholder;
+@FXML
+Text emailPlaceholder, passwordPlaceholder, usernamePlaceholder;
+@FXML
+Button copyEmailButton, copyPasswordButton, copyUsernameButton, linkButton;
