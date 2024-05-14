@@ -1,11 +1,13 @@
 package passwordmanager;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import passwordmanager.database.DatabaseConnection;
+import passwordmanager.database.Entry;
+import passwordmanager.database.EntryCache;
+import passwordmanager.database.SearchResultsCache;
 import passwordmanager.livetesting.LiveTestSetup;
 
 import java.io.IOException;
@@ -26,7 +28,12 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        runSetupTasks(args);
+        launch();
+    }
 
+    public static void runSetupTasks(String[] args) {
+        // Testing setup
         if (args.length == 0) {
             DatabaseConnection.setConnection(false);
         } else if ( args[0].equals("testing") ) {
@@ -34,6 +41,8 @@ public class App extends Application {
             LiveTestSetup.setup();
         }
 
-        launch();
+        // Cache setups (possible prevents this from going out of scope)
+        EntryCache setupCache = EntryCache.getInstance();
+        SearchResultsCache setupSearchResultsCache = SearchResultsCache.getInstance();
     }
 }

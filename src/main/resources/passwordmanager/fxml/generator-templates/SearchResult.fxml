@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="600.0" styleClass="background" stylesheets="@../../css/DarkTheme.css" fx:controller="passwordmanager.ui.controllers.SearchResultController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane minHeight="200.0" minWidth="100.0" styleClass="search-results-box" stylesheets="@../../css/DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.ui.controllers.SearchResultController">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="30.0" />
     <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
@@ -21,7 +21,10 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="titlePlaceholder" styleClass="search-result-title" text="TitlePlaceholder" />
+      <Label fx:id="titlePlaceholder" styleClass="search-result-title" text="TitlePlaceholder">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin></Label>
       <Label fx:id="emailsLabel" styleClass="search-result-labels" text="Email:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="15.0" />
@@ -45,7 +48,10 @@
       <Button fx:id="copyUsernameButton" mnemonicParsing="false" styleClass="search-result-button" text="Copy" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <VBox alignment="CENTER" spacing="5.0" GridPane.columnIndex="2">
          <children>
-            <Label fx:id="dateCreatedPlaceholder" styleClass="search-result-date-text" text="DATE_CREATED_PLACEHOLDER" />
+            <Label fx:id="dateCreatedPlaceholder" styleClass="search-result-date-text" text="DATE_CREATED_PLACEHOLDER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
             <Label fx:id="dateModifiedPlaceholder" styleClass="search-result-date-text" text="DATE_MODIFIED_PLACEHOLDER" />
          </children>
       </VBox>

@@ -58,7 +58,23 @@ public class EntryGenerator {
     private static final String[] TITLES = {
             "Facebook", "Gmail", "Twitter", "LinkedIn", "Instagram", "Reddit", "Amazon", "Netflix", "Dropbox", "GitHub",
             "Yahoo", "Microsoft", "Google Drive", "Twitch", "Slack", "WhatsApp", "Zoom", "Skype", "Discord", "Pinterest",
-            "Tumblr", "Snapchat", "Ebay", "PayPal", "Spotify", "Apple", "PlayStation", "Xbox", "Nintendo", "Steam"
+            "Tumblr", "Snapchat", "Ebay", "PayPal", "Spotify", "Apple", "PlayStation", "Xbox", "Nintendo", "Steam",
+            "Adobe Acrobat", "Behance", "Behance", "Creative Cloud", "Illustrator", "Photoshop", "Premiere Pro", "InDesign", "Lightroom", "After Effects",
+            "Sketch", "Figma", "InVision", "Adobe XD", "Zeplin", "Canva", "PicMonkey", "GIMP", "CorelDRAW", "SketchUp",
+            "AutoCAD", "SolidWorks", "Blender", "Maya", "Unity", "Unreal Engine", "Cinema 4D", "3ds Max", "ZBrush", "Substance Painter",
+            "Procreate", "Affinity Designer", "Affinity Photo", "Affinity Publisher", "Clip Studio Paint", "PaintTool SAI", "Krita", "Reaper", "Audacity", "GarageBand",
+            "Logic Pro", "FL Studio", "Ableton Live", "Cubase", "Reason", "Studio One", "Bitwig Studio", "Native Instruments", "Serato DJ", "Virtual DJ",
+            "Traktor", "Pioneer DJ", "Denon DJ", "Mixxx", "Cross DJ", "Rekordbox", "Serato Scratch Live", "Ableton Push", "Maschine", "Launchpad",
+            "MPC", "Korg", "Roland", "Akai", "Novation", "Arturia", "Behringer", "Moog", "Teenage Engineering", "Yamaha",
+            "Kawai", "Casio", "Suzuki", "Fender", "Gibson", "Ibanez", "PRS", "Epiphone", "Jackson", "ESP",
+            "Schecter", "Dean", "Taylor", "Martin", "Seagull", "Gretsch", "Rickenbacker", "Hofner",
+            "Adobe", "WhatsApp", "Dropbox", "Zoom", "Slack", "Trello", "Uber", "Airbnb", "Tinder", "Hulu",
+            "WordPress", "Quora", "Medium", "Wikipedia", "Evernote", "Stripe", "Shopify", "Shopify", "Asana", "Notion",
+            "Salesforce", "Zendesk", "Mailchimp", "Grammarly", "Reddit", "LinkedIn", "Pinterest", "Discord", "Skype", "Microsoft Teams",
+            "Google Meet", "iCloud", "OneDrive", "Box", "Vimeo", "Youtube", "Soundcloud", "Spotify", "Pandora", "Deezer",
+            "Apple Music", "Shazam", "Kindle", "Audible", "Viber", "LINE", "WeChat", "Telegram", "Signal",
+            "WordPress", "Blogger", "Ghost", "Joomla", "Drupal", "Magento", "Shopify", "Squarespace", "Wix", "Weebly",
+            "GoDaddy", "Namecheap", "Bluehost", "HostGator", "Dreamhost", "InMotion Hosting", "SiteGround", "A2 Hosting", "Kinsta", "WP Engine"
     };
 
     private static final String[] EMAILS = {

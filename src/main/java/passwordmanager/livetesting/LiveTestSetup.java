@@ -24,7 +24,7 @@ public class LiveTestSetup {
         DatabaseAPI databaseAPI = DatabaseAPI.getInstance();
 
         // Add 25 randomly generated entries to the test database
-        List<Entry> entries = EntryGenerator.generateEntries(25);
+        List<Entry> entries = EntryGenerator.generateEntries(150);
         for (Entry entry : entries) {
             databaseAPI.newEntry(entry);
         }

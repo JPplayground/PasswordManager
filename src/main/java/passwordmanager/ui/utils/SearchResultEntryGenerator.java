@@ -16,7 +16,7 @@ public class SearchResultEntryGenerator {
     /**
      * Generates a search result entry.
      * @param entry The entry to generate the search result for.
-     * @return The generated search result.
+     * @return The generated search result as a Node.
      */
     public static Node generateSearchResult(Entry entry) {
 
