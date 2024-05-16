@@ -2,7 +2,7 @@ package passwordmanager.database.SQLStatementBulderTests;
 
 import passwordmanager.database.DatabaseConnection;
 import passwordmanager.database.DatabaseConstants;
-import passwordmanager.database.SQLStatementBuilder;
+import passwordmanager.database.SQLQueryBuilder;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;
@@ -22,14 +22,14 @@ public class UpdateAndQueryTests {
 
         {
             // Create Table 'ENTRIES'
-            var sqlStatementBuilder = new SQLStatementBuilder();
+            var sqlStatementBuilder = new SQLQueryBuilder();
             PreparedStatement statement = sqlStatementBuilder.prepareEntryTableCreationStatement();
             statement.executeUpdate();
         }
 
         {
             // Create Table 'COMMON_EMAILS'
-            var sqlStatementBuilder = new SQLStatementBuilder();
+            var sqlStatementBuilder = new SQLQueryBuilder();
             PreparedStatement statement = sqlStatementBuilder.prepareCommonEmailsTableCreationStatement();
             statement.executeUpdate();
         }
@@ -43,7 +43,7 @@ public class UpdateAndQueryTests {
     @Test
     public void testInsertEntry() throws SQLException {
         // Insert an entry
-        var sqlStatementBuilder = new SQLStatementBuilder();
+        var sqlStatementBuilder = new SQLQueryBuilder();
         PreparedStatement statement = sqlStatementBuilder.prepareInsertEntryStatement(
                 "insertTestTitle", "test@example.com", "password123", "testUser", "http://example.com", "General"
         );
@@ -54,7 +54,7 @@ public class UpdateAndQueryTests {
 
     @Test
     public void testGetEntry() throws SQLException {
-        var sqlStatementBuilder = new SQLStatementBuilder();
+        var sqlStatementBuilder = new SQLQueryBuilder();
 
         // Constant vars for this entry
         String title = "getTestTitle", email = "test@example.com", password = "password123";
@@ -82,7 +82,7 @@ public class UpdateAndQueryTests {
 
     @Test
     public void testUpdateEntry() throws SQLException {
-        var sqlStatementBuilder = new SQLStatementBuilder();
+        var sqlStatementBuilder = new SQLQueryBuilder();
         int affectedRows;
 
         // Constant vars for this entry
@@ -126,7 +126,7 @@ public class UpdateAndQueryTests {
 
     @Test
     public void testRemoveEntry() throws SQLException {
-        var sqlStatementBuilder = new SQLStatementBuilder();
+        var sqlStatementBuilder = new SQLQueryBuilder();
         int affectedRows;
 
         // Constant vars for this entry
@@ -154,7 +154,7 @@ public class UpdateAndQueryTests {
 
     @Test
     public void testGetAllEntryTitles() throws SQLException {
-        var sqlStatementBuilder = new SQLStatementBuilder();
+        var sqlStatementBuilder = new SQLQueryBuilder();
 
         String title1 = "getAllTestTitle1", email1 = "test@example.com1", password1 = "password1";
         String username1 = "testUser1", link1 = "http://example.com1", category1 = "General1";

@@ -1,6 +1,6 @@
 package passwordmanager.livetesting;
 
-import passwordmanager.database.Entry;
+import passwordmanager.model.Entry;
 
 import java.util.ArrayList;
 import java.util.List;

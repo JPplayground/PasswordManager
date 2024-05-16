@@ -1,9 +1,8 @@
 package passwordmanager.database.SQLStatementBulderTests;
 
-import org.junit.After;
 import passwordmanager.database.DatabaseConnection;
 import passwordmanager.database.DatabaseConstants;
-import passwordmanager.database.SQLStatementBuilder;
+import passwordmanager.database.SQLQueryBuilder;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;
@@ -30,12 +29,12 @@ public class TableCreationTest {
     @Test
     public void testEntryTableCreation() throws SQLException {
 
-        SQLStatementBuilder sqlStatementBuilder;
+        SQLQueryBuilder sqlQueryBuilder;
         PreparedStatement createTable;
 
-        sqlStatementBuilder = new SQLStatementBuilder();
+        sqlQueryBuilder = new SQLQueryBuilder();
 
-        createTable = sqlStatementBuilder.prepareEntryTableCreationStatement();
+        createTable = sqlQueryBuilder.prepareEntryTableCreationStatement();
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
         String sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC' AND TABLE_NAME = ?;";
@@ -53,12 +52,12 @@ public class TableCreationTest {
     @Test
     public void testCommonEmailsTableCreation() throws SQLException {
 
-        SQLStatementBuilder sqlStatementBuilder;
+        SQLQueryBuilder sqlQueryBuilder;
         PreparedStatement createTable;
 
-        sqlStatementBuilder = new SQLStatementBuilder();
+        sqlQueryBuilder = new SQLQueryBuilder();
 
-        createTable = sqlStatementBuilder.prepareCommonEmailsTableCreationStatement();
+        createTable = sqlQueryBuilder.prepareCommonEmailsTableCreationStatement();
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
         String sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC' AND TABLE_NAME = ?;";

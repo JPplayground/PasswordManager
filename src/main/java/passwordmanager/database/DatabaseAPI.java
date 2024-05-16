@@ -1,5 +1,7 @@
 package passwordmanager.database;
 
+import passwordmanager.model.Entry;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,12 +16,22 @@ import java.util.Set;
  * This class ensures safe database operations and encapsulates SQL statements for
  * adding, modifying, removing, and retrieving data related to entries and common emails.
  *
- * @author Josh Patterson
+ * <p>Note: This class follows the singleton design pattern to ensure only one instance
+ * is created throughout the application.
+ *
+ * <p>Usage example:
+ * <pre>
+ * {@code
+ * DatabaseAPI dbAPI = DatabaseAPI.getInstance();
+ * dbAPI.newEntry("example title", "email@example.com", "password123", "username", "http://example.com", "example category");
+ * }
+ * </pre>
+ *
  * @see Entry
  */
 public class DatabaseAPI {
 
-    private SQLStatementBuilder sqlStatementBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
 
     // Singleton Instance
     private static DatabaseAPI instance;
@@ -31,12 +43,12 @@ public class DatabaseAPI {
      */
     private DatabaseAPI() {
         try {
-            this.sqlStatementBuilder = new SQLStatementBuilder();
+            this.sqlQueryBuilder = new SQLQueryBuilder();
 
-            PreparedStatement createEntryTable = sqlStatementBuilder.prepareEntryTableCreationStatement();
+            PreparedStatement createEntryTable = sqlQueryBuilder.prepareEntryTableCreationStatement();
             createEntryTable.execute();
 
-            PreparedStatement createCommonEmailsTable = sqlStatementBuilder.prepareCommonEmailsTableCreationStatement();
+            PreparedStatement createCommonEmailsTable = sqlQueryBuilder.prepareCommonEmailsTableCreationStatement();
             createCommonEmailsTable.execute();
 
         } catch (SQLException e) {
@@ -68,7 +80,7 @@ public class DatabaseAPI {
      */
     public void newEntry(String title, String email, String password, String username, String link, String category) {
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareInsertEntryStatement(title, email, password, username, link, category);
+            PreparedStatement stmt = sqlQueryBuilder.prepareInsertEntryStatement(title, email, password, username, link, category);
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,21 +90,10 @@ public class DatabaseAPI {
     /**
      * Adds a new entry to the database.
      *
-     * @param entry     the entry object needing to be added.
+     * @param entry the entry object to be added.
      */
     public void newEntry(Entry entry) {
-
-        String title, email, password, username, link, category;
-
-        title = entry.getTitle();
-        email = entry.getEmail();
-        password = entry.getPassword();
-        username = entry.getUsername();
-        link = entry.getLink();
-        category = entry.getCategory();
-
-        this.newEntry(title, email, password, username, link, category);
-
+        this.newEntry(entry.getTitle(), entry.getEmail(), entry.getPassword(), entry.getUsername(), entry.getLink(), entry.getCategory());
     }
 
     /**
@@ -108,7 +109,7 @@ public class DatabaseAPI {
      */
     public void modifyEntry(String title, String email, String password, String username, String link, String category) {
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareEntryUpdateStatement(title, email, password, username, link, category);
+            PreparedStatement stmt = sqlQueryBuilder.prepareEntryUpdateStatement(title, email, password, username, link, category);
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,7 +123,7 @@ public class DatabaseAPI {
      */
     public void removeEntry(String title) {
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareRemoveEntryStatement(title);
+            PreparedStatement stmt = sqlQueryBuilder.prepareRemoveEntryStatement(title);
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,22 +138,18 @@ public class DatabaseAPI {
      */
     public Entry getEntry(String titleKey) {
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareGetEntryStatement(titleKey);
+            PreparedStatement stmt = sqlQueryBuilder.prepareGetEntryStatement(titleKey);
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-
                 // Retrieve entry data from the result set
-                String title, email, password, username, link, category;
-                title = resultSet.getString(DatabaseConstants.EntryColumns.TITLE.toString());
-                email = resultSet.getString(DatabaseConstants.EntryColumns.EMAIL.toString());
-                password = resultSet.getString(DatabaseConstants.EntryColumns.PASSWORD.toString());
-                username = resultSet.getString(DatabaseConstants.EntryColumns.USERNAME.toString());
-                link = resultSet.getString(DatabaseConstants.EntryColumns.LINK.toString());
-                category = resultSet.getString(DatabaseConstants.EntryColumns.CATEGORY.toString());
-
-                Timestamp dateCreated, dateModified;
-                dateCreated = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_CREATED.toString());
-                dateModified = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_MODIFIED.toString());
+                String title = resultSet.getString(DatabaseConstants.EntryColumns.TITLE.toString());
+                String email = resultSet.getString(DatabaseConstants.EntryColumns.EMAIL.toString());
+                String password = resultSet.getString(DatabaseConstants.EntryColumns.PASSWORD.toString());
+                String username = resultSet.getString(DatabaseConstants.EntryColumns.USERNAME.toString());
+                String link = resultSet.getString(DatabaseConstants.EntryColumns.LINK.toString());
+                String category = resultSet.getString(DatabaseConstants.EntryColumns.CATEGORY.toString());
+                Timestamp dateCreated = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_CREATED.toString());
+                Timestamp dateModified = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_MODIFIED.toString());
 
                 // Create and return the Entry object
                 return new Entry(title, email, password, username, link, category, dateCreated, dateModified);
@@ -189,7 +186,7 @@ public class DatabaseAPI {
     public ArrayList<String> getListOfEntryTitles() {
         ArrayList<String> entries = new ArrayList<>();
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareGetAllEntryTitlesStatement();
+            PreparedStatement stmt = sqlQueryBuilder.prepareGetAllEntryTitlesStatement();
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 entries.add(resultSet.getString(1));
@@ -208,7 +205,7 @@ public class DatabaseAPI {
      */
     public void addCommonEmail(String email) {
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareAddCommonEmailStatement(email);
+            PreparedStatement stmt = sqlQueryBuilder.prepareAddCommonEmailStatement(email);
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -228,11 +225,9 @@ public class DatabaseAPI {
      *         or {@code null} if an SQL exception occurs.
      */
     public ArrayList<String> getListOfCommonEmails() {
-
         ArrayList<String> emails = new ArrayList<>();
-
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareGetListOfCommonEmailsStatement();
+            PreparedStatement stmt = sqlQueryBuilder.prepareGetListOfCommonEmailsStatement();
             ResultSet resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
@@ -260,11 +255,9 @@ public class DatabaseAPI {
      *         or {@code null} if an SQL exception occurs.
      */
     public Set<String> getListOfGroups() {
-
         Set<String> groups = new HashSet<>();
-
         try {
-            PreparedStatement stmt = sqlStatementBuilder.prepareGetListOfGroupsStatement();
+            PreparedStatement stmt = sqlQueryBuilder.prepareGetListOfGroupsStatement();
             ResultSet resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {

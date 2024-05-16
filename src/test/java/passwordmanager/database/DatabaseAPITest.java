@@ -2,6 +2,7 @@ package passwordmanager.database;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import passwordmanager.model.Entry;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

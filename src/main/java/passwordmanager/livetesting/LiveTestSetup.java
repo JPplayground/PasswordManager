@@ -1,7 +1,7 @@
 package passwordmanager.livetesting;
 
 import passwordmanager.database.DatabaseAPI;
-import passwordmanager.database.Entry;
+import passwordmanager.model.Entry;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class LiveTestSetup {
         DatabaseAPI databaseAPI = DatabaseAPI.getInstance();
 
         // Add 25 randomly generated entries to the test database
-        List<Entry> entries = EntryGenerator.generateEntries(150);
+        List<Entry> entries = EntryGenerator.generateEntries(30);
         for (Entry entry : entries) {
             databaseAPI.newEntry(entry);
         }

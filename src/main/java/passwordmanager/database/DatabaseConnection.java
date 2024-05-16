@@ -5,13 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * The {@code DatabaseConnection} class provides a static method to set the connection to the database.
+ * The {@code DatabaseConnection} class provides static methods to manage the connection to the database.
  * This class is used to set the connection to the database and retrieve the connection when needed.
  * The connection is set to the database URL specified in the {@link DatabaseConstants} class.
  *
  * <p>Instances of this class are not needed as all methods are static.
  * The connection to the database is set using the {@link #setConnection(boolean)} method.
  * The connection to the database is retrieved using the {@link #getConnection()} method.
+ *
+ * <p>Usage example:
+ * <pre>
+ * {@code
+ * DatabaseConnection.setConnection(false);
+ * Connection conn = DatabaseConnection.getConnection();
+ * }
+ * </pre>
  *
  * @see DatabaseConstants
  */
@@ -25,7 +33,6 @@ public class DatabaseConnection {
      * @param isTesting whether the connection is for testing purposes.
      */
     public static void setConnection(boolean isTesting) {
-
         try {
             if (isTesting) {
                 connection = DriverManager.getConnection(DatabaseConstants.TEST_CONNECTION_URL);
@@ -35,7 +42,6 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -43,7 +49,9 @@ public class DatabaseConnection {
      */
     public static void closeConnection() {
         try {
-            connection.close();
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,9 +63,8 @@ public class DatabaseConnection {
      * @return the connection to the database.
      */
     public static Connection getConnection() {
-
         if (connection == null) {
-            System.out.println("You forgot to call DatabaseConnection.setConnection() first!");
+            System.err.println("You forgot to call DatabaseConnection.setConnection() first!");
             System.exit(0);
         }
 
