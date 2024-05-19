@@ -20,17 +20,17 @@ public class DatabaseConstants {
     /**
      * The URL of the database driver.
      */
-    public static final String DRIVER_URL = "org.h2.Driver";
+//    public static final String DRIVER_URL = "org.h2.Driver";
 
     /**
      * The connection URL for the application database.
      */
-    public static final String APP_CONNECTION_URL = "jdbc:h2:~/test";
+    public static final String APP_CONNECTION_URL = "jdbc:sqlite:./password_manager.db";
 
     /**
      * The connection URL for the test database.
      */
-    public static final String TEST_CONNECTION_URL = "jdbc:h2:mem:test";
+    public static final String TEST_CONNECTION_URL = "jdbc:sqlite::memory:";
 
     /**
      * The name of the entries table.

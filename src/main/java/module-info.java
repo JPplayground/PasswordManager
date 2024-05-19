@@ -1,11 +1,12 @@
 module com.jp.passwordmanager {
     requires javafx.controls;
     requires javafx.fxml;
-    requires com.fasterxml.jackson.databind;
     requires java.sql;
-    requires com.h2database;
     requires java.datatransfer;
     requires java.desktop;
+    requires org.xerial.sqlitejdbc;
+    requires org.slf4j;
+    requires org.slf4j.simple;
 
     exports passwordmanager.database;
     opens passwordmanager.database to javafx.fxml;

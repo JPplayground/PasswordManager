@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryCache;
 import passwordmanager.util.PasswordGenerator;
 
 public class AddPageController {
@@ -101,6 +102,9 @@ public class AddPageController {
 
         // Reset the dropdowns to include the new email
         setDropdowns();
+
+        // Ensure entry cache is updated
+        EntryCache.getInstance().loadAllEntries();
 
     }
 

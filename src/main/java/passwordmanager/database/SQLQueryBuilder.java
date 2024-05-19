@@ -109,7 +109,7 @@ public class SQLQueryBuilder {
                 DatabaseConstants.EntryColumns.LINK + ", " +
                 DatabaseConstants.EntryColumns.CATEGORY + ", " +
                 DatabaseConstants.EntryColumns.DATE_CREATED + ", " +
-                DatabaseConstants.EntryColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+                DatabaseConstants.EntryColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))";
 
         PreparedStatement stmt = this.connection.prepareStatement(sql);
         stmt.setString(1, title);
@@ -157,7 +157,7 @@ public class SQLQueryBuilder {
             sql.append(DatabaseConstants.EntryColumns.CATEGORY + " = ?, ");
         }
 
-        sql.append(DatabaseConstants.EntryColumns.DATE_MODIFIED + " = NOW()");
+        sql.append(DatabaseConstants.EntryColumns.DATE_MODIFIED + " = datetime('now')");
         sql.append(" WHERE " + DatabaseConstants.EntryColumns.TITLE + " = ?");
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql.toString());

@@ -36,12 +36,16 @@ public class EntryCache {
 
     /**
      * Private constructor to initialize the EntryCache.
-     * This constructor retrieves all entries from the database and sorts them by title.
-     * It also prints the time taken for these operations.
      */
     private EntryCache() {
         databaseAPI = DatabaseAPI.getInstance();
+        loadAllEntries();
+    }
 
+    /**
+     * Loads all entries from the database and sorts them by title.
+     */
+    public void loadAllEntries() {
         // Timing get all entries
         Instant start = Instant.now();
         entries = databaseAPI.getAllEntries();

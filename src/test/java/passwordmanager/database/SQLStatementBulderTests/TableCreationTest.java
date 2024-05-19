@@ -37,7 +37,7 @@ public class TableCreationTest {
         createTable = sqlQueryBuilder.prepareEntryTableCreationStatement();
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
-        String sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC' AND TABLE_NAME = ?;";
+        String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
         PreparedStatement checkTable = this.connection.prepareStatement(sql);
         checkTable.setString(1, DatabaseConstants.ENTRIES_TABLE_NAME);
 
@@ -46,8 +46,8 @@ public class TableCreationTest {
 
         int tableCount = resultSet.getInt(1);
         assertEquals(1, tableCount);
-
     }
+
 
     @Test
     public void testCommonEmailsTableCreation() throws SQLException {
@@ -60,7 +60,7 @@ public class TableCreationTest {
         createTable = sqlQueryBuilder.prepareCommonEmailsTableCreationStatement();
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
-        String sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC' AND TABLE_NAME = ?;";
+        String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
         PreparedStatement checkTable = this.connection.prepareStatement(sql);
         checkTable.setString(1, DatabaseConstants.COMMON_EMAILS_TABLE_NAME);
 
@@ -69,6 +69,6 @@ public class TableCreationTest {
 
         int tableCount = resultSet.getInt(1);
         assertEquals(1, tableCount);
-
     }
+
 }

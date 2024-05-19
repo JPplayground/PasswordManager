@@ -30,6 +30,7 @@ public class App extends Application {
     }
 
     public static void runSetupTasks(String[] args) {
+
         // Testing setup
         if (args.length == 0) {
             DatabaseConnection.setConnection(false);
