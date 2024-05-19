@@ -9,14 +9,15 @@ import javafx.scene.layout.GridPane;
 import passwordmanager.model.SearchResultNodesCache;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindPageController {
 
     private SearchResultNodesCache searchResultNodesCache = SearchResultNodesCache.getInstance();
 
-    private ArrayList<Node> searchResultsNodes = searchResultNodesCache.getSearchResultsNodes();
-
     private MainWindowController mainWindowController;
+
+    private List<Node> currentDisplayNodes = searchResultNodesCache.getNodes();
 
     @FXML
     GridPane searchFunctionsGridPane;
@@ -36,13 +37,23 @@ public class FindPageController {
     @FXML
     public void initialize() {
         displaySearchResults();
+
+        // Bind grid pane height to scroll pane height
+        searchResultDisplay.minHeightProperty().bind(searchResultsScrollPane.heightProperty());
+
+        searchEntryBox.textProperty().addListener((observable, oldValue, newValue) -> textChanged(newValue));
     }
 
     public void displaySearchResults() {
+
+        System.out.println("Display search results called.");
+
+        searchResultDisplay.getChildren().clear();
+
         int column = 0;
         int row = 0;
 
-        for (Node searchResultNode : searchResultNodesCache.getSearchResultsNodes()) {
+        for (Node searchResultNode : currentDisplayNodes) {
             searchResultDisplay.add(searchResultNode, column, row);
 
             column++;
@@ -51,5 +62,20 @@ public class FindPageController {
                 row++;
             }
         }
+    }
+
+    public void textChanged(String filterString) {
+        System.out.println("Text changed: " + filterString);
+
+        if (filterString.isEmpty()) {
+
+            currentDisplayNodes = searchResultNodesCache.getNodes();
+
+        } else {
+
+            currentDisplayNodes = searchResultNodesCache.getFilteredNodes(filterString);
+        }
+
+        displaySearchResults();
     }
 }

@@ -189,4 +189,14 @@ public class Entry {
 
         return entryAsString.toString();
     }
+
+    /**
+     * Returns true if the title of this entry contains the search string, ignoring case.
+     *
+     * @param search the search string to check for in the title.
+     * @return true if the title contains the search string, false otherwise.
+     */
+    public boolean titleContains(String search) {
+        return title.toLowerCase().contains(search.toLowerCase());
+    }
 }

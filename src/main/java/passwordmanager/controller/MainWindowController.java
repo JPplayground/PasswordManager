@@ -38,7 +38,6 @@ public class MainWindowController {
         setButtonWidths();
         setButtonCallbacks();
         loadHomePage();
-        setResizeCallback();
     }
 
     /**
@@ -179,17 +178,5 @@ public class MainWindowController {
 
     }
 
-    /**
-     * This method is used to set the resize callback for the main border pane.
-     */
-    public void setResizeCallback() {
-        mainBorderPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Width: " + newValue);
-        });
-
-        mainBorderPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Height: " + newValue);
-        });
-    }
 
 }

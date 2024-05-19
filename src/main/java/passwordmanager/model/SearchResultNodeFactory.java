@@ -46,6 +46,7 @@ public class SearchResultNodeFactory {
             node.getProperties().put("entry", entry);
 
             return node;
+
         } catch (IOException e) {
             e.printStackTrace();
             return null;

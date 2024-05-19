@@ -4,7 +4,6 @@ module com.jp.passwordmanager {
     requires com.fasterxml.jackson.databind;
     requires java.sql;
     requires com.h2database;
-    requires annotations;
     requires java.datatransfer;
     requires java.desktop;
 

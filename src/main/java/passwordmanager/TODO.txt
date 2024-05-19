@@ -1,1 +1,2 @@
 Add comparator to SearchResultEntry nodes (filter the nodes rather than the entries so we dont have to recreate the FXML)
+Use icons in search result boxes

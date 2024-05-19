@@ -2,9 +2,8 @@ package passwordmanager.model;
 
 import javafx.scene.Node;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The {@code SearchResultsCache} class is a singleton that provides a cache for search result nodes in the password manager application.
@@ -29,7 +28,7 @@ public class SearchResultNodesCache {
 
     private static SearchResultNodesCache instance = null;
 
-    private final ArrayList<Node> searchResultsNodes = new ArrayList<>();
+    private final List<Node> searchResultsNodes = new ArrayList<>();
 
     /**
      * Private constructor to initialize the SearchResultsCache.
@@ -61,7 +60,7 @@ public class SearchResultNodesCache {
      *
      * @return an {@code ArrayList} containing the cached search result nodes.
      */
-    public ArrayList<Node> getSearchResultsNodes() {
+    public List<Node> getNodes() {
         return searchResultsNodes;
     }
 
@@ -70,8 +69,14 @@ public class SearchResultNodesCache {
      * @param searchQuery
      * @return an {@code ArrayList} containing the cached search result nodes that contain the specified search query.
      */
-    public ArrayList<Node> getSearchResultsNodes(String searchQuery) {
-        return searchResultsNodes;
+    public List<Node> getFilteredNodes(String searchQuery) {
+
+        return searchResultsNodes.stream()
+                .filter(node -> {
+                    Entry entry = (Entry) node.getProperties().get("entry");
+                    return entry.getTitle().toLowerCase().contains(searchQuery.toLowerCase());
+                })
+                .toList();
     }
 
 }
