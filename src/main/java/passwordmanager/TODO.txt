@@ -1,2 +1,3 @@
 Add comparator to SearchResultEntry nodes (filter the nodes rather than the entries so we dont have to recreate the FXML)
 Use icons in search result boxes
+Fix updating find page after adding entry (EntryCache is updated but search results node cache is not) (THIS STILL NOT WORKING) (email isn't updating)

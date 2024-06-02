@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryCache;
+import passwordmanager.model.SearchResultNodesCache;
 import passwordmanager.util.PasswordGenerator;
 
 public class AddPageController {
@@ -103,8 +104,6 @@ public class AddPageController {
         // Reset the dropdowns to include the new email
         setDropdowns();
 
-        // Ensure entry cache is updated
-        EntryCache.getInstance().loadAllEntries();
 
     }
 
@@ -137,6 +136,10 @@ public class AddPageController {
 
         // Reset the dropdowns to include the new entry group in case one was added
         setDropdowns();
+
+        // Ensure entry cache is updated
+        EntryCache.getInstance().updateEntries();
+        SearchResultNodesCache.getInstance().updateSearchResultsNodes();
     }
 
 

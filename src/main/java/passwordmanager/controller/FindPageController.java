@@ -17,7 +17,7 @@ public class FindPageController {
 
     private MainWindowController mainWindowController;
 
-    private List<Node> currentDisplayNodes = searchResultNodesCache.getNodes();
+    private List<Node> currentDisplayNodes;
 
     @FXML
     GridPane searchFunctionsGridPane;
@@ -36,6 +36,8 @@ public class FindPageController {
 
     @FXML
     public void initialize() {
+
+        currentDisplayNodes = searchResultNodesCache.getNodes();
         displaySearchResults();
 
         // Bind grid pane height to scroll pane height

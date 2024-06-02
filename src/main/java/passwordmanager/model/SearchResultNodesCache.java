@@ -56,6 +56,18 @@ public class SearchResultNodesCache {
     }
 
     /**
+     * Updates the search results nodes by clearing the existing search results nodes and regenerating them.
+     */
+    public void updateSearchResultsNodes() {
+        searchResultsNodes.clear();
+        ArrayList<Entry> entries = EntryCache.getInstance().getEntries();
+
+        for (Entry entry : entries) {
+            searchResultsNodes.add(SearchResultNodeFactory.generateSearchResult(entry));
+        }
+    }
+
+    /**
      * Returns the list of cached search result nodes.
      *
      * @return an {@code ArrayList} containing the cached search result nodes.

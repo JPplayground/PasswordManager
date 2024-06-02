@@ -3,8 +3,6 @@ package passwordmanager.model;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.database.EntryTitleComparator;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 
 /**
@@ -39,26 +37,15 @@ public class EntryCache {
      */
     private EntryCache() {
         databaseAPI = DatabaseAPI.getInstance();
-        loadAllEntries();
+        updateEntries();
     }
 
     /**
      * Loads all entries from the database and sorts them by title.
      */
-    public void loadAllEntries() {
-        // Timing get all entries
-        Instant start = Instant.now();
+    public void updateEntries() {
         entries = databaseAPI.getAllEntries();
-        Instant end = Instant.now();
-        Duration timeElapsed = Duration.between(start, end);
-        System.out.println("Get all entries operation took " + timeElapsed.toMillis() + " milliseconds");
-
-        // Timing sort entries
-        start = Instant.now();
         entries.sort(new EntryTitleComparator());
-        end = Instant.now();
-        timeElapsed = Duration.between(start, end);
-        System.out.println("Sort entries operation took " + timeElapsed.toMillis() + " milliseconds");
     }
 
     /**
