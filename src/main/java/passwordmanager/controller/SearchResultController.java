@@ -1,103 +1,155 @@
 package passwordmanager.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Window;
+import passwordmanager.database.DatabaseAPI;
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryCache;
+import passwordmanager.model.SearchResultCache;
 
-import javafx.scene.input.Clipboard;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 import java.awt.*;
-import java.net.URI;
+import java.awt.datatransfer.StringSelection;
 
+import java.util.Optional;
+import java.util.logging.Logger;
 
 public class SearchResultController {
 
+    Entry entry;
+
     @FXML
-    Label titlePlaceholder, dateCreatedPlaceholder, dateModifiedPlaceholder, emailsLabel, passwordLabel, usernameLabel;
+    GridPane root;
+
     @FXML
-    Text emailPlaceholder, passwordPlaceholder, usernamePlaceholder;
+    private Label titleLabel;
+
     @FXML
-    Button copyEmailButton, copyPasswordButton, copyUsernameButton, linkButton;
+    private TextField emailTextField, passwordTextField, usernameTextField;
 
-    String title, username, password, link;
-    String dateCreated, dateModified;
+    @FXML
+    private Button copyEmailBtn, copyPasswordBtn, copyUsernameBtn, editBtn, deleteBtn;
 
-    /**
-     * Constructor for the search result controller.
-     * @param entry The entry to display.
-     */
-    public SearchResultController(Entry entry) {
-
-        this.title = entry.getTitle();
-        this.username = entry.getUsername();
-        this.password = entry.getPassword();
-        this.link = entry.getLink();
-
-        if (entry.getDateCreated() != null && entry.getDateModified() != null) {
-            this.dateCreated = entry.getDateCreated().toString().substring(0, 10);
-            this.dateModified = entry.getDateModified().toString().substring(0, 10);
-        } else {
-            this.dateCreated = "N/A";
-            this.dateModified = "N/A";
-        }
-    }
-
-    /**
-     * Initializes the controller.
-     */
     @FXML
     public void initialize() {
-        setOpenLinkCallback();
+        logger.info("Initializing SearchResultController");
+
         setCopyCallbacks();
-        setLabels();
+        setDeleteCallback();
+        setEditCallback();
+
+        // Setting the textfields to be non focus-traversable
+        emailTextField.setFocusTraversable(false);
+        passwordTextField.setFocusTraversable(false);
+        usernameTextField.setFocusTraversable(false);
+
+        // TODO: Focus appears on title entry field initially, would like to remove that if possible
     }
 
-    /**
-     * Sets the text for the labels and placeholders.
-     */
+    public void setEntry(Entry entry) {
+        this.entry = entry;
+        logger.info("Setting text fields for entry: " + entry.getTitle());
+
+        emailTextField.setText(this.entry.getEmail());
+        passwordTextField.setText(this.entry.getPassword());
+
+        // Gray out the username field if it is empty
+        if (this.entry.getUsername().isEmpty()) {
+            usernameTextField.setDisable(true);
+        } else {
+            usernameTextField.setText(this.entry.getUsername());
+        }
+
+        titleLabel.setText(this.entry.getTitle());
+    }
+
     private void setCopyCallbacks() {
-        copyEmailButton.setOnAction(e -> copyToClipboard(emailPlaceholder.getText()));
-        copyPasswordButton.setOnAction(e -> copyToClipboard(passwordPlaceholder.getText()));
-        copyUsernameButton.setOnAction(e -> copyToClipboard(usernamePlaceholder.getText()));
+        copyEmailBtn.setOnAction((ActionEvent event) -> {
+            StringSelection stringSelection = new StringSelection(emailTextField.getText());
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        });
+
+        copyPasswordBtn.setOnAction((ActionEvent event) -> {
+            StringSelection stringSelection = new StringSelection(passwordTextField.getText());
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        });
+
+        copyUsernameBtn.setOnAction((ActionEvent event) -> {
+            StringSelection stringSelection = new StringSelection(usernameTextField.getText());
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        });
     }
 
-    /**
-     * Copies the given text to the clipboard.
-     * @param text The text to copy.
-     */
-    private void copyToClipboard(String text) {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent content = new ClipboardContent();
-        content.putString(text);
-        clipboard.setContent(content);
+    private void setEditCallback() {
+        // TODO: Implement edit feature
+        // Things that need to happen here:
+        // 1. Open the EditEntryDialog
+        // 2. ...
+
+        // For now going to disable the edit button
+        editBtn.setDisable(true);
     }
 
-    /**
-     * Sets the callback for the open link button.
-     */
-    private void setOpenLinkCallback() {
-        linkButton.setOnAction(e -> {
-            try {
-                Desktop.getDesktop().browse(new URI(link));
-            } catch (Exception ex) {
-                ex.printStackTrace();
+    private void setDeleteCallback() {
+        // TODO: Re-implement more efficient way to keep caches accurate
+        // TODO: Figure out why title on succeeding entry gets highlighted when deleting an entry
+
+        deleteBtn.setOnAction((ActionEvent event) -> {
+
+            // Confirm deletion popup
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete this entry?");
+            alert.setContentText("This action cannot be undone.");
+
+            // Set the owner of the alert to the main window
+            Window window = deleteBtn.getScene().getWindow();
+            alert.initOwner(window);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                logger.info("Deleting entry: " + this.entry.getTitle());
+
+                // Delete the entry from the database and update caches
+                DatabaseAPI.getInstance().removeEntry(this.entry.getTitle());
+                EntryCache.getInstance().updateEntries();
+                SearchResultCache.getInstance().refreshSearchResults();
+
+                // Remove the entry from the VBox
+                VBox parent = (VBox) root.getParent();
+                parent.getChildren().remove(root);
+
+                // Cleanup resources
+                cleanup();
+            } else {
+                logger.info("Deletion cancelled for entry: " + this.entry.getTitle());
             }
         });
     }
 
-    /**
-     * Sets the text for the placeholders.
-     */
-    private void setLabels() {
-        titlePlaceholder.setText(title);
-        emailPlaceholder.setText(username);
-        passwordPlaceholder.setText(password);
-        usernamePlaceholder.setText(username);
-        dateCreatedPlaceholder.setText(dateCreated);
-        dateModifiedPlaceholder.setText(dateModified);
+    private void cleanup() {
+        // Remove event handlers
+        copyEmailBtn.setOnAction(null);
+        copyPasswordBtn.setOnAction(null);
+        copyUsernameBtn.setOnAction(null);
+        editBtn.setOnAction(null);
+        deleteBtn.setOnAction(null);
+
+        // Clear references to help with garbage collection
+        entry = null;
+        emailTextField.setText("");
+        passwordTextField.setText("");
+        usernameTextField.setText("");
     }
 
+    // Logger
+    private final Logger logger = Logger.getLogger(SearchResultCache.class.getName());
 }

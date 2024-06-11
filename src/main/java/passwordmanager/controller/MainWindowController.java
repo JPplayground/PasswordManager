@@ -1,182 +1,163 @@
-/*
-Color Palette:
-49243E
-704264
-BB8493
-DBAFA0
- */
-
 package passwordmanager.controller;
 
-import javafx.animation.FadeTransition;
-import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import passwordmanager.ui.UIPaths;
+import javafx.scene.layout.VBox;
+import javafx.scene.Node;
+import javafx.stage.Window;
+import passwordmanager.database.DatabaseAPI;
+import passwordmanager.model.Entry;
+import passwordmanager.model.EntryCache;
+import passwordmanager.model.SearchResultCache;
+import passwordmanager.util.PasswordGenerator;
 
-
-import java.io.IOException;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class MainWindowController {
 
-    String currentLoadedPage = UIPaths.HOME_PAGE_PATH;
-
-    // Sidebar buttons
+    // Add Tab UI Elements
     @FXML
-    private Button homeBtn, addBtn, findBtn, manageBtn, aboutBtn;
-
+    private TextField titleEntryField, emailEntryField, passwordEntryField, usernameEntryField, groupEntryField, linkEntryField;
     @FXML
-    private BorderPane mainBorderPane;
+    private Button clearBtn, addBtn, generatePasswordBtn;
+    @FXML
+    ChoiceBox<String> emailChoiceBox, groupChoiceBox;
 
-    private boolean firstLoad = true;
+    // View Tab UI Elements
+    @FXML
+    TextField searchField;
+    @FXML
+    MenuButton filterMenuButton;
+    @FXML
+    VBox searchResultsDisplayVBox;
+
+    // Cache
+    private final EntryCache entryCache = EntryCache.getInstance();
+    private final SearchResultCache searchResultCache = SearchResultCache.getInstance();
 
     @FXML
     public void initialize() {
-        setButtonWidths();
-        setButtonCallbacks();
-        loadHomePage();
+        logger.info("Initializing MainWindowController");
+
+        // Load and display search results in the view tab
+        setupSearchResultsDisplay();
+
+        // Set the email choice box options to unique emails in the database
+        setUpEmailChoiceBoxOptions();
+
+        setUpSearchFilter();
+
+        // Set up various button callbacks
+        addBtn.setOnAction(e -> addButtonCallback());
+        clearBtn.setOnAction(e -> clearTextFields());
+        generatePasswordBtn.setOnAction(e -> generatePasswordCallback());
+        emailChoiceBox.setOnAction(e -> emailChoiceBoxCallback());
     }
 
-    /**
-     * This method is used to set the width of the buttons in the sidebar to match the width of the left side of the border pane.
-     */
-    public void setButtonWidths() {
-        // Set button widths to match size of left side of border pane
-        homeBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
-        addBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
-        findBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
-        manageBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
-        aboutBtn.prefWidthProperty().bind(mainBorderPane.widthProperty());
-    }
+    private void setupSearchResultsDisplay() {
+        logger.info("Setting up search results display");
 
-    /**
-     * This method is used to set the callbacks for the buttons in the sidebar.
-     */
-    public void setButtonCallbacks() {
-        homeBtn.setOnAction(event -> loadHomePage());
-        addBtn.setOnAction(event -> loadAddPage());
-        findBtn.setOnAction(event -> loadFindPage());
-        manageBtn.setOnAction(event -> loadManagePage());
-        aboutBtn.setOnAction(event -> loadAboutPage());
-    }
+        // Clear the search results display
+        searchResultsDisplayVBox.getChildren().clear();
 
-    /**
-     * This method is used to load the home page.
-     */
-    public void loadHomePage() {
-        if (currentLoadedPage.equals(UIPaths.HOME_PAGE_PATH) && (!firstLoad)) {
-            return;
+        // Get search results from cache
+        List<Node> searchResults = searchResultCache.getSearchResults();
+
+        // Add search results to display
+        for (Node searchResult : searchResults) {
+            searchResultsDisplayVBox.getChildren().add(searchResult);
         }
-        System.out.println("Loading home page");
-
-        // Load the home page and set the controller
-        FXMLLoader loader = loadPageWithFadeTransition(UIPaths.HOME_PAGE_PATH);
-        HomePageController homePageController = loader.getController();
-        homePageController.setMainWindowController(this);
-
-        currentLoadedPage = UIPaths.HOME_PAGE_PATH;
-        firstLoad = false;
     }
 
-    /**
-     * This method is used to load the add page.
-     */
-    public void loadAddPage() {
-        if (currentLoadedPage.equals(UIPaths.ADD_PAGE_PATH)) {
-            return;
-        }
-        System.out.println("Loading add page");
+    private void addButtonCallback() {
+        // Get the values from the text fields
+        String title = titleEntryField.getText();
+        String email = emailEntryField.getText();
+        String password = passwordEntryField.getText();
+        String username = usernameEntryField.getText();
+        String group = groupEntryField.getText();
+        String link = linkEntryField.getText();
 
-        // Load the add page and set the controller
-        FXMLLoader loader = loadPageWithFadeTransition(UIPaths.ADD_PAGE_PATH);
-        AddPageController addPageController = loader.getController();
-        addPageController.setMainWindowController(this);
+        // Check required text fields are not empty
+        if (title.isEmpty() || email.isEmpty() || password.isEmpty() ) {
+            logger.warning("Title and password fields are required");
 
-        currentLoadedPage = UIPaths.ADD_PAGE_PATH;
-    }
-
-    /**
-     * This method is used to load the find page.
-     */
-    public void loadFindPage() {
-        if (currentLoadedPage.equals(UIPaths.FIND_PAGE_PATH)) {
-            return;
-        }
-        System.out.println("Loading find page");
-
-        FXMLLoader loader = loadPageWithFadeTransition(UIPaths.FIND_PAGE_PATH);
-        FindPageController findPageController = loader.getController();
-        findPageController.setMainWindowController(this);
-
-        currentLoadedPage = UIPaths.FIND_PAGE_PATH;
-    }
-
-    /**
-     * This method is used to load the manage page.
-     */
-    public void loadManagePage() {
-        if (currentLoadedPage.equals(UIPaths.MANAGE_PAGE_PATH)) {
-            return;
-        }
-        System.out.println("Loading manage page");
-
-        FXMLLoader loader = loadPageWithFadeTransition(UIPaths.MANAGE_PAGE_PATH);
-        ManagePageController managePageController = loader.getController();
-        managePageController.setMainWindowController(this);
-
-        currentLoadedPage = UIPaths.MANAGE_PAGE_PATH;
-    }
-
-    /**
-     * This method is used to load the about page.
-     */
-    public void loadAboutPage() {
-        if (currentLoadedPage.equals(UIPaths.ABOUT_PAGE_PATH)) {
-            return;
-        }
-        System.out.println("Loading about page");
-
-        FXMLLoader loader = loadPageWithFadeTransition(UIPaths.ABOUT_PAGE_PATH);
-        AboutPageController aboutPageController = loader.getController();
-        aboutPageController.setMainWindowController(this);
-
-        currentLoadedPage = UIPaths.ABOUT_PAGE_PATH;
-    }
-
-    /**
-     * This method is used to load a page with a fade transition.
-     * The returned FXMLLoader object can be used to pass a reference of MainWindowController to the controller of the loaded page.
-     *
-     * @param fxmlPath The path to the FXML file.
-     * @return The FXMLLoader object.
-     */
-    public FXMLLoader loadPageWithFadeTransition(String fxmlPath) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-        try {
-            // Load the new page
-            Node newPage = fxmlLoader.load();
-
-            // Create the fade transition
-            FadeTransition ft = new FadeTransition(Duration.millis(250), newPage);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-
-            // Set the new page to the center of the border pane
-            mainBorderPane.setCenter(newPage);
-
-            // Start the transition
-            ft.play();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading page");
+            // Notifying popup
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Missing Required Information");
+            alert.setContentText("Title, email, and password fields are required.");
+            // Set the owner of the alert to the main window
+            Window window = addBtn.getScene().getWindow();
+            alert.initOwner(window);
+            alert.show();
         }
 
-        return fxmlLoader;
+        // Check if the title already exists
+        else if (EntryCache.getInstance().contains(title)) {
+            logger.warning("Entry with title already exists");
 
+            // Notifying popup
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Entry Already Exists");
+            alert.setContentText("An entry with the title '" + title + "' already exists.");
+            // Set the owner of the alert to the main window
+            Window window = addBtn.getScene().getWindow();
+            alert.initOwner(window);
+            alert.show();
+        }
+
+        // TODO: Other preconditions to check before adding an entry
+
+        // Add the entry to the database
+        else {
+            DatabaseAPI.getInstance().newEntry(new Entry(title, email, password, username, link, group));
+            entryCache.updateEntries();
+            searchResultCache.refreshSearchResults();
+            setupSearchResultsDisplay();
+            clearTextFields();
+
+        }
     }
 
+    private void setUpEmailChoiceBoxOptions() {
+        List<String> emails = entryCache.getUniqueEmails();
+        for (String email : emails) {
+            emailChoiceBox.getItems().add(email);
+        }
+    }
+
+    private void emailChoiceBoxCallback() {
+        String selectedEmail = emailChoiceBox.getValue();
+        emailEntryField.setText(selectedEmail);
+
+        // TODO: Clear the email choice box selection without clearing the text field
+        // This doesn't work! : emailChoiceBox.setValue(null);
+    }
+
+    private void generatePasswordCallback() {
+        // Generate a random password
+        String password = PasswordGenerator.getPassword();
+        passwordEntryField.setText(password);
+    }
+
+    private void clearTextFields() {
+        // Clear the text fields
+        titleEntryField.clear();
+        emailEntryField.clear();
+        passwordEntryField.clear();
+        usernameEntryField.clear();
+        groupEntryField.clear();
+        linkEntryField.clear();
+    }
+
+    private void setUpSearchFilter() {
+        // TODO: Implement filter feature
+        // Disabling until feature is implemented
+        filterMenuButton.setDisable(true);
+    }
+
+    // Logger
+    private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
 }
