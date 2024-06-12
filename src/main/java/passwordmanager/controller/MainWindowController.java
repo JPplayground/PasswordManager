@@ -1,5 +1,7 @@
 package passwordmanager.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -32,7 +34,7 @@ public class MainWindowController {
     @FXML
     VBox searchResultsDisplayVBox;
 
-    // Cache
+    // Caches
     private final EntryCache entryCache = EntryCache.getInstance();
     private final SearchResultCache searchResultCache = SearchResultCache.getInstance();
 
@@ -46,7 +48,7 @@ public class MainWindowController {
         // Set the email choice box options to unique emails in the database
         setUpEmailChoiceBoxOptions();
 
-        setUpSearchFilter();
+        setUpSearchFilterButton();
 
         // Set up various button callbacks
         addBtn.setOnAction(e -> addButtonCallback());
@@ -65,8 +67,32 @@ public class MainWindowController {
         List<Node> searchResults = searchResultCache.getSearchResults();
 
         // Add search results to display
+        // Default is to display all entries in the database
         for (Node searchResult : searchResults) {
             searchResultsDisplayVBox.getChildren().add(searchResult);
+        }
+
+        // Add a listener to the search bar
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filterSearchResults(newValue);
+            }
+        });
+    }
+
+    private void filterSearchResults(String searchText) {
+        // Clear the search results display
+        searchResultsDisplayVBox.getChildren().clear();
+
+        // Get search results from cache
+        List<Node> searchResults = searchResultCache.getSearchResults();
+
+        for (Node searchResult : searchResults) {
+            Entry currentResultEntry = (Entry) searchResult.getUserData();
+            if (currentResultEntry.titleContains(searchText)) {
+                searchResultsDisplayVBox.getChildren().add(searchResult);
+            }
         }
     }
 
@@ -151,7 +177,7 @@ public class MainWindowController {
         linkEntryField.clear();
     }
 
-    private void setUpSearchFilter() {
+    private void setUpSearchFilterButton() {
         // TODO: Implement filter feature
         // Disabling until feature is implemented
         filterMenuButton.setDisable(true);

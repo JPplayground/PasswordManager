@@ -8,7 +8,7 @@
 Hey there! This project is a work in progress towards building a simple and effective password management system.
 Right now it is incomplete, with only basic features and a very simple GUI.  
 
-# Main Goals for the Project 
+## Main Goals for the Project 
 
 - Migrate to Electron for the UI
 - Give the user the option of storing passwords locally (currently implemented) or cloud based storage

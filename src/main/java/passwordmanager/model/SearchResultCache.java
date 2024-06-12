@@ -41,6 +41,10 @@ public class SearchResultCache {
                 Node searchResult = loader.load();
                 SearchResultController controller = loader.getController();
                 controller.setEntry(entry);
+
+                // Embed entry data in node for late access (filtering in MainWindowController)
+                searchResult.setUserData(entry);
+
                 searchResults.add(searchResult);
             } catch (IOException e) {
                 logger.severe("Failed to load SearchResult.fxml");
