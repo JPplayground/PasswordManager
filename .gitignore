@@ -46,4 +46,5 @@ test.trace.db
 
 /backup/
 
-identifier.sqlite
+/identifier.sqlite
+password_manager.db
