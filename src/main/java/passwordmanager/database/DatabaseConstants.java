@@ -18,11 +18,6 @@ package passwordmanager.database;
 public class DatabaseConstants {
 
     /**
-     * The URL of the database driver.
-     */
-//    public static final String DRIVER_URL = "org.h2.Driver";
-
-    /**
      * The connection URL for the application database.
      */
     public static final String APP_CONNECTION_URL = "jdbc:sqlite:./password_manager.db";
