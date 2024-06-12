@@ -45,3 +45,5 @@ test.trace.db
 
 
 /backup/
+
+identifier.sqlite
