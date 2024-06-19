@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"com.jp.passwordmanager"}];updateSearchResults();
+moduleSearchIndex = [{"l":"passwordmanager"}];updateSearchResults();

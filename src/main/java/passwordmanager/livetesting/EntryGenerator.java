@@ -48,7 +48,15 @@ public class EntryGenerator {
             String link = LINKS[random.nextInt(LINKS.length)];
             String category = CATEGORIES[random.nextInt(CATEGORIES.length)];
 
-            entries.add(new Entry(title, email, password, username, link, category));
+            Entry entry = new Entry.EntryBuilder(title)
+                    .email(email)
+                    .password(password)
+                    .username(username)
+                    .link(link)
+                    .category(category)
+                    .build();
+
+            entries.add(entry);
         }
 
         return entries;

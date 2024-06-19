@@ -42,28 +42,5 @@ public class DatabaseConstants {
      */
     public static final String COMMON_EMAILS_COLUMN_NAME = "email";
 
-    /**
-     * Enum representing the columns in the entries table.
-     */
-    public enum EntryColumns {
-        TITLE("title"),
-        EMAIL("email"),
-        PASSWORD("password"),
-        USERNAME("username"),
-        LINK("link"),
-        CATEGORY("category"),
-        DATE_CREATED("date_created"),
-        DATE_MODIFIED("date_modified");
 
-        private final String columnName;
-
-        EntryColumns(String columnName) {
-            this.columnName = columnName;
-        }
-
-        @Override
-        public String toString() {
-            return columnName;
-        }
-    }
 }

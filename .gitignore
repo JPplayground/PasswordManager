@@ -47,4 +47,9 @@ test.trace.db
 /backup/
 
 /identifier.sqlite
-password_manager.db
+/password_manager.db
+/data.json
+/jpackage-command.txt
+
+src/main/java/passwordmanager/NOTES.txt
+src/main/java/passwordmanager/TODO.txt

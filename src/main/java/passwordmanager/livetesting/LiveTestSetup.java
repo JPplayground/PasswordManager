@@ -29,9 +29,6 @@ public class LiveTestSetup {
             databaseAPI.newEntry(entry);
         }
 
-        databaseAPI.addCommonEmail("billybobthorton@hotmail.com");
-        databaseAPI.addCommonEmail("vapegodyolo420@myspace.net");
-
         System.out.println("Live test setup finished.");
 
 

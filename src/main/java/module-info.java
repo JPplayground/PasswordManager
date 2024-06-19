@@ -1,4 +1,4 @@
-module com.jp.passwordmanager {
+module passwordmanager {
     requires javafx.controls;
     requires java.sql;
     requires java.datatransfer;
@@ -7,6 +7,8 @@ module com.jp.passwordmanager {
     requires org.slf4j;
     requires org.slf4j.simple;
     requires javafx.fxml;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
     exports passwordmanager.database;
     exports passwordmanager.util;

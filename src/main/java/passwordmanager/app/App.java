@@ -48,7 +48,7 @@ public class App extends Application {
 
         // Testing setup
         if (args.length == 0) {
-            DatabaseConnection.setConnection(false);    // TODO: Devise a more descriptive way to set the connection
+            DatabaseConnection.setConnection(false);    // TODO: Devise a more descriptive way to set the connection to testing or live
         } else if (args[0].equals("testing")) {
             DatabaseConnection.setConnection(true);
             LiveTestSetup.setup();

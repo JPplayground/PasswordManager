@@ -34,60 +34,99 @@ import java.sql.Timestamp;
  * @see IllegalAccessException
  */
 public class Entry {
-    private final String title;
-    private final String email;
-    private final String password;
-    private final String username;
-    private final String link;
-    private final String category;
-    private final Timestamp dateCreated;
-    private final Timestamp dateModified;
 
-    /**
-     * Constructs a new Entry without date information. This constructor is typically used when
-     * the dates are not yet known or not needed.
-     *
-     * @param title    The title of the entry.
-     * @param email    The email associated with the entry.
-     * @param password The password of the entry.
-     * @param username The username associated with the entry.
-     * @param link     A hyperlink associated with the entry, if any.
-     * @param category The category to which the entry belongs.
-     */
-    public Entry(String title, String email, String password, String username, String link, String category) {
+    // Only truly required parameter to construct an Entry
+    private final String title;
+
+    private String email;
+    private String secondaryEmail;
+    private String password;
+    private String username;
+    private String phoneNumber;
+    private String link;
+    private String category;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
+
+    private Entry(String title) {
         this.title = title;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.link = link;
-        this.category = category;
-        this.dateCreated = null;
-        this.dateModified = null;
     }
 
-    /**
-     * Constructs a new Entry with specified date information for creation and modification.
-     * This constructor is used when both the creation and modification dates are known at the time
-     * of entry creation.
-     *
-     * @param title        The title of the entry.
-     * @param email        The email associated with the entry.
-     * @param password     The password of the entry.
-     * @param username     The username associated with the entry.
-     * @param link         A hyperlink associated with the entry, if any.
-     * @param category     The category to which the entry belongs.
-     * @param dateCreated  The timestamp representing the date and time when the entry was created.
-     * @param dateModified The timestamp representing the date and time when the entry was last modified.
-     */
-    public Entry(String title, String email, String password, String username, String link, String category, Timestamp dateCreated, Timestamp dateModified) {
-        this.title = title;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.link = link;
-        this.category = category;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
+    public static class EntryBuilder {
+        // Although implicit, all non-required fields will be null if not set
+        private final String title;
+        private String email = null;
+        private String secondaryEmail = null;
+        private String password = null;
+        private String username = null;
+        private String phoneNumber = null;
+        private String link = null;
+        private String category = null;
+        private Timestamp dateCreated = null;
+        private Timestamp dateModified = null;
+
+        public EntryBuilder(String title) {
+            this.title = title;
+        }
+
+        public EntryBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public EntryBuilder secondaryEmail(String secondaryEmail) {
+            this.secondaryEmail = secondaryEmail;
+            return this;
+        }
+
+        public EntryBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public EntryBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public EntryBuilder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public EntryBuilder link(String link) {
+            this.link = link;
+            return this;
+        }
+
+        public EntryBuilder category(String group) {
+            this.category = group;
+            return this;
+        }
+
+        public EntryBuilder dateCreated(Timestamp dateCreated) {
+            this.dateCreated = dateCreated;
+            return this;
+        }
+
+        public EntryBuilder dateModified(Timestamp dateModified) {
+            this.dateModified = dateModified;
+            return this;
+        }
+
+        public Entry build() {
+            Entry entry = new Entry(title);
+            entry.email = email;
+            entry.secondaryEmail = secondaryEmail;
+            entry.password = password;
+            entry.username = username;
+            entry.phoneNumber = phoneNumber;
+            entry.link = link;
+            entry.category = category;
+            entry.dateCreated = dateCreated;
+            entry.dateModified = dateModified;
+            return entry;
+        }
     }
 
     /**
@@ -109,6 +148,15 @@ public class Entry {
     }
 
     /**
+     * Returns the secondary email associated with this entry.
+     *
+     * @return the secondary email of the entry.
+     */
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    /**
      * Returns the password for this entry.
      *
      * @return the password of the entry.
@@ -124,6 +172,15 @@ public class Entry {
      */
     public String getUsername() {
         return username;
+    }
+
+    /**
+     * Returns the phone number associated with this entry.
+     *
+     * @return the phone number of the entry.
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**
@@ -175,8 +232,10 @@ public class Entry {
 
         entryAsString.append("Title: ").append(title).append("\n");
         entryAsString.append("\tEmail: ").append(email).append("\n");
+        entryAsString.append("\tSecondary Email: ").append(secondaryEmail).append("\n");
         entryAsString.append("\tPassword: ").append(password).append("\n");
         entryAsString.append("\tUsername: ").append(username).append("\n");
+        entryAsString.append("\tPhone Number: ").append(phoneNumber).append("\n");
         entryAsString.append("\tLink: ").append(link).append("\n");
         entryAsString.append("\tCategory: ").append(category).append("\n");
 
