@@ -16,7 +16,7 @@ public class TableCreationTest {
 
     @BeforeEach
     public void openConnection() throws SQLException {
-        DatabaseConnection.setConnection(true);
+        DatabaseConnection.setConnection();
         connection = DatabaseConnection.getConnection();
     }
 
@@ -24,7 +24,6 @@ public class TableCreationTest {
     public void closeConnection() throws SQLException {
         connection.close();
     }
-
 
     @Test
     public void testEntryTableCreation() throws SQLException {
@@ -38,7 +37,7 @@ public class TableCreationTest {
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
         String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
-        PreparedStatement checkTable = this.connection.prepareStatement(sql);
+        PreparedStatement checkTable = connection.prepareStatement(sql);
         checkTable.setString(1, DatabaseConstants.ENTRIES_TABLE_NAME);
 
         ResultSet resultSet = checkTable.executeQuery();

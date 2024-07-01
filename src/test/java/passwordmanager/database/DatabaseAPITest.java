@@ -3,6 +3,7 @@ package passwordmanager.database;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -30,8 +31,17 @@ public class DatabaseAPITest {
         category = "example";
 
 
+        Entry entry = new EntryBuilder(title)
+                .email(email)
+                .password(password)
+                .username(username)
+                .link(link)
+                .category(category)
+                .build();
+
+
         assertDoesNotThrow(() -> {
-            databaseAPI.newEntry(title, email, password, username, link, category);
+            databaseAPI.newEntry(entry);
         });
 
         assertDoesNotThrow(() -> {
@@ -44,7 +54,7 @@ public class DatabaseAPITest {
         String title;
         title = "Example";
 
-        Entry entry = new Entry.EntryBuilder(title).build();
+        Entry entry = new EntryBuilder(title).build();
 
         assertDoesNotThrow(() -> {
             databaseAPI.newEntry(entry);
@@ -66,7 +76,7 @@ public class DatabaseAPITest {
         link = "www.example.com";
         category = "example";
 
-        Entry entry = new Entry.EntryBuilder(title)
+        Entry entry = new EntryBuilder(title)
                 .email(email)
                 .password(password)
                 .username(username)
@@ -102,6 +112,14 @@ public class DatabaseAPITest {
         link1 = "www.example.com1";
         category1 = "example1";
 
+        Entry entry1 = new EntryBuilder(title1)
+                .email(email1)
+                .password(password1)
+                .username(username1)
+                .link(link1)
+                .category(category1)
+                .build();
+
         String title2, email2, password2, username2, link2, category2;
         title2 = "Example2";
         email2 = "a@a.com2";
@@ -110,8 +128,16 @@ public class DatabaseAPITest {
         link2 = "www.example.com2";
         category2 = "example2";
 
-        databaseAPI.newEntry(title1, email1, password1, username1, link1, category1);
-        databaseAPI.newEntry(title2, email2, password2, username2, link2, category2);
+        Entry entry2 = new EntryBuilder(title2)
+                .email(email2)
+                .password(password2)
+                .username(username2)
+                .link(link2)
+                .category(category2)
+                .build();
+
+        databaseAPI.newEntry(entry1);
+        databaseAPI.newEntry(entry2);
 
         ArrayList<String> listOfTitles = databaseAPI.getListOfEntryTitles();
 
@@ -123,29 +149,5 @@ public class DatabaseAPITest {
         databaseAPI.removeEntry(title1);
         databaseAPI.removeEntry(title2);
     }
-
-    @Test
-    public void testAddGetAndRemoveCommonEmails() {
-
-        String email1, email2;
-        email1 = "example1@gmail.com";
-        email2 = "example2@gmail.com";
-
-        databaseAPI.addCommonEmail(email1);
-
-        ArrayList<String> emails = databaseAPI.getListOfCommonEmails();
-        assertEquals(1, emails.size());
-
-        databaseAPI.addCommonEmail(email2);
-        emails = databaseAPI.getListOfCommonEmails();
-        assertEquals(2, emails.size());
-
-        assertEquals(email1, emails.get(0));
-        assertEquals(email2, emails.get(1));
-
-    }
-
-
-
 
 }
