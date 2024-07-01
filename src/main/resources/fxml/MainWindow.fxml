@@ -147,7 +147,7 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" layoutY="47.0" prefHeight="722.0" prefWidth="1200.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="47.0">
+                  <ScrollPane fx:id="scrollBox" hbarPolicy="NEVER" layoutY="47.0" prefHeight="722.0" prefWidth="1200.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="47.0">
                      <content>
                         <VBox fx:id="searchResultsDisplayVBox" alignment="TOP_CENTER" fillWidth="false" minHeight="1000.0" minWidth="1200.0" spacing="20.0">
                            <padding>

@@ -38,6 +38,8 @@ public class MainWindowController {
     @FXML
     MenuButton filterMenuButton;
     @FXML
+    ScrollPane scrollBox;
+    @FXML
     VBox searchResultsDisplayVBox;
 
     // Caches
@@ -90,6 +92,14 @@ public class MainWindowController {
                 filterSearchResults(newValue);
             }
         });
+    }
+
+    public double getScrollBarPosition() {
+        return scrollBox.getVvalue();
+    }
+
+    public void setScrollBarPosition(double position) {
+        scrollBox.setVvalue(position);
     }
 
     private void filterSearchResults(String searchText) {
