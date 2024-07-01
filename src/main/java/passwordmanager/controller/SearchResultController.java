@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import passwordmanager.database.DatabaseAPI;
@@ -27,7 +26,7 @@ public class SearchResultController {
     Entry entry;
 
     @FXML
-    GridPane root;
+    VBox root;
 
     @FXML
     private Label titleLabel;

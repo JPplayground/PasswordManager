@@ -1,6 +1,7 @@
 package passwordmanager.database;
 
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +10,11 @@ import java.util.Set;
 
 /**
  * The {@code DatabaseAPI} class provides methods for interacting with a database
- * to perform various operations related to managing entries and common email addresses
- * within a password manager application.
+ * to perform various operations related to managing entries within the application
  *
  * <p>Instances of this class are obtained using the {@link #getInstance()} method.
  * This class ensures safe database operations and encapsulates SQL statements for
- * adding, modifying, removing, and retrieving data related to entries and common emails.
+ * adding, modifying, removing, and retrieving data related to entries.
  *
  * <p>Note: This class follows the singleton design pattern to ensure only one instance
  * is created throughout the application.
@@ -31,7 +31,7 @@ import java.util.Set;
  */
 public class DatabaseAPI {
 
-    private SQLQueryBuilder sqlQueryBuilder;
+    private PreparedStatementGenerator preparedStatementGenerator;
 
     // Singleton Instance
     private static DatabaseAPI instance;
@@ -43,13 +43,11 @@ public class DatabaseAPI {
      */
     private DatabaseAPI() {
         try {
-            this.sqlQueryBuilder = new SQLQueryBuilder();
+            this.preparedStatementGenerator = new PreparedStatementGenerator();
 
-            PreparedStatement createEntryTable = sqlQueryBuilder.prepareEntryTableCreationStatement();
-            createEntryTable.execute();
-
-            PreparedStatement createCommonEmailsTable = sqlQueryBuilder.prepareCommonEmailsTableCreationStatement();
-            createCommonEmailsTable.execute();
+            try (PreparedStatement createEntryTable = preparedStatementGenerator. prepareEntryTableCreationStatement()) {
+                createEntryTable.execute();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,29 +69,16 @@ public class DatabaseAPI {
     /**
      * Adds a new entry to the database.
      *
-     * @param title    the title of the entry.
-     * @param email    the email associated with the entry.
-     * @param password the password of the entry.
-     * @param username the username associated with the entry.
-     * @param link     a hyperlink associated with the entry, if any.
-     * @param category the category to which the entry belongs.
-     */
-    public void newEntry(String title, String email, String password, String username, String link, String category) {
-        try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareInsertEntryStatement(title, email, password, username, link, category);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Adds a new entry to the database.
-     *
      * @param entry the entry object to be added.
      */
     public void newEntry(Entry entry) {
-        this.newEntry(entry.getTitle(), entry.getEmail(), entry.getPassword(), entry.getUsername(), entry.getLink(), entry.getCategory());
+        try {
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareInsertEntryStatement(entry)) {
+                stmt.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -109,8 +94,9 @@ public class DatabaseAPI {
      */
     public void modifyEntry(String title, String email, String password, String username, String link, String category) {
         try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareEntryUpdateStatement(title, email, password, username, link, category);
-            stmt.execute();
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareEntryUpdateStatement(title, email, password, username, link, category)) {
+                stmt.execute();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -123,8 +109,25 @@ public class DatabaseAPI {
      */
     public void removeEntry(String title) {
         try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareRemoveEntryStatement(title);
-            stmt.execute();
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(title)) {
+                stmt.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Removes an entry from the database.
+     *
+     * @param entry the entry to be removed.
+     */
+    public void removeEntry(Entry entry) {
+        try {
+            // Uses removeEntry(String) by getting title from entry
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(entry.getTitle())) {
+                stmt.execute();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,23 +141,39 @@ public class DatabaseAPI {
      */
     public Entry getEntry(String titleKey) {
         try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareGetEntryStatement(titleKey);
-            ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                // Retrieve entry data from the result set
-                String title = resultSet.getString(DatabaseConstants.EntryColumns.TITLE.toString());
-                String email = resultSet.getString(DatabaseConstants.EntryColumns.EMAIL.toString());
-                String password = resultSet.getString(DatabaseConstants.EntryColumns.PASSWORD.toString());
-                String username = resultSet.getString(DatabaseConstants.EntryColumns.USERNAME.toString());
-                String link = resultSet.getString(DatabaseConstants.EntryColumns.LINK.toString());
-                String category = resultSet.getString(DatabaseConstants.EntryColumns.CATEGORY.toString());
-                Timestamp dateCreated = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_CREATED.toString());
-                Timestamp dateModified = resultSet.getTimestamp(DatabaseConstants.EntryColumns.DATE_MODIFIED.toString());
+            ResultSet resultSet;
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetEntryStatement(titleKey)) {
+                resultSet = stmt.executeQuery();
+                if (resultSet.next()) {
 
-                // Create and return the Entry object
-                return new Entry(title, email, password, username, link, category, dateCreated, dateModified);
-            } else {
-                throw new SQLException("Entry not found with title: " + titleKey);
+                    // Retrieve entry data from the result set
+                    String title = resultSet.getString(EntryTableColumns.TITLE.toString());
+                    String email = resultSet.getString(EntryTableColumns.EMAIL.toString());
+                    String secondaryEmail = resultSet.getString(EntryTableColumns.SECONDARY_EMAIL.toString());
+                    String password = resultSet.getString(EntryTableColumns.PASSWORD.toString());
+                    String username = resultSet.getString(EntryTableColumns.USERNAME.toString());
+                    String phoneNumber = resultSet.getString(EntryTableColumns.PHONE_NUMBER.toString());
+                    String link = resultSet.getString(EntryTableColumns.LINK.toString());
+                    String category = resultSet.getString(EntryTableColumns.CATEGORY.toString());
+                    Timestamp dateCreated = resultSet.getTimestamp(EntryTableColumns.DATE_CREATED.toString());
+                    Timestamp dateModified = resultSet.getTimestamp(EntryTableColumns.DATE_MODIFIED.toString());
+
+                    // Create and return the Entry object
+                    return new EntryBuilder(title)
+                            .email(email)
+                            .password(password)
+                            .secondaryEmail(secondaryEmail)
+                            .username(username)
+                            .link(link)
+                            .phoneNumber(phoneNumber)
+                            .category(category)
+                            .dateCreated(dateCreated)
+                            .dateModified(dateModified)
+                            .build();
+
+                } else {
+                    throw new SQLException("Entry not found with title: " + titleKey);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,10 +205,12 @@ public class DatabaseAPI {
     public ArrayList<String> getListOfEntryTitles() {
         ArrayList<String> entries = new ArrayList<>();
         try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareGetAllEntryTitlesStatement();
-            ResultSet resultSet = stmt.executeQuery();
-            while (resultSet.next()) {
-                entries.add(resultSet.getString(1));
+            ResultSet resultSet;
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetAllEntryTitlesStatement()) {
+                resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    entries.add(resultSet.getString(1));
+                }
             }
             return entries;
         } catch (SQLException e) {
@@ -199,57 +220,7 @@ public class DatabaseAPI {
     }
 
     /**
-     * Adds a common email address to the database.
-     *
-     * @param email the email address to add to the common emails list.
-     */
-    public void addCommonEmail(String email) {
-        try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareAddCommonEmailStatement(email);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Retrieves a list of common emails from the database.
-     * This method executes a SQL query prepared by {@code prepareGetListOfCommonEmailsStatement}
-     * from the {@code sqlStatementBuilder} to fetch all common emails stored in the database.
-     * The emails are read from the result set and added to an ArrayList.
-     *
-     * <p>This method handles any SQL exceptions by printing the stack trace and returns {@code null}
-     * if an exception occurs, indicating that the operation failed.
-     *
-     * @return An {@code ArrayList<String>} containing all the common emails retrieved from the database,
-     *         or {@code null} if an SQL exception occurs.
-     */
-    public ArrayList<String> getListOfCommonEmails() {
-        ArrayList<String> emails = new ArrayList<>();
-        try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareGetListOfCommonEmailsStatement();
-            ResultSet resultSet = stmt.executeQuery();
-
-            while (resultSet.next()) {
-                emails.add(resultSet.getString(1));
-            }
-
-            return emails;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * Retrieves a list of all groups from the database.
-     * This method executes a SQL query prepared by {@code prepareGetListOfGroupsStatement}
-     * from the {@code sqlStatementBuilder} to fetch all groups stored in the database.
-     * The groups are read from the result set and added to a HashSet.
-     *
-     * <p>This method handles any SQL exceptions by printing the stack trace and returns {@code null}
-     * if an exception occurs, indicating that the operation failed.
      *
      * @return A {@code Set<String>} containing all the groups retrieved from the database,
      *         or {@code null} if an SQL exception occurs.
@@ -257,15 +228,14 @@ public class DatabaseAPI {
     public Set<String> getListOfGroups() {
         Set<String> groups = new HashSet<>();
         try {
-            PreparedStatement stmt = sqlQueryBuilder.prepareGetListOfGroupsStatement();
-            ResultSet resultSet = stmt.executeQuery();
-
-            while (resultSet.next()) {
-                groups.add(resultSet.getString(1));
+            ResultSet resultSet;
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetListOfGroupsStatement()) {
+                resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    groups.add(resultSet.getString(1));
+                }
             }
-
             return groups;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

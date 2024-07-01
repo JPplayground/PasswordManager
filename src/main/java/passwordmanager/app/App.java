@@ -46,11 +46,12 @@ public class App extends Application {
     public static void runSetupTasks(String[] args) {
         logger.info("Running setup tasks");
 
-        // Testing setup
-        if (args.length == 0) {
-            DatabaseConnection.setConnection(false);    // TODO: Devise a more descriptive way to set the connection
-        } else if (args[0].equals("testing")) {
-            DatabaseConnection.setConnection(true);
+        // Testing setup is done here determined by hard coded settings
+        // See: DeveloperSettings.java
+        DatabaseConnection.setConnection();
+
+        // Sets testing data for UI components
+        if (DeveloperSettings.getApplicationMode() == DeveloperSettings.ApplicationMode.TESTING) {
             LiveTestSetup.setup();
         }
     }

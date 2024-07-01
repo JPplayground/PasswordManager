@@ -2,7 +2,7 @@ package passwordmanager.database.SQLStatementBulderTests;
 
 import passwordmanager.database.DatabaseConnection;
 import passwordmanager.database.DatabaseConstants;
-import passwordmanager.database.SQLQueryBuilder;
+import passwordmanager.database.PreparedStatementGenerator;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;
@@ -29,12 +29,12 @@ public class TableCreationTest {
     @Test
     public void testEntryTableCreation() throws SQLException {
 
-        SQLQueryBuilder sqlQueryBuilder;
+        PreparedStatementGenerator preparedStatementGenerator;
         PreparedStatement createTable;
 
-        sqlQueryBuilder = new SQLQueryBuilder();
+        preparedStatementGenerator = new PreparedStatementGenerator();
 
-        createTable = sqlQueryBuilder.prepareEntryTableCreationStatement();
+        createTable = preparedStatementGenerator.prepareEntryTableCreationStatement();
         assertDoesNotThrow(() -> createTable.executeUpdate());
 
         String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
@@ -48,27 +48,5 @@ public class TableCreationTest {
         assertEquals(1, tableCount);
     }
 
-
-    @Test
-    public void testCommonEmailsTableCreation() throws SQLException {
-
-        SQLQueryBuilder sqlQueryBuilder;
-        PreparedStatement createTable;
-
-        sqlQueryBuilder = new SQLQueryBuilder();
-
-        createTable = sqlQueryBuilder.prepareCommonEmailsTableCreationStatement();
-        assertDoesNotThrow(() -> createTable.executeUpdate());
-
-        String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
-        PreparedStatement checkTable = this.connection.prepareStatement(sql);
-        checkTable.setString(1, DatabaseConstants.COMMON_EMAILS_TABLE_NAME);
-
-        ResultSet resultSet = checkTable.executeQuery();
-        assertTrue(resultSet.next());
-
-        int tableCount = resultSet.getInt(1);
-        assertEquals(1, tableCount);
-    }
 
 }

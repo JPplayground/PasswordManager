@@ -1,7 +1,6 @@
 package passwordmanager.model;
 
 import passwordmanager.database.DatabaseAPI;
-import passwordmanager.database.EntryTitleComparator;
 
 import java.util.ArrayList;
 import java.util.List;

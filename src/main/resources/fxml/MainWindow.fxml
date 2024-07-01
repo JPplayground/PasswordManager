@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.MainWindowController">
+<TabPane fx:id="rootTabPane" prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.MainWindowController">
   <tabs>
     <Tab closable="false" text="Add">
       <content>
@@ -15,16 +13,18 @@
                <children>
                   <VBox prefHeight="573.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <GridPane prefHeight="475.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane prefHeight="627.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" percentWidth="30.0" prefWidth="310.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" percentWidth="40.0" prefWidth="490.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" percentWidth="30.0" prefWidth="490.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" percentWidth="40.0" prefWidth="310.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" percentWidth="30.0" prefWidth="490.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" percentWidth="40.0" prefWidth="490.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -40,22 +40,32 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Password" GridPane.rowIndex="2">
+                              <Label text="Secondary/Recovery Email" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Username" GridPane.rowIndex="3">
+                              <Label text="Password" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Group" GridPane.rowIndex="4">
+                              <Label text="Username" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Link" GridPane.rowIndex="5">
+                              <Label text="Phone Number" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Link" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Group" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
@@ -65,42 +75,57 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="emailEntryField" maxWidth="300.0" promptText="Required..." GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="emailEntryField" maxWidth="300.0" promptText="Recommended..." GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="passwordEntryField" maxWidth="300.0" promptText="Required..." GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <TextField fx:id="secondaryEmailEntryField" maxWidth="300.0" promptText="Recommended..." GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="usernameEntryField" maxWidth="300.0" promptText="Optional..." GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <TextField fx:id="passwordEntryField" maxWidth="300.0" promptText="Recommended..." GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="groupEntryField" maxWidth="300.0" promptText="Optional..." GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <TextField fx:id="usernameEntryField" maxWidth="300.0" promptText="Recommended..." GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="linkEntryField" maxWidth="300.0" promptText="Optional..." GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <TextField fx:id="phoneNumberEntryField" maxWidth="300.0" promptText="Recommended..." GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Button fx:id="generatePasswordBtn" minWidth="150.0" mnemonicParsing="false" text="Generate" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              <TextField fx:id="groupEntryField" maxWidth="300.0" promptText="Optional..." GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <GridPane.margin>
-                                    <Insets left="10.0" />
+                                    <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
-                              </Button>
+                              </TextField>
+                              <TextField fx:id="linkEntryField" maxWidth="300.0" promptText="Optional..." GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
                               <ChoiceBox fx:id="emailChoiceBox" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </ChoiceBox>
-                              <ChoiceBox fx:id="groupChoiceBox" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                              <ChoiceBox fx:id="secondaryEmailChoiceBox" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                              <Button fx:id="generatePasswordBtn" minWidth="150.0" mnemonicParsing="false" text="Generate" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <ChoiceBox fx:id="groupChoiceBox" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -122,9 +147,12 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ScrollPane layoutY="47.0" prefHeight="510.0" prefWidth="800.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="47.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutY="47.0" prefHeight="722.0" prefWidth="1200.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="47.0">
                      <content>
-                        <VBox fx:id="searchResultsDisplayVBox" alignment="TOP_CENTER" fillWidth="false" minHeight="510.0" prefWidth="785.0" spacing="20.0" />
+                        <VBox fx:id="searchResultsDisplayVBox" alignment="TOP_CENTER" fillWidth="false" minHeight="1000.0" minWidth="1200.0" spacing="20.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></VBox>
                      </content>
                   </ScrollPane>
                   <TextField fx:id="searchField" layoutX="14.0" layoutY="11.0" prefHeight="25.0" prefWidth="239.0" />

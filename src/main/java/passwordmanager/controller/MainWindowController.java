@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.stage.Window;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 import passwordmanager.model.EntryCache;
 import passwordmanager.model.SearchResultCache;
 import passwordmanager.util.PasswordGenerator;
@@ -18,13 +19,18 @@ import java.util.logging.Logger;
 
 public class MainWindowController {
 
+    // Root
+    @FXML
+    private TabPane rootTabPane;
+
     // Add Tab UI Elements
     @FXML
-    private TextField titleEntryField, emailEntryField, passwordEntryField, usernameEntryField, groupEntryField, linkEntryField;
+    private TextField titleEntryField, emailEntryField, secondaryEmailEntryField, passwordEntryField,
+            usernameEntryField, phoneNumberEntryField, groupEntryField, linkEntryField;
     @FXML
     private Button clearBtn, addBtn, generatePasswordBtn;
     @FXML
-    ChoiceBox<String> emailChoiceBox, groupChoiceBox;
+    ChoiceBox<String> emailChoiceBox, groupChoiceBox, secondaryEmailChoiceBox;
 
     // View Tab UI Elements
     @FXML
@@ -48,13 +54,18 @@ public class MainWindowController {
         // Set the email choice box options to unique emails in the database
         setUpEmailChoiceBoxOptions();
 
-        setUpSearchFilterButton();
-
         // Set up various button callbacks
         addBtn.setOnAction(e -> addButtonCallback());
         clearBtn.setOnAction(e -> clearTextFields());
         generatePasswordBtn.setOnAction(e -> generatePasswordCallback());
         emailChoiceBox.setOnAction(e -> emailChoiceBoxCallback());
+
+        setUpChooseFilterButton();
+    }
+
+    private void setUpChooseFilterButton() {
+        // TODO: Implement filtering by different criteria
+        filterMenuButton.setDisable(true);
     }
 
     private void setupSearchResultsDisplay() {
@@ -100,19 +111,22 @@ public class MainWindowController {
         // Get the values from the text fields
         String title = titleEntryField.getText();
         String email = emailEntryField.getText();
+        String secondaryEmail = secondaryEmailEntryField.getText();
         String password = passwordEntryField.getText();
         String username = usernameEntryField.getText();
-        String group = groupEntryField.getText();
+        String phoneNumber = phoneNumberEntryField.getText();
         String link = linkEntryField.getText();
+        String group = groupEntryField.getText();
 
-        // Check required text fields are not empty
-        if (title.isEmpty() || email.isEmpty() || password.isEmpty() ) {
-            logger.warning("Title and password fields are required");
+
+        // Check title is present
+        if (title.isEmpty() ) {
+            logger.warning("Title is required!");
 
             // Notifying popup
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Missing Required Information");
-            alert.setContentText("Title, email, and password fields are required.");
+            alert.setContentText("A title is required to add an entry.");
             // Set the owner of the alert to the main window
             Window window = addBtn.getScene().getWindow();
             alert.initOwner(window);
@@ -137,7 +151,18 @@ public class MainWindowController {
 
         // Add the entry to the database
         else {
-            DatabaseAPI.getInstance().newEntry(new Entry(title, email, password, username, link, group));
+
+            Entry entry = new EntryBuilder(title)
+                    .email(email)
+                    .secondaryEmail(secondaryEmail)
+                    .password(password)
+                    .username(username)
+                    .phoneNumber(phoneNumber)
+                    .link(link)
+                    .category(group)
+                    .build();
+
+            DatabaseAPI.getInstance().newEntry(entry);
             entryCache.updateEntries();
             searchResultCache.refreshSearchResults();
             setupSearchResultsDisplay();
@@ -151,6 +176,7 @@ public class MainWindowController {
         for (String email : emails) {
             emailChoiceBox.getItems().add(email);
         }
+        // TODO: Need to reset this when new emails are added
     }
 
     private void emailChoiceBoxCallback() {
@@ -171,16 +197,12 @@ public class MainWindowController {
         // Clear the text fields
         titleEntryField.clear();
         emailEntryField.clear();
+        secondaryEmailEntryField.clear();
         passwordEntryField.clear();
         usernameEntryField.clear();
+        phoneNumberEntryField.clear();
         groupEntryField.clear();
         linkEntryField.clear();
-    }
-
-    private void setUpSearchFilterButton() {
-        // TODO: Implement filter feature
-        // Disabling until feature is implemented
-        filterMenuButton.setDisable(true);
     }
 
     // Logger

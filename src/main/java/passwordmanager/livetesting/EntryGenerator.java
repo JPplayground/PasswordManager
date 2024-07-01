@@ -1,6 +1,7 @@
 package passwordmanager.livetesting;
 
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,15 @@ public class EntryGenerator {
             String link = LINKS[random.nextInt(LINKS.length)];
             String category = CATEGORIES[random.nextInt(CATEGORIES.length)];
 
-            entries.add(new Entry(title, email, password, username, link, category));
+            Entry entry = new EntryBuilder(title)
+                    .email(email)
+                    .password(password)
+                    .username(username)
+                    .link(link)
+                    .category(category)
+                    .build();
+
+            entries.add(entry);
         }
 
         return entries;

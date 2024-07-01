@@ -3,96 +3,35 @@ package passwordmanager.model;
 import java.sql.Timestamp;
 
 /**
- * Represents an entry in a password manager application.
- * This class encapsulates all relevant information for an entry including title, email,
- * password, username, link, and category, along with timestamps for creation and modification.
- * This class provides flexibility with multiple constructors to accommodate different use cases
- * where creation and modification dates might or might not be available at the time of instantiation.
- *
- * <p>Instances of this class are immutable, disallowing changes to the entry's details
- * after instantiation. This class provides getters for all properties. If creation or
- * modification dates are not set during object construction, accessing these fields
- * will throw an {@link IllegalAccessException}.
- *
- * <p>Usage example:
- * <pre>
- * {@code
- * Entry entry = new Entry("example title", "email@example.com", "password123", "username", "http://example.com", "example category");
- * System.out.println(entry.getTitle());
- * }
- * </pre>
- *
- * <p>If creation and modification dates are available:
- * <pre>
- * {@code
- * Timestamp now = new Timestamp(System.currentTimeMillis());
- * Entry entry = new Entry("example title", "email@example.com", "password123", "username", "http://example.com", "example category", now, now);
- * System.out.println(entry.getDateCreated());
- * }
- * </pre>
- *
- * @see IllegalAccessException
+ * Represents an entry in the password manager.
+ * This class stores various attributes of an entry such as title, email, password, username, etc.
+ * It is primarily intended to be used with the {@link EntryBuilder} class to facilitate construction.
  */
 public class Entry {
+
+    // Only truly required parameter to construct an Entry
     private final String title;
-    private final String email;
-    private final String password;
-    private final String username;
-    private final String link;
-    private final String category;
-    private final Timestamp dateCreated;
-    private final Timestamp dateModified;
+
+    private String email;
+    private String secondaryEmail;
+    private String password;
+    private String username;
+    private String phoneNumber;
+    private String link;
+    private String category;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
 
     /**
-     * Constructs a new Entry without date information. This constructor is typically used when
-     * the dates are not yet known or not needed.
+     * Constructs an Entry with the specified title.
      *
-     * @param title    The title of the entry.
-     * @param email    The email associated with the entry.
-     * @param password The password of the entry.
-     * @param username The username associated with the entry.
-     * @param link     A hyperlink associated with the entry, if any.
-     * @param category The category to which the entry belongs.
+     * @param title the title of the entry.
      */
-    public Entry(String title, String email, String password, String username, String link, String category) {
+    public Entry(String title) {
         this.title = title;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.link = link;
-        this.category = category;
-        this.dateCreated = null;
-        this.dateModified = null;
     }
 
     /**
-     * Constructs a new Entry with specified date information for creation and modification.
-     * This constructor is used when both the creation and modification dates are known at the time
-     * of entry creation.
-     *
-     * @param title        The title of the entry.
-     * @param email        The email associated with the entry.
-     * @param password     The password of the entry.
-     * @param username     The username associated with the entry.
-     * @param link         A hyperlink associated with the entry, if any.
-     * @param category     The category to which the entry belongs.
-     * @param dateCreated  The timestamp representing the date and time when the entry was created.
-     * @param dateModified The timestamp representing the date and time when the entry was last modified.
-     */
-    public Entry(String title, String email, String password, String username, String link, String category, Timestamp dateCreated, Timestamp dateModified) {
-        this.title = title;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.link = link;
-        this.category = category;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
-    }
-
-    /**
-     * Returns the title of this entry.
-     *
      * @return the title of the entry.
      */
     public String getTitle() {
@@ -100,8 +39,6 @@ public class Entry {
     }
 
     /**
-     * Returns the email associated with this entry.
-     *
      * @return the email of the entry.
      */
     public String getEmail() {
@@ -109,8 +46,13 @@ public class Entry {
     }
 
     /**
-     * Returns the password for this entry.
-     *
+     * @return the secondary email of the entry.
+     */
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    /**
      * @return the password of the entry.
      */
     public String getPassword() {
@@ -118,8 +60,6 @@ public class Entry {
     }
 
     /**
-     * Returns the username associated with this entry.
-     *
      * @return the username of the entry.
      */
     public String getUsername() {
@@ -127,8 +67,13 @@ public class Entry {
     }
 
     /**
-     * Returns the hyperlink associated with this entry, if any.
-     *
+     * @return the phone number of the entry.
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
      * @return the link of the entry, or null if none.
      */
     public String getLink() {
@@ -136,8 +81,6 @@ public class Entry {
     }
 
     /**
-     * Returns the category to which this entry belongs.
-     *
      * @return the category of the entry.
      */
     public String getCategory() {
@@ -145,8 +88,6 @@ public class Entry {
     }
 
     /**
-     * Returns the creation timestamp of this entry.
-     *
      * @return the timestamp when the entry was created, or null if not set.
      */
     public Timestamp getDateCreated() {
@@ -154,12 +95,91 @@ public class Entry {
     }
 
     /**
-     * Returns the modification timestamp of this entry.
-     *
      * @return the timestamp when the entry was last modified, or null if not set.
      */
     public Timestamp getDateModified() {
         return dateModified;
+    }
+
+    /**
+     * Sets the email of the entry.
+     *
+     * @param email the email to set.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Sets the secondary email of the entry.
+     *
+     * @param secondaryEmail the secondary email to set.
+     */
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
+    }
+
+    /**
+     * Sets the password of the entry.
+     *
+     * @param password the password to set.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Sets the username of the entry.
+     *
+     * @param username the username to set.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Sets the phone number of the entry.
+     *
+     * @param phoneNumber the phone number to set.
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Sets the link of the entry.
+     *
+     * @param link the link to set.
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    /**
+     * Sets the category of the entry.
+     *
+     * @param category the category to set.
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * Sets the creation timestamp of the entry.
+     *
+     * @param dateCreated the creation timestamp to set.
+     */
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    /**
+     * Sets the modification timestamp of the entry.
+     *
+     * @param dateModified the modification timestamp to set.
+     */
+    public void setDateModified(Timestamp dateModified) {
+        this.dateModified = dateModified;
     }
 
     /**
@@ -175,8 +195,10 @@ public class Entry {
 
         entryAsString.append("Title: ").append(title).append("\n");
         entryAsString.append("\tEmail: ").append(email).append("\n");
+        entryAsString.append("\tSecondary Email: ").append(secondaryEmail).append("\n");
         entryAsString.append("\tPassword: ").append(password).append("\n");
         entryAsString.append("\tUsername: ").append(username).append("\n");
+        entryAsString.append("\tPhone Number: ").append(phoneNumber).append("\n");
         entryAsString.append("\tLink: ").append(link).append("\n");
         entryAsString.append("\tCategory: ").append(category).append("\n");
 

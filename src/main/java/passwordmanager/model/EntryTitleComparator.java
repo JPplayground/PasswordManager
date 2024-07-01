@@ -1,6 +1,4 @@
-package passwordmanager.database;
-
-import passwordmanager.model.Entry;
+package passwordmanager.model;
 
 import java.util.Comparator;
 
