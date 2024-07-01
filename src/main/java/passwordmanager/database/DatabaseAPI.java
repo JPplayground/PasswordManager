@@ -1,6 +1,7 @@
 package passwordmanager.database;
 
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +10,11 @@ import java.util.Set;
 
 /**
  * The {@code DatabaseAPI} class provides methods for interacting with a database
- * to perform various operations related to managing entries and common email addresses
- * within a password manager application.
+ * to perform various operations related to managing entries within the application
  *
  * <p>Instances of this class are obtained using the {@link #getInstance()} method.
  * This class ensures safe database operations and encapsulates SQL statements for
- * adding, modifying, removing, and retrieving data related to entries and common emails.
+ * adding, modifying, removing, and retrieving data related to entries.
  *
  * <p>Note: This class follows the singleton design pattern to ensure only one instance
  * is created throughout the application.
@@ -45,7 +45,7 @@ public class DatabaseAPI {
         try {
             this.preparedStatementGenerator = new PreparedStatementGenerator();
 
-            try (PreparedStatement createEntryTable = preparedStatementGenerator.prepareEntryTableCreationStatement()) {
+            try (PreparedStatement createEntryTable = preparedStatementGenerator. prepareEntryTableCreationStatement()) {
                 createEntryTable.execute();
             }
 
@@ -118,6 +118,22 @@ public class DatabaseAPI {
     }
 
     /**
+     * Removes an entry from the database.
+     *
+     * @param entry the entry to be removed.
+     */
+    public void removeEntry(Entry entry) {
+        try {
+            // Uses removeEntry(String) by getting title from entry
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(entry.getTitle())) {
+                stmt.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Retrieves an entry from the database based on its title.
      *
      * @param titleKey the title of the entry to retrieve.
@@ -129,6 +145,7 @@ public class DatabaseAPI {
             try (PreparedStatement stmt = preparedStatementGenerator.prepareGetEntryStatement(titleKey)) {
                 resultSet = stmt.executeQuery();
                 if (resultSet.next()) {
+
                     // Retrieve entry data from the result set
                     String title = resultSet.getString(EntryTableColumns.TITLE.toString());
                     String email = resultSet.getString(EntryTableColumns.EMAIL.toString());
@@ -142,7 +159,7 @@ public class DatabaseAPI {
                     Timestamp dateModified = resultSet.getTimestamp(EntryTableColumns.DATE_MODIFIED.toString());
 
                     // Create and return the Entry object
-                    return new Entry.EntryBuilder(title)
+                    return new EntryBuilder(title)
                             .email(email)
                             .password(password)
                             .secondaryEmail(secondaryEmail)
@@ -204,12 +221,6 @@ public class DatabaseAPI {
 
     /**
      * Retrieves a list of all groups from the database.
-     * This method executes a SQL query prepared by {@code prepareGetListOfGroupsStatement}
-     * from the {@code sqlStatementBuilder} to fetch all groups stored in the database.
-     * The groups are read from the result set and added to a HashSet.
-     *
-     * <p>This method handles any SQL exceptions by printing the stack trace and returns {@code null}
-     * if an exception occurs, indicating that the operation failed.
      *
      * @return A {@code Set<String>} containing all the groups retrieved from the database,
      *         or {@code null} if an SQL exception occurs.

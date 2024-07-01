@@ -32,15 +32,4 @@ public class DatabaseConstants {
      */
     public static final String ENTRIES_TABLE_NAME = "ENTRIES";
 
-    /**
-     * The name of the common emails table.
-     */
-    public static final String COMMON_EMAILS_TABLE_NAME = "COMMON_EMAILS";
-
-    /**
-     * The name of the email column in the common emails table.
-     */
-    public static final String COMMON_EMAILS_COLUMN_NAME = "email";
-
-
 }

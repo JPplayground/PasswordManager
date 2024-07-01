@@ -6,85 +6,119 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="root" maxWidth="600.0" minWidth="600.0" style="-fx-background-color: #E4E2E2; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.SearchResultController">
-    <columnConstraints>
-        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <VBox.margin>
-        <Insets top="10.0" />
-    </VBox.margin>
-    <children>
-        <Label fx:id="titleLabel" text="Title" GridPane.columnIndex="1">
+<VBox fx:id="root" alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.SearchResultController">
+   <children>
+        <Label fx:id="titleLabel" text="Title">
          <font>
             <Font name="System Bold" size="18.0" />
-         </font></Label>
-        <TextField fx:id="emailTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets left="20.0" right="20.0" />
-            </GridPane.margin>
-        </TextField>
-        <TextField fx:id="passwordTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <GridPane.margin>
-                <Insets left="20.0" right="20.0" />
-            </GridPane.margin>
-        </TextField>
-        <TextField fx:id="usernameTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets left="20.0" right="20.0" />
-            </GridPane.margin>
-        </TextField>
-        <Label text="Email" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets right="10.0" />
-            </GridPane.margin>
-        </Label>
-        <Label text="Password" GridPane.rowIndex="2">
-            <GridPane.margin>
-                <Insets right="10.0" />
-            </GridPane.margin>
-        </Label>
-        <Label text="Username" GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets right="10.0" />
-            </GridPane.margin>
-        </Label>
-        <Button fx:id="copyEmailBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets left="10.0" />
-            </GridPane.margin>
-        </Button>
-        <Button fx:id="copyPasswordBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2" GridPane.rowIndex="2">
-            <GridPane.margin>
-                <Insets left="10.0" />
-            </GridPane.margin>
-        </Button>
-        <Button fx:id="copyUsernameBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2" GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets left="10.0" />
-            </GridPane.margin>
-        </Button>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-            <children>
-                <Button fx:id="editBtn" minWidth="85.0" mnemonicParsing="false" text="Edit">
-                    <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="deleteBtn" minWidth="85.0" mnemonicParsing="false" text="Delete">
-                    <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-        </HBox>
-    </children>
-</GridPane>
+         </font>
+      </Label>
+      <GridPane maxWidth="600.0" minWidth="800.0" style="-fx-background-color: #E4E2E2; -fx-background-radius: 10;" vgap="5.0">
+          <columnConstraints>
+              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <VBox.margin>
+              <Insets top="10.0" />
+          </VBox.margin>
+          <children>
+              <TextField fx:id="emailTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1">
+                  <GridPane.margin>
+                      <Insets left="5.0" right="5.0" />
+                  </GridPane.margin>
+              </TextField>
+              <TextField fx:id="passwordTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                      <Insets left="5.0" right="5.0" />
+                  </GridPane.margin>
+              </TextField>
+              <TextField fx:id="usernameTextField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <GridPane.margin>
+                      <Insets left="5.0" right="5.0" />
+                  </GridPane.margin>
+              </TextField>
+              <Label text="Email">
+                  <GridPane.margin>
+                      <Insets right="10.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label text="Password" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                      <Insets right="10.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label text="Username" GridPane.rowIndex="2">
+                  <GridPane.margin>
+                      <Insets right="10.0" />
+                  </GridPane.margin>
+              </Label>
+              <Button fx:id="copyEmailBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2">
+                  <GridPane.margin>
+                      <Insets left="10.0" />
+                  </GridPane.margin>
+              </Button>
+              <Button fx:id="copyPasswordBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                      <Insets left="10.0" />
+                  </GridPane.margin>
+              </Button>
+              <Button fx:id="copyUsernameBtn" mnemonicParsing="false" text="Copy" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <GridPane.margin>
+                      <Insets left="10.0" />
+                  </GridPane.margin>
+              </Button>
+              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="emailTextField1" alignment="CENTER" editable="false" GridPane.columnIndex="4">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="emailTextField2" alignment="CENTER" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="copyEmailBtn1" mnemonicParsing="false" text="Copy" GridPane.columnIndex="5">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="copyEmailBtn2" mnemonicParsing="false" text="Copy" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Secondary Email" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Phone Number" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Group" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+                <Button fx:id="deleteBtn" minWidth="85.0" mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <Button fx:id="editBtn" minWidth="85.0" mnemonicParsing="false" text="Edit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </GridPane>
+   </children>
+</VBox>

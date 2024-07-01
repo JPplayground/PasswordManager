@@ -3,35 +3,9 @@ package passwordmanager.model;
 import java.sql.Timestamp;
 
 /**
- * Represents an entry in a password manager application.
- * This class encapsulates all relevant information for an entry including title, email,
- * password, username, link, and category, along with timestamps for creation and modification.
- * This class provides flexibility with multiple constructors to accommodate different use cases
- * where creation and modification dates might or might not be available at the time of instantiation.
- *
- * <p>Instances of this class are immutable, disallowing changes to the entry's details
- * after instantiation. This class provides getters for all properties. If creation or
- * modification dates are not set during object construction, accessing these fields
- * will throw an {@link IllegalAccessException}.
- *
- * <p>Usage example:
- * <pre>
- * {@code
- * Entry entry = new Entry("example title", "email@example.com", "password123", "username", "http://example.com", "example category");
- * System.out.println(entry.getTitle());
- * }
- * </pre>
- *
- * <p>If creation and modification dates are available:
- * <pre>
- * {@code
- * Timestamp now = new Timestamp(System.currentTimeMillis());
- * Entry entry = new Entry("example title", "email@example.com", "password123", "username", "http://example.com", "example category", now, now);
- * System.out.println(entry.getDateCreated());
- * }
- * </pre>
- *
- * @see IllegalAccessException
+ * Represents an entry in the password manager.
+ * This class stores various attributes of an entry such as title, email, password, username, etc.
+ * It is primarily intended to be used with the {@link EntryBuilder} class to facilitate construction.
  */
 public class Entry {
 
@@ -48,90 +22,16 @@ public class Entry {
     private Timestamp dateCreated;
     private Timestamp dateModified;
 
-    private Entry(String title) {
+    /**
+     * Constructs an Entry with the specified title.
+     *
+     * @param title the title of the entry.
+     */
+    public Entry(String title) {
         this.title = title;
     }
 
-    public static class EntryBuilder {
-        // Although implicit, all non-required fields will be null if not set
-        private final String title;
-        private String email = null;
-        private String secondaryEmail = null;
-        private String password = null;
-        private String username = null;
-        private String phoneNumber = null;
-        private String link = null;
-        private String category = null;
-        private Timestamp dateCreated = null;
-        private Timestamp dateModified = null;
-
-        public EntryBuilder(String title) {
-            this.title = title;
-        }
-
-        public EntryBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public EntryBuilder secondaryEmail(String secondaryEmail) {
-            this.secondaryEmail = secondaryEmail;
-            return this;
-        }
-
-        public EntryBuilder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public EntryBuilder username(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public EntryBuilder phoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-            return this;
-        }
-
-        public EntryBuilder link(String link) {
-            this.link = link;
-            return this;
-        }
-
-        public EntryBuilder category(String group) {
-            this.category = group;
-            return this;
-        }
-
-        public EntryBuilder dateCreated(Timestamp dateCreated) {
-            this.dateCreated = dateCreated;
-            return this;
-        }
-
-        public EntryBuilder dateModified(Timestamp dateModified) {
-            this.dateModified = dateModified;
-            return this;
-        }
-
-        public Entry build() {
-            Entry entry = new Entry(title);
-            entry.email = email;
-            entry.secondaryEmail = secondaryEmail;
-            entry.password = password;
-            entry.username = username;
-            entry.phoneNumber = phoneNumber;
-            entry.link = link;
-            entry.category = category;
-            entry.dateCreated = dateCreated;
-            entry.dateModified = dateModified;
-            return entry;
-        }
-    }
-
     /**
-     * Returns the title of this entry.
-     *
      * @return the title of the entry.
      */
     public String getTitle() {
@@ -139,8 +39,6 @@ public class Entry {
     }
 
     /**
-     * Returns the email associated with this entry.
-     *
      * @return the email of the entry.
      */
     public String getEmail() {
@@ -148,8 +46,6 @@ public class Entry {
     }
 
     /**
-     * Returns the secondary email associated with this entry.
-     *
      * @return the secondary email of the entry.
      */
     public String getSecondaryEmail() {
@@ -157,8 +53,6 @@ public class Entry {
     }
 
     /**
-     * Returns the password for this entry.
-     *
      * @return the password of the entry.
      */
     public String getPassword() {
@@ -166,8 +60,6 @@ public class Entry {
     }
 
     /**
-     * Returns the username associated with this entry.
-     *
      * @return the username of the entry.
      */
     public String getUsername() {
@@ -175,8 +67,6 @@ public class Entry {
     }
 
     /**
-     * Returns the phone number associated with this entry.
-     *
      * @return the phone number of the entry.
      */
     public String getPhoneNumber() {
@@ -184,8 +74,6 @@ public class Entry {
     }
 
     /**
-     * Returns the hyperlink associated with this entry, if any.
-     *
      * @return the link of the entry, or null if none.
      */
     public String getLink() {
@@ -193,8 +81,6 @@ public class Entry {
     }
 
     /**
-     * Returns the category to which this entry belongs.
-     *
      * @return the category of the entry.
      */
     public String getCategory() {
@@ -202,8 +88,6 @@ public class Entry {
     }
 
     /**
-     * Returns the creation timestamp of this entry.
-     *
      * @return the timestamp when the entry was created, or null if not set.
      */
     public Timestamp getDateCreated() {
@@ -211,12 +95,91 @@ public class Entry {
     }
 
     /**
-     * Returns the modification timestamp of this entry.
-     *
      * @return the timestamp when the entry was last modified, or null if not set.
      */
     public Timestamp getDateModified() {
         return dateModified;
+    }
+
+    /**
+     * Sets the email of the entry.
+     *
+     * @param email the email to set.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Sets the secondary email of the entry.
+     *
+     * @param secondaryEmail the secondary email to set.
+     */
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
+    }
+
+    /**
+     * Sets the password of the entry.
+     *
+     * @param password the password to set.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Sets the username of the entry.
+     *
+     * @param username the username to set.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Sets the phone number of the entry.
+     *
+     * @param phoneNumber the phone number to set.
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Sets the link of the entry.
+     *
+     * @param link the link to set.
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    /**
+     * Sets the category of the entry.
+     *
+     * @param category the category to set.
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * Sets the creation timestamp of the entry.
+     *
+     * @param dateCreated the creation timestamp to set.
+     */
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    /**
+     * Sets the modification timestamp of the entry.
+     *
+     * @param dateModified the modification timestamp to set.
+     */
+    public void setDateModified(Timestamp dateModified) {
+        this.dateModified = dateModified;
     }
 
     /**

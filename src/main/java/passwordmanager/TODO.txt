@@ -6,3 +6,10 @@ Find where (if implemented) where we restrict trying to create an "Entrie" table
 6/19/2024
 -------------------
 Update search result fxml to support new fields
+
+6/30/2024
+-------------------
+Inspect dox for each file to ensure they are accurate
+Update testing files
+Add encryption to database
+Add external database (username/password verification)

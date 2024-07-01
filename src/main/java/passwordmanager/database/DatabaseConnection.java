@@ -1,5 +1,7 @@
 package passwordmanager.database;
 
+import passwordmanager.app.DeveloperSettings;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,12 +31,10 @@ public class DatabaseConnection {
 
     /**
      * Sets the connection to the database.
-     *
-     * @param isTesting whether the connection is for testing purposes.
      */
-    public static void setConnection(boolean isTesting) {
+    public static void setConnection() {
         try {
-            if (isTesting) {
+            if (DeveloperSettings.getApplicationMode() == DeveloperSettings.ApplicationMode.TESTING) {
                 connection = DriverManager.getConnection(DatabaseConstants.TEST_CONNECTION_URL);
             } else {
                 connection = DriverManager.getConnection(DatabaseConstants.APP_CONNECTION_URL);

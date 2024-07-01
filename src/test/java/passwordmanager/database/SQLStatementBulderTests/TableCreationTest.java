@@ -49,26 +49,4 @@ public class TableCreationTest {
     }
 
 
-    @Test
-    public void testCommonEmailsTableCreation() throws SQLException {
-
-        PreparedStatementGenerator preparedStatementGenerator;
-        PreparedStatement createTable;
-
-        preparedStatementGenerator = new PreparedStatementGenerator();
-
-        createTable = preparedStatementGenerator.prepareCommonEmailsTableCreationStatement();
-        assertDoesNotThrow(() -> createTable.executeUpdate());
-
-        String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
-        PreparedStatement checkTable = this.connection.prepareStatement(sql);
-        checkTable.setString(1, DatabaseConstants.COMMON_EMAILS_TABLE_NAME);
-
-        ResultSet resultSet = checkTable.executeQuery();
-        assertTrue(resultSet.next());
-
-        int tableCount = resultSet.getInt(1);
-        assertEquals(1, tableCount);
-    }
-
 }

@@ -15,7 +15,7 @@ public class DatabaseAPITest {
 
     @BeforeAll
     public static void setup() {
-        DatabaseConnection.setConnection(true);
+        DatabaseConnection.setConnection();
         databaseAPI = DatabaseAPI.getInstance();
     }
 
@@ -41,17 +41,13 @@ public class DatabaseAPITest {
 
     @Test
     public void testInsertAndRemoveEntryWithEmptyParameters() {
-        String title, email, password, username, link, category;
+        String title;
         title = "Example";
-        email = "a@a.com";
-        password = "password123";
-        username = "";
-        link = "";
-        category = "";
 
+        Entry entry = new Entry.EntryBuilder(title).build();
 
         assertDoesNotThrow(() -> {
-            databaseAPI.newEntry(title, email, password, username, link, category);
+            databaseAPI.newEntry(entry);
         });
 
         assertDoesNotThrow(() -> {
@@ -70,8 +66,16 @@ public class DatabaseAPITest {
         link = "www.example.com";
         category = "example";
 
-        databaseAPI.newEntry(title, email, password, username, link, category);
-        Entry entry = databaseAPI.getEntry(title);
+        Entry entry = new Entry.EntryBuilder(title)
+                .email(email)
+                .password(password)
+                .username(username)
+                .link(link)
+                .category(category)
+                .build();
+
+        databaseAPI.newEntry(entry);
+        entry = databaseAPI.getEntry(title);
 
         assertEquals(entry.getTitle(), title);
         assertEquals(entry.getEmail(), email);

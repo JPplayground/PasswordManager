@@ -7,9 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.stage.Window;
-import org.slf4j.LoggerFactory;
 import passwordmanager.database.DatabaseAPI;
 import passwordmanager.model.Entry;
+import passwordmanager.model.EntryBuilder;
 import passwordmanager.model.EntryCache;
 import passwordmanager.model.SearchResultCache;
 import passwordmanager.util.PasswordGenerator;
@@ -19,7 +19,9 @@ import java.util.logging.Logger;
 
 public class MainWindowController {
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(MainWindowController.class);
+    // Root
+    @FXML
+    private TabPane rootTabPane;
 
     // Add Tab UI Elements
     @FXML
@@ -28,7 +30,7 @@ public class MainWindowController {
     @FXML
     private Button clearBtn, addBtn, generatePasswordBtn;
     @FXML
-    ChoiceBox<String> emailChoiceBox, groupChoiceBox;
+    ChoiceBox<String> emailChoiceBox, groupChoiceBox, secondaryEmailChoiceBox;
 
     // View Tab UI Elements
     @FXML
@@ -150,7 +152,7 @@ public class MainWindowController {
         // Add the entry to the database
         else {
 
-            Entry entry = new Entry.EntryBuilder(title)
+            Entry entry = new EntryBuilder(title)
                     .email(email)
                     .secondaryEmail(secondaryEmail)
                     .password(password)

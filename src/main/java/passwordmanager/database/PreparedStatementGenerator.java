@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * The {@code PreparedStatementGenerator Builder} class is responsible for creating and preparing SQL {@link PreparedStatement}s
+ * The {@code PreparedStatementGenerator} class is responsible for creating and preparing SQL {@link PreparedStatement}s
  * for various database operations related to managing entries and common email addresses within a password manager application.
  * This class ensures SQL statements are safely prepared to avoid SQL injection vulnerabilities and manages SQL commands
  * for inserting, updating, deleting, and querying data.
@@ -27,8 +27,8 @@ import java.sql.SQLException;
  * <p>Usage example:
  * <pre>
  * {@code
- * PreparedStatementGenerator builder = new PreparedStatementGenerator();
- * PreparedStatement stmt = builder.prepareInsertEntryStatement("title", "email", "password", "username", "link", "category");
+ * PreparedStatementGenerator generator = new PreparedStatementGenerator();
+ * PreparedStatement stmt = generator.prepareInsertEntryStatement(entry);
  * stmt.execute();
  * }
  * </pre>
@@ -41,7 +41,7 @@ public class PreparedStatementGenerator {
     private final Connection connection;
 
     /**
-     * Constructs an instance of {@code SQLStatementBuilder}.
+     * Constructs an instance of {@code PreparedStatementGenerator}.
      * Retrieves the database connection from {@link DatabaseConnection}.
      */
     public PreparedStatementGenerator() {
@@ -80,19 +80,10 @@ public class PreparedStatementGenerator {
      * both {@code DATE_CREATED} and {@code DATE_MODIFIED} fields.
      *
      * @param entry the entry object containing the data to be inserted into the database.
+     * @return a {@code PreparedStatement} object ready for execution to insert the entry data.
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareInsertEntryStatement(Entry entry) throws SQLException {
-
-        String title = entry.getTitle();
-        String email = entry.getEmail();
-        String secondaryEmail = entry.getSecondaryEmail();
-        String password = entry.getPassword();
-        String username = entry.getUsername();
-        String phoneNumber = entry.getPhoneNumber();
-        String link = entry.getLink();
-        String category = entry.getCategory();
-
         String sql = "INSERT INTO " + DatabaseConstants.ENTRIES_TABLE_NAME + " (" +
                 EntryTableColumns.TITLE + ", " +
                 EntryTableColumns.EMAIL + ", " +
@@ -106,18 +97,17 @@ public class PreparedStatementGenerator {
                 EntryTableColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))";
 
         PreparedStatement stmt = this.connection.prepareStatement(sql);
-        stmt.setString(1, title);
-        stmt.setString(2, email);
-        stmt.setString(3, secondaryEmail);
-        stmt.setString(4, password);
-        stmt.setString(5, username);
-        stmt.setString(6, phoneNumber);
-        stmt.setString(7, link);
-        stmt.setString(8, category);
+        stmt.setString(1, entry.getTitle());
+        stmt.setString(2, entry.getEmail());
+        stmt.setString(3, entry.getSecondaryEmail());
+        stmt.setString(4, entry.getPassword());
+        stmt.setString(5, entry.getUsername());
+        stmt.setString(6, entry.getPhoneNumber());
+        stmt.setString(7, entry.getLink());
+        stmt.setString(8, entry.getCategory());
         return stmt;
     }
 
-    // TODO: Change this, I do not like it
     /**
      * Prepares a {@code PreparedStatement} for updating an existing entry in the entries table based on the title.
      * This method allows selective updates where only specified fields (non-null parameters) are updated.
