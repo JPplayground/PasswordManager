@@ -6,21 +6,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import passwordmanager.encryption.WinKeyStorageUtil;
 import passwordmanager.livetesting.LiveTestSetup;
 import passwordmanager.model.EntryCache;
 import passwordmanager.database.DatabaseConnection;
 import passwordmanager.model.SearchResultCache;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class App extends Application {
 
-    // Logger
-    private static final Logger logger = Logger.getLogger(App.class.getName());
-
     @Override
     public void start(Stage stage) throws IOException {
+
+        // If windows, run windows key storage util
+
+        // If Linux, run linux key storage util
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainWindow.fxml"));
         Parent root = loader.load();
 
@@ -30,10 +32,14 @@ public class App extends Application {
         Scene scene = new Scene(root);
 
         // set resizable to false
-        stage.setResizable(false);
+        // stage.setResizable(false);
+
+        scene.getStylesheets().add(getClass().getResource("/css/MainWindow.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();
+
+        WinKeyStorageUtil.isKeyPresent();
 
     }
 
@@ -44,7 +50,6 @@ public class App extends Application {
     }
 
     public static void runSetupTasks(String[] args) {
-        logger.info("Running setup tasks");
 
         // Testing setup is done here determined by hard coded settings
         // See: DeveloperSettings.java
@@ -54,10 +59,11 @@ public class App extends Application {
         if (DeveloperSettings.getApplicationMode() == DeveloperSettings.ApplicationMode.TESTING) {
             LiveTestSetup.setup();
         }
+
+        // Check if key exists
     }
 
     public static void runPreloadTasks() {
-        logger.info("Running preload tasks");
 
         // Cache setup
         EntryCache setupCache = EntryCache.getInstance();

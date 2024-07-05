@@ -6,14 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="root" alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.SearchResultController">
+<VBox fx:id="root" alignment="CENTER" fillWidth="false" maxWidth="250.0" styleClass="search-result" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.SearchResultController">
    <children>
         <Label fx:id="titleLabel" text="Title">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <GridPane maxWidth="600.0" minWidth="800.0" style="-fx-background-color: #E4E2E2; -fx-background-radius: 10;" vgap="5.0">
+      <GridPane maxWidth="600.0" minWidth="800.0" vgap="5.0">
           <columnConstraints>
               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
@@ -23,10 +23,10 @@
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
           <VBox.margin>
               <Insets top="10.0" />

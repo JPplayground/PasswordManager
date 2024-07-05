@@ -1,0 +1,9 @@
+.tab-pane {
+    -fx-tab-min-height: 25px;
+    -fx-tab-min-width: 80px;
+}
+
+.search-result {
+    -fx-background-color: #E4E2E2;
+    -fx-background-radius: 10px;
+}

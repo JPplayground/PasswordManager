@@ -1,8 +1,0 @@
-module:com.jp.passwordmanager
-passwordmanager.app
-passwordmanager.controller
-passwordmanager.database
-passwordmanager.livetesting
-passwordmanager.model
-passwordmanager.ui
-passwordmanager.util

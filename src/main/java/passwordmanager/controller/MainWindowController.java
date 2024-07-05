@@ -48,7 +48,6 @@ public class MainWindowController {
 
     @FXML
     public void initialize() {
-        logger.info("Initializing MainWindowController");
 
         // Load and display search results in the view tab
         setupSearchResultsDisplay();
@@ -71,7 +70,6 @@ public class MainWindowController {
     }
 
     private void setupSearchResultsDisplay() {
-        logger.info("Setting up search results display");
 
         // Clear the search results display
         searchResultsDisplayVBox.getChildren().clear();
@@ -131,7 +129,6 @@ public class MainWindowController {
 
         // Check title is present
         if (title.isEmpty() ) {
-            logger.warning("Title is required!");
 
             // Notifying popup
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -145,7 +142,6 @@ public class MainWindowController {
 
         // Check if the title already exists
         else if (EntryCache.getInstance().contains(title)) {
-            logger.warning("Entry with title already exists");
 
             // Notifying popup
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -214,8 +210,5 @@ public class MainWindowController {
         groupEntryField.clear();
         linkEntryField.clear();
     }
-
-    // Logger
-    private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
 }

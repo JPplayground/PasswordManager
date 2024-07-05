@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import passwordmanager.database.DatabaseAPI;
@@ -40,7 +39,6 @@ public class SearchResultController {
 
     @FXML
     public void initialize() {
-        logger.info("Initializing SearchResultController");
 
         setCopyCallbacks();
         setDeleteCallback();
@@ -56,7 +54,6 @@ public class SearchResultController {
 
     public void setEntry(Entry entry) {
         this.entry = entry;
-        logger.info("Setting text fields for entry: " + entry.getTitle());
 
         emailTextField.setText(this.entry.getEmail());
         passwordTextField.setText(this.entry.getPassword());
@@ -116,7 +113,6 @@ public class SearchResultController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                logger.info("Deleting entry: " + this.entry.getTitle());
 
                 // Delete the entry from the database and update caches
                 DatabaseAPI.getInstance().removeEntry(this.entry.getTitle());
@@ -130,7 +126,7 @@ public class SearchResultController {
                 // Cleanup resources
                 cleanup();
             } else {
-                logger.info("Deletion cancelled for entry: " + this.entry.getTitle());
+
             }
         });
     }
@@ -149,7 +145,4 @@ public class SearchResultController {
         passwordTextField.setText("");
         usernameTextField.setText("");
     }
-
-    // Logger
-    private final Logger logger = Logger.getLogger(SearchResultCache.class.getName());
 }
