@@ -50,6 +50,7 @@ test.trace.db
 /password_manager.db
 /data.json
 /jpackage-command.txt
+/javadoc/
 
 src/main/java/passwordmanager/NOTES.txt
 src/main/java/passwordmanager/TODO.txt
