@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="root" alignment="CENTER" fillWidth="false" maxWidth="250.0" styleClass="search-result" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.controller.SearchResultController">
+<VBox fx:id="root" alignment="CENTER" fillWidth="false" maxWidth="250.0" styleClass="search-result" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passwordmanager.frontend.controller.SearchResultController">
    <children>
         <Label fx:id="titleLabel" text="Title">
          <font>

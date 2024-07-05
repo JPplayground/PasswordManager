@@ -1,9 +1,8 @@
 package passwordmanager.database.SQLStatementBulderTests;
 
-import passwordmanager.database.DatabaseConnection;
-import passwordmanager.database.DatabaseConstants;
-import passwordmanager.database.PreparedStatementGenerator;
-import passwordmanager.database.EntryTableColumns;
+import passwordmanager.backend.local.database.DatabaseConnection;
+import passwordmanager.backend.local.database.PreparedStatementGenerator;
+import passwordmanager.backend.local.database.EntryFields;
 import org.junit.jupiter.api.*;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
@@ -137,7 +136,7 @@ public class UpdateAndQueryTests {
         ResultSet resultSet = getEntryStatement.executeQuery();
 
         assertTrue(resultSet.next());
-        String updatedEmail = resultSet.getString(EntryTableColumns.EMAIL.toString());
+        String updatedEmail = resultSet.getString(EntryFields.EMAIL.toString());
 
         assertEquals(newEmail, updatedEmail);
 

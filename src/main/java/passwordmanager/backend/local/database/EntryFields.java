@@ -1,9 +1,9 @@
-package passwordmanager.database;
+package passwordmanager.backend.local.database;
 
 /**
  * Enum representing the columns in the entries table.
  */
-public enum EntryTableColumns {
+public enum EntryFields {
     TITLE("title"),
     EMAIL("email"),
     SECONDARY_EMAIL("secondary_email"),
@@ -17,7 +17,7 @@ public enum EntryTableColumns {
 
     private final String columnName;
 
-    EntryTableColumns(String columnName) {
+    EntryFields(String columnName) {
         this.columnName = columnName;
     }
 

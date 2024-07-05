@@ -1,7 +1,7 @@
 package passwordmanager.database;
 
 import org.junit.Test;
-import passwordmanager.encryption.DPAPIUtil;
+import passwordmanager.backend.local.encryption.windows.DPAPIUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

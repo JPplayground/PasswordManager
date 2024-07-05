@@ -1,4 +1,4 @@
-package passwordmanager.controller;
+package passwordmanager.frontend.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -6,10 +6,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
-import passwordmanager.database.DatabaseAPI;
+import passwordmanager.backend.local.database.LocalAPI;
 import passwordmanager.model.Entry;
-import passwordmanager.model.EntryCache;
-import passwordmanager.model.SearchResultCache;
+import passwordmanager.frontend.cache.EntryCache;
+import passwordmanager.frontend.cache.SearchResultCache;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -19,7 +19,6 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 public class SearchResultController {
 
@@ -115,7 +114,7 @@ public class SearchResultController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
                 // Delete the entry from the database and update caches
-                DatabaseAPI.getInstance().removeEntry(this.entry.getTitle());
+                LocalAPI.getInstance().removeEntry(this.entry.getTitle());
                 EntryCache.getInstance().updateEntries();
                 SearchResultCache.getInstance().refreshSearchResults();
 

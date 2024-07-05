@@ -1,6 +1,9 @@
-package passwordmanager.model;
+package passwordmanager.frontend.cache;
 
-import passwordmanager.database.DatabaseAPI;
+import passwordmanager.backend.DatabaseAPI;
+import passwordmanager.backend.local.database.LocalAPI;
+import passwordmanager.model.Entry;
+import passwordmanager.model.EntryTitleComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,35 +23,27 @@ import java.util.List;
  * }
  * </pre>
  *
- * @see DatabaseAPI
+ * @see LocalAPI
  * @see Entry
  * @see EntryTitleComparator
  */
 public class EntryCache {
 
+    // TODO: This class is not going to work whenever syncing between a local / remote database is needed
+    // Changing from a singleton messes with some UI logic right now so for now we wait to change
+
+    private static DatabaseAPI dbapi = null;
+
     private static EntryCache instance = null;
 
-    private static DatabaseAPI databaseAPI = null;
-
-    private ArrayList<Entry> entries = null;
+    private List<Entry> entries = null;
 
     /**
      * Private constructor to initialize the EntryCache.
      */
     private EntryCache() {
-        databaseAPI = DatabaseAPI.getInstance();
+        dbapi = LocalAPI.getInstance();
         updateEntries();
-    }
-
-    /**
-     * Loads all entries from the database and sorts them by title.
-     */
-    public void updateEntries() {
-        if (entries != null) {
-            entries.clear();
-        }
-        entries = databaseAPI.getAllEntries();
-        entries.sort(new EntryTitleComparator());
     }
 
     /**
@@ -64,19 +59,30 @@ public class EntryCache {
     }
 
     /**
+     * Loads all entries from the database and sorts them by title in the class's containing data structure.
+     */
+    public void updateEntries() {
+        if (entries != null) {
+            entries.clear();
+        }
+        entries = dbapi.getAllEntries();
+        entries.sort(new EntryTitleComparator());
+    }
+
+    /**
      * Returns the list of cached entries.
      *
      * @return an {@code ArrayList} containing the cached entries.
      */
-    public ArrayList<Entry> getEntries() {
+    public List<Entry> getEntries() {
         return entries;
     }
 
     /**
-     * Returns the entry with the specified title.
+     * Returns a boolean value indicating if an Entry with the supplied title already exists.
      *
      * @param title the title of the entry to retrieve.
-     * @return the entry with the specified title, or {@code null} if no such entry exists.
+     * @return {@code true} if entry already exists, {@code false} otherwise.
      */
     public boolean contains(String title) {
         for (Entry entry : entries) {
@@ -93,6 +99,9 @@ public class EntryCache {
      * @return a {@code List} of unique emails in the cached entries.
      */
     public List<String> getUniqueEmails() {
+
+        // TODO: I feel like this is not an efficient place to do this
+
         List<String> emails = new ArrayList<>();
         for (Entry entry : entries) {
             if (!emails.contains(entry.getEmail())) {

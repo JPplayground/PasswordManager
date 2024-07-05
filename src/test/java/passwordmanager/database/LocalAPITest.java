@@ -2,6 +2,8 @@ package passwordmanager.database;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import passwordmanager.backend.local.database.LocalAPI;
+import passwordmanager.backend.local.database.DatabaseConnection;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
 
@@ -10,14 +12,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DatabaseAPITest {
+public class LocalAPITest {
 
-    private static DatabaseAPI databaseAPI;
+    private static LocalAPI localAPI;
 
     @BeforeAll
     public static void setup() {
         DatabaseConnection.setConnection();
-        databaseAPI = DatabaseAPI.getInstance();
+        localAPI = LocalAPI.getInstance();
     }
 
     @Test
@@ -41,11 +43,11 @@ public class DatabaseAPITest {
 
 
         assertDoesNotThrow(() -> {
-            databaseAPI.newEntry(entry);
+            localAPI.newEntry(entry);
         });
 
         assertDoesNotThrow(() -> {
-            databaseAPI.removeEntry(title);
+            localAPI.removeEntry(title);
         });
     }
 
@@ -57,11 +59,11 @@ public class DatabaseAPITest {
         Entry entry = new EntryBuilder(title).build();
 
         assertDoesNotThrow(() -> {
-            databaseAPI.newEntry(entry);
+            localAPI.newEntry(entry);
         });
 
         assertDoesNotThrow(() -> {
-            databaseAPI.removeEntry(title);
+            localAPI.removeEntry(title);
         });
     }
 
@@ -84,8 +86,8 @@ public class DatabaseAPITest {
                 .category(category)
                 .build();
 
-        databaseAPI.newEntry(entry);
-        entry = databaseAPI.getEntry(title);
+        localAPI.newEntry(entry);
+        entry = localAPI.getEntry(title);
 
         assertEquals(entry.getTitle(), title);
         assertEquals(entry.getEmail(), email);
@@ -98,12 +100,12 @@ public class DatabaseAPITest {
         assertInstanceOf(Timestamp.class, entry.getDateModified());
 
         // Cleanup
-        databaseAPI.removeEntry(title);
+        localAPI.removeEntry(title);
 
     }
 
     @Test
-    public void testGetListOfEntryTitles() {
+    public void testGetEntryTitles() {
         String title1, email1, password1, username1, link1, category1;
         title1 = "Example1";
         email1 = "a@a.com1";
@@ -136,18 +138,18 @@ public class DatabaseAPITest {
                 .category(category2)
                 .build();
 
-        databaseAPI.newEntry(entry1);
-        databaseAPI.newEntry(entry2);
+        localAPI.newEntry(entry1);
+        localAPI.newEntry(entry2);
 
-        ArrayList<String> listOfTitles = databaseAPI.getListOfEntryTitles();
+        ArrayList<String> listOfTitles = localAPI.getEntryTitles();
 
         assertEquals(2, listOfTitles.size());
         assertEquals(title1, listOfTitles.get(0));
         assertEquals(title2, listOfTitles.get(1));
 
         // Cleanup
-        databaseAPI.removeEntry(title1);
-        databaseAPI.removeEntry(title2);
+        localAPI.removeEntry(title1);
+        localAPI.removeEntry(title2);
     }
 
 }

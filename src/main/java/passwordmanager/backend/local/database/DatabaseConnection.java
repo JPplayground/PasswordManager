@@ -1,4 +1,4 @@
-package passwordmanager.database;
+package passwordmanager.backend.local.database;
 
 import passwordmanager.app.DeveloperSettings;
 
@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * The connection is set to the database URL specified in the {@link DatabaseConstants} class.
  *
  * <p>Instances of this class are not needed as all methods are static.
- * The connection to the database is set using the {@link #setConnection(boolean)} method.
+ * The connection to the database is set using the {@link #setConnection()} method.
  * The connection to the database is retrieved using the {@link #getConnection()} method.
  *
  * <p>Usage example:

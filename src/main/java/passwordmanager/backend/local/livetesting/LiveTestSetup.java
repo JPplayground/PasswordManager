@@ -1,6 +1,6 @@
-package passwordmanager.livetesting;
+package passwordmanager.backend.local.livetesting;
 
-import passwordmanager.database.DatabaseAPI;
+import passwordmanager.backend.local.database.LocalAPI;
 import passwordmanager.model.Entry;
 
 import java.util.List;
@@ -21,12 +21,12 @@ public class LiveTestSetup {
 
         System.out.println("Live test setup activated.");
 
-        DatabaseAPI databaseAPI = DatabaseAPI.getInstance();
+        LocalAPI localAPI = LocalAPI.getInstance();
 
         // Add 25 randomly generated entries to the test database
         List<Entry> entries = EntryGenerator.generateEntries(50);
         for (Entry entry : entries) {
-            databaseAPI.newEntry(entry);
+            localAPI.newEntry(entry);
         }
 
         System.out.println("Live test setup finished.");

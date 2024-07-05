@@ -10,15 +10,21 @@ module passwordmanager {
     requires com.sun.jna.platform;
     requires com.sun.jna;
 
-    exports passwordmanager.database;
-    exports passwordmanager.util;
+    exports passwordmanager.backend.local.database;
+    exports passwordmanager.frontend.util;
     exports passwordmanager.app;
     exports passwordmanager.model;
-    exports passwordmanager.controller;
+    exports passwordmanager.frontend.controller;
+    exports passwordmanager.backend;
 
-    opens passwordmanager.controller to javafx.fxml;
+    opens passwordmanager.frontend.controller to javafx.fxml;
     opens passwordmanager.app to javafx.fxml;
-    exports passwordmanager.encryption;
-    opens passwordmanager.encryption to javafx.fxml;
+    exports passwordmanager.backend.local.encryption;
+    opens passwordmanager.backend.local.encryption to javafx.fxml;
+    exports passwordmanager.backend.local.encryption.windows;
+    opens passwordmanager.backend.local.encryption.windows to javafx.fxml;
+    exports passwordmanager.backend.local.encryption.linux;
+    opens passwordmanager.backend.local.encryption.linux to javafx.fxml;
+    exports passwordmanager.frontend.cache;
 
 }

@@ -1,8 +1,9 @@
-package passwordmanager.model;
+package passwordmanager.frontend.cache;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import passwordmanager.controller.SearchResultController;
+import passwordmanager.frontend.controller.SearchResultController;
+import passwordmanager.model.Entry;
 
 import java.io.IOException;
 import java.util.ArrayList;

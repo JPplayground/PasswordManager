@@ -1,4 +1,4 @@
-package passwordmanager.database;
+package passwordmanager.backend.local.database;
 
 import passwordmanager.model.Entry;
 
@@ -59,16 +59,16 @@ public class PreparedStatementGenerator {
      */
     public PreparedStatement prepareEntryTableCreationStatement() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.ENTRIES_TABLE_NAME + "(" +
-                EntryTableColumns.TITLE + " VARCHAR(255) PRIMARY KEY, " +
-                EntryTableColumns.EMAIL + " VARCHAR(255), " +
-                EntryTableColumns.SECONDARY_EMAIL + " VARCHAR(255), " +
-                EntryTableColumns.PASSWORD + " VARCHAR(255), " +
-                EntryTableColumns.USERNAME + " VARCHAR(255), " +
-                EntryTableColumns.PHONE_NUMBER + " VARCHAR(255), " +
-                EntryTableColumns.LINK + " VARCHAR(255), " +
-                EntryTableColumns.CATEGORY + " VARCHAR(255), " +
-                EntryTableColumns.DATE_CREATED + " DATE, " +
-                EntryTableColumns.DATE_MODIFIED + " DATE);";
+                EntryFields.TITLE + " VARCHAR(255) PRIMARY KEY, " +
+                EntryFields.EMAIL + " VARCHAR(255), " +
+                EntryFields.SECONDARY_EMAIL + " VARCHAR(255), " +
+                EntryFields.PASSWORD + " VARCHAR(255), " +
+                EntryFields.USERNAME + " VARCHAR(255), " +
+                EntryFields.PHONE_NUMBER + " VARCHAR(255), " +
+                EntryFields.LINK + " VARCHAR(255), " +
+                EntryFields.CATEGORY + " VARCHAR(255), " +
+                EntryFields.DATE_CREATED + " DATE, " +
+                EntryFields.DATE_MODIFIED + " DATE);";
 
         return this.connection.prepareStatement(sql);
     }
@@ -85,16 +85,16 @@ public class PreparedStatementGenerator {
      */
     public PreparedStatement prepareInsertEntryStatement(Entry entry) throws SQLException {
         String sql = "INSERT INTO " + DatabaseConstants.ENTRIES_TABLE_NAME + " (" +
-                EntryTableColumns.TITLE + ", " +
-                EntryTableColumns.EMAIL + ", " +
-                EntryTableColumns.SECONDARY_EMAIL + ", " +
-                EntryTableColumns.PASSWORD + ", " +
-                EntryTableColumns.USERNAME + ", " +
-                EntryTableColumns.PHONE_NUMBER + ", " +
-                EntryTableColumns.LINK + ", " +
-                EntryTableColumns.CATEGORY + ", " +
-                EntryTableColumns.DATE_CREATED + ", " +
-                EntryTableColumns.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))";
+                EntryFields.TITLE + ", " +
+                EntryFields.EMAIL + ", " +
+                EntryFields.SECONDARY_EMAIL + ", " +
+                EntryFields.PASSWORD + ", " +
+                EntryFields.USERNAME + ", " +
+                EntryFields.PHONE_NUMBER + ", " +
+                EntryFields.LINK + ", " +
+                EntryFields.CATEGORY + ", " +
+                EntryFields.DATE_CREATED + ", " +
+                EntryFields.DATE_MODIFIED + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))";
 
         PreparedStatement stmt = this.connection.prepareStatement(sql);
         stmt.setString(1, entry.getTitle());
@@ -129,23 +129,23 @@ public class PreparedStatementGenerator {
         StringBuilder sql = new StringBuilder("UPDATE " + DatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
 
         if (email != null) {
-            sql.append(EntryTableColumns.EMAIL + " = ?, ");
+            sql.append(EntryFields.EMAIL + " = ?, ");
         }
         if (password != null) {
-            sql.append(EntryTableColumns.PASSWORD + " = ?, ");
+            sql.append(EntryFields.PASSWORD + " = ?, ");
         }
         if (username != null) {
-            sql.append(EntryTableColumns.USERNAME + " = ?, ");
+            sql.append(EntryFields.USERNAME + " = ?, ");
         }
         if (link != null) {
-            sql.append(EntryTableColumns.LINK + " = ?, ");
+            sql.append(EntryFields.LINK + " = ?, ");
         }
         if (category != null) {
-            sql.append(EntryTableColumns.CATEGORY + " = ?, ");
+            sql.append(EntryFields.CATEGORY + " = ?, ");
         }
 
-        sql.append(EntryTableColumns.DATE_MODIFIED + " = datetime('now')");
-        sql.append(" WHERE " + EntryTableColumns.TITLE + " = ?");
+        sql.append(EntryFields.DATE_MODIFIED + " = datetime('now')");
+        sql.append(" WHERE " + EntryFields.TITLE + " = ?");
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql.toString());
         int paramIndex = 1;
@@ -182,7 +182,7 @@ public class PreparedStatementGenerator {
      */
     public PreparedStatement prepareRemoveEntryStatement(String title) throws SQLException {
         String sql = "DELETE FROM " + DatabaseConstants.ENTRIES_TABLE_NAME +
-                " WHERE " + EntryTableColumns.TITLE + " = ?";
+                " WHERE " + EntryFields.TITLE + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         pstmt.setString(1, title);
@@ -200,7 +200,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetEntryStatement(String title) throws SQLException {
-        String sql = "SELECT * FROM " + DatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + EntryTableColumns.TITLE + " = ?";
+        String sql = "SELECT * FROM " + DatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + EntryFields.TITLE + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         pstmt.setString(1, title);
@@ -215,7 +215,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetAllEntryTitlesStatement() throws SQLException {
-        String sql = "SELECT " + EntryTableColumns.TITLE + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
+        String sql = "SELECT " + EntryFields.TITLE + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
 
         return this.connection.prepareStatement(sql);
     }
@@ -229,7 +229,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetListOfGroupsStatement() throws SQLException {
-        String sql = "SELECT DISTINCT " + EntryTableColumns.CATEGORY + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
+        String sql = "SELECT DISTINCT " + EntryFields.CATEGORY + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
 
         return this.connection.prepareStatement(sql);
     }

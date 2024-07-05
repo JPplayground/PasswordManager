@@ -1,4 +1,4 @@
-package passwordmanager.encryption;
+package passwordmanager.backend.local.encryption;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;

@@ -1,4 +1,4 @@
-package passwordmanager.encryption;
+package passwordmanager.backend.local.encryption.windows;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;

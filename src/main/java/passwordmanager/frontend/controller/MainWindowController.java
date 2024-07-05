@@ -1,4 +1,4 @@
-package passwordmanager.controller;
+package passwordmanager.frontend.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -7,15 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.stage.Window;
-import passwordmanager.database.DatabaseAPI;
+import passwordmanager.backend.local.database.LocalAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
-import passwordmanager.model.EntryCache;
-import passwordmanager.model.SearchResultCache;
-import passwordmanager.util.PasswordGenerator;
+import passwordmanager.frontend.cache.EntryCache;
+import passwordmanager.frontend.cache.SearchResultCache;
+import passwordmanager.frontend.util.PasswordGenerator;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class MainWindowController {
 
@@ -168,7 +167,7 @@ public class MainWindowController {
                     .category(group)
                     .build();
 
-            DatabaseAPI.getInstance().newEntry(entry);
+            LocalAPI.getInstance().newEntry(entry);
             entryCache.updateEntries();
             searchResultCache.refreshSearchResults();
             setupSearchResultsDisplay();

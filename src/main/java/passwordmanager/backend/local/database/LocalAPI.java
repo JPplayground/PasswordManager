@@ -1,5 +1,6 @@
-package passwordmanager.database;
+package passwordmanager.backend.local.database;
 
+import passwordmanager.backend.DatabaseAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
 
@@ -29,19 +30,19 @@ import java.util.Set;
  *
  * @see Entry
  */
-public class DatabaseAPI {
+public class LocalAPI implements DatabaseAPI {
 
     private PreparedStatementGenerator preparedStatementGenerator;
 
     // Singleton Instance
-    private static DatabaseAPI instance;
+    private static LocalAPI instance;
 
     /**
      * Private constructor to initialize the database connection and create necessary tables.
      * This constructor is called internally to ensure only one instance of the {@code DatabaseAPI}
      * class exists throughout the application.
      */
-    private DatabaseAPI() {
+    private LocalAPI() {
         try {
             this.preparedStatementGenerator = new PreparedStatementGenerator();
 
@@ -59,18 +60,17 @@ public class DatabaseAPI {
      *
      * @return the singleton instance of the {@code DatabaseAPI}.
      */
-    public static DatabaseAPI getInstance() {
+    public static LocalAPI getInstance() {
         if (instance == null) {
-            instance = new DatabaseAPI();
+            instance = new LocalAPI();
         }
         return instance;
     }
 
     /**
-     * Adds a new entry to the database.
-     *
-     * @param entry the entry object to be added.
+     *  {@inheritDoc}
      */
+    @Override
     public void newEntry(Entry entry) {
         try {
             try (PreparedStatement stmt = preparedStatementGenerator.prepareInsertEntryStatement(entry)) {
@@ -79,6 +79,11 @@ public class DatabaseAPI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void modifyEntry(String title, EntryFields field, String newValue) {
+        // TODO: IMPLEMENT
     }
 
     /**
@@ -103,10 +108,9 @@ public class DatabaseAPI {
     }
 
     /**
-     * Removes an entry from the database.
-     *
-     * @param title the title of the entry to remove.
+     *  {@inheritDoc}
      */
+    @Override
     public void removeEntry(String title) {
         try {
             try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(title)) {
@@ -118,10 +122,9 @@ public class DatabaseAPI {
     }
 
     /**
-     * Removes an entry from the database.
-     *
-     * @param entry the entry to be removed.
+     *  {@inheritDoc}
      */
+    @Override
     public void removeEntry(Entry entry) {
         try {
             // Uses removeEntry(String) by getting title from entry
@@ -134,11 +137,9 @@ public class DatabaseAPI {
     }
 
     /**
-     * Retrieves an entry from the database based on its title.
-     *
-     * @param titleKey the title of the entry to retrieve.
-     * @return the {@code Entry} object corresponding to the title, or {@code null} if not found.
+     *  {@inheritDoc}
      */
+    @Override
     public Entry getEntry(String titleKey) {
         try {
             ResultSet resultSet;
@@ -147,16 +148,16 @@ public class DatabaseAPI {
                 if (resultSet.next()) {
 
                     // Retrieve entry data from the result set
-                    String title = resultSet.getString(EntryTableColumns.TITLE.toString());
-                    String email = resultSet.getString(EntryTableColumns.EMAIL.toString());
-                    String secondaryEmail = resultSet.getString(EntryTableColumns.SECONDARY_EMAIL.toString());
-                    String password = resultSet.getString(EntryTableColumns.PASSWORD.toString());
-                    String username = resultSet.getString(EntryTableColumns.USERNAME.toString());
-                    String phoneNumber = resultSet.getString(EntryTableColumns.PHONE_NUMBER.toString());
-                    String link = resultSet.getString(EntryTableColumns.LINK.toString());
-                    String category = resultSet.getString(EntryTableColumns.CATEGORY.toString());
-                    Timestamp dateCreated = resultSet.getTimestamp(EntryTableColumns.DATE_CREATED.toString());
-                    Timestamp dateModified = resultSet.getTimestamp(EntryTableColumns.DATE_MODIFIED.toString());
+                    String title = resultSet.getString(EntryFields.TITLE.toString());
+                    String email = resultSet.getString(EntryFields.EMAIL.toString());
+                    String secondaryEmail = resultSet.getString(EntryFields.SECONDARY_EMAIL.toString());
+                    String password = resultSet.getString(EntryFields.PASSWORD.toString());
+                    String username = resultSet.getString(EntryFields.USERNAME.toString());
+                    String phoneNumber = resultSet.getString(EntryFields.PHONE_NUMBER.toString());
+                    String link = resultSet.getString(EntryFields.LINK.toString());
+                    String category = resultSet.getString(EntryFields.CATEGORY.toString());
+                    Timestamp dateCreated = resultSet.getTimestamp(EntryFields.DATE_CREATED.toString());
+                    Timestamp dateModified = resultSet.getTimestamp(EntryFields.DATE_MODIFIED.toString());
 
                     // Create and return the Entry object
                     return new EntryBuilder(title)
@@ -182,12 +183,11 @@ public class DatabaseAPI {
     }
 
     /**
-     * Retrieves all entries from the database.
-     *
-     * @return an {@code ArrayList} containing all entries, or {@code null} if an error occurs.
+     *  {@inheritDoc}
      */
+    @Override
     public ArrayList<Entry> getAllEntries() {
-        ArrayList<String> entryTitles = getListOfEntryTitles();
+        ArrayList<String> entryTitles = getEntryTitles();
         ArrayList<Entry> entries = new ArrayList<>();
 
         for (String title : entryTitles) {
@@ -198,11 +198,10 @@ public class DatabaseAPI {
     }
 
     /**
-     * Retrieves a list of all entry titles from the database.
-     *
-     * @return an {@code ArrayList} containing all entry titles, or {@code null} if an error occurs.
+     *  {@inheritDoc}
      */
-    public ArrayList<String> getListOfEntryTitles() {
+    @Override
+    public ArrayList<String> getEntryTitles() {
         ArrayList<String> entries = new ArrayList<>();
         try {
             ResultSet resultSet;
@@ -220,12 +219,10 @@ public class DatabaseAPI {
     }
 
     /**
-     * Retrieves a list of all groups from the database.
-     *
-     * @return A {@code Set<String>} containing all the groups retrieved from the database,
-     *         or {@code null} if an SQL exception occurs.
+     *  {@inheritDoc}
      */
-    public Set<String> getListOfGroups() {
+    @Override
+    public Set<String> getGroups() {
         Set<String> groups = new HashSet<>();
         try {
             ResultSet resultSet;

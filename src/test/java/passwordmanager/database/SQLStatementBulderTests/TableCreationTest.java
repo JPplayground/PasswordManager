@@ -1,8 +1,8 @@
 package passwordmanager.database.SQLStatementBulderTests;
 
-import passwordmanager.database.DatabaseConnection;
-import passwordmanager.database.DatabaseConstants;
-import passwordmanager.database.PreparedStatementGenerator;
+import passwordmanager.backend.local.database.DatabaseConnection;
+import passwordmanager.backend.local.database.DatabaseConstants;
+import passwordmanager.backend.local.database.PreparedStatementGenerator;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;

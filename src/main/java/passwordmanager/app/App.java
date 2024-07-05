@@ -6,11 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import passwordmanager.encryption.WinKeyStorageUtil;
-import passwordmanager.livetesting.LiveTestSetup;
-import passwordmanager.model.EntryCache;
-import passwordmanager.database.DatabaseConnection;
-import passwordmanager.model.SearchResultCache;
+import passwordmanager.backend.local.encryption.windows.WinKeyStorageUtil;
+import passwordmanager.backend.local.livetesting.LiveTestSetup;
+import passwordmanager.frontend.cache.EntryCache;
+import passwordmanager.backend.local.database.DatabaseConnection;
+import passwordmanager.frontend.cache.SearchResultCache;
 
 import java.io.IOException;
 
