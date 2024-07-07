@@ -11,7 +11,7 @@ import passwordmanager.backend.local.database.LocalAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
 import passwordmanager.frontend.cache.EntryCache;
-import passwordmanager.frontend.cache.SearchResultCache;
+import passwordmanager.frontend.cache.SearchResultFXMLCache;
 import passwordmanager.frontend.util.PasswordGenerator;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class MainWindowController {
 
     // Caches
     private final EntryCache entryCache = EntryCache.getInstance();
-    private final SearchResultCache searchResultCache = SearchResultCache.getInstance();
+    private final SearchResultFXMLCache searchResultFXMLCache = SearchResultFXMLCache.getInstance();
 
     @FXML
     public void initialize() {
@@ -74,7 +74,7 @@ public class MainWindowController {
         searchResultsDisplayVBox.getChildren().clear();
 
         // Get search results from cache
-        List<Node> searchResults = searchResultCache.getSearchResults();
+        List<Node> searchResults = searchResultFXMLCache.getSearchResults();
 
         // Add search results to display
         // Default is to display all entries in the database
@@ -104,7 +104,7 @@ public class MainWindowController {
         searchResultsDisplayVBox.getChildren().clear();
 
         // Get search results from cache
-        List<Node> searchResults = searchResultCache.getSearchResults();
+        List<Node> searchResults = searchResultFXMLCache.getSearchResults();
 
         for (Node searchResult : searchResults) {
             Entry currentResultEntry = (Entry) searchResult.getUserData();
@@ -169,7 +169,7 @@ public class MainWindowController {
 
             LocalAPI.getInstance().newEntry(entry);
             entryCache.updateEntries();
-            searchResultCache.refreshSearchResults();
+            searchResultFXMLCache.refreshSearchResults();
             setupSearchResultsDisplay();
             clearTextFields();
 

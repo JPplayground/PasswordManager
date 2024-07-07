@@ -2,14 +2,9 @@ Add comparator to SearchResultEntry nodes (filter the nodes rather than the entr
 Use icons in search result boxes
 Fix updating find page after adding entry (EntryCache is updated but search results node cache is not) (THIS STILL NOT WORKING) (email isn't updating)
 Find where (if implemented) where we restrict trying to create an "Entrie" table only if it doesn't already exist (Update NOTES.txt with this info)
-
-6/19/2024
--------------------
 Update search result fxml to support new fields
-
-6/30/2024
--------------------
 Inspect dox for each file to ensure they are accurate
 Update testing files
 Add encryption to database
 Add external database (username/password verification)
+Ensure only one instance of the program is running

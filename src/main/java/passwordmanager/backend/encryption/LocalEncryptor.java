@@ -1,4 +1,4 @@
-package passwordmanager.backend.local.encryption;
+package passwordmanager.backend.encryption;
 
 public class LocalEncryptor {
     private String encryptionKey;

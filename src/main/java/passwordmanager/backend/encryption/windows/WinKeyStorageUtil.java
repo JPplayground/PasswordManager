@@ -1,7 +1,7 @@
-package passwordmanager.backend.local.encryption.windows;
+package passwordmanager.backend.encryption.windows;
 
 import passwordmanager.app.DeveloperSettings;
-import passwordmanager.backend.local.encryption.UserKeyGenerator;
+import passwordmanager.backend.encryption.UserKeyGenerator;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;

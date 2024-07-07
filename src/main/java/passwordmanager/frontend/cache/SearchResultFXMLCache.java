@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class SearchResultCache {
+public class SearchResultFXMLCache {
 
     // Logger
-    private static final Logger logger = Logger.getLogger(SearchResultCache.class.getName());
+    private static final Logger logger = Logger.getLogger(SearchResultFXMLCache.class.getName());
 
     // Singleton instance
-    private static SearchResultCache instance = null;
+    private static SearchResultFXMLCache instance = null;
 
     // Cached list of search results
     private List<Node> searchResults = new ArrayList<>();
 
     // Get singleton instance of the SearchResultCache
-    public static SearchResultCache getInstance() {
+    public static SearchResultFXMLCache getInstance() {
         if (instance == null) {
             logger.info("Creating new SearchResultCache instance");
-            instance = new SearchResultCache();
+            instance = new SearchResultFXMLCache();
         }
         return instance;
     }

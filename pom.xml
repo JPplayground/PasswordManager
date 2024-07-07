@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>21-ea+5</version>
+            <version>21.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -108,6 +108,13 @@
             <version>5.8.0</version>
         </dependency>
 
+<!--REMOVE BEFORE RELEASE-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>DynamoDBLocal</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+<!--REMOVE BEFORE RELEASE-->
 
     </dependencies>
 

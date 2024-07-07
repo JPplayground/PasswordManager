@@ -9,7 +9,7 @@ import javafx.stage.Window;
 import passwordmanager.backend.local.database.LocalAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.frontend.cache.EntryCache;
-import passwordmanager.frontend.cache.SearchResultCache;
+import passwordmanager.frontend.cache.SearchResultFXMLCache;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -116,7 +116,7 @@ public class SearchResultController {
                 // Delete the entry from the database and update caches
                 LocalAPI.getInstance().removeEntry(this.entry.getTitle());
                 EntryCache.getInstance().updateEntries();
-                SearchResultCache.getInstance().refreshSearchResults();
+                SearchResultFXMLCache.getInstance().refreshSearchResults();
 
                 // Remove the entry from the VBox
                 VBox parent = (VBox) root.getParent();
