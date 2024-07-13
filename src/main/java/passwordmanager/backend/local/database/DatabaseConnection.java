@@ -1,6 +1,6 @@
 package passwordmanager.backend.local.database;
 
-import passwordmanager.app.DeveloperSettings;
+import passwordmanager.app.DevelopmentSettings;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,7 +34,7 @@ public class DatabaseConnection {
      */
     public static void setConnection() {
         try {
-            if (DeveloperSettings.getApplicationMode() == DeveloperSettings.ApplicationMode.TESTING) {
+            if (DevelopmentSettings.getApplicationMode() == DevelopmentSettings.ApplicationMode.TESTING) {
                 connection = DriverManager.getConnection(DatabaseConstants.TEST_CONNECTION_URL);
             } else {
                 connection = DriverManager.getConnection(DatabaseConstants.APP_CONNECTION_URL);

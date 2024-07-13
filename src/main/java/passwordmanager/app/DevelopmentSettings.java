@@ -1,6 +1,6 @@
 package passwordmanager.app;
 
-public class DeveloperSettings {
+public class DevelopmentSettings {
 
     // --------------------------------------------------------------------------------------- //
 

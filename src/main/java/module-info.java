@@ -9,6 +9,7 @@ module passwordmanager {
     requires com.fasterxml.jackson.databind;
     requires com.sun.jna.platform;
     requires com.sun.jna;
+    requires java.compiler;
 
     exports passwordmanager.backend.local.database;
     exports passwordmanager.frontend.util;
