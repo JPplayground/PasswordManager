@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-    <img src="Logo.png" alt="Logo" width="25%">
+    <img src="res/Logo.png" alt="Logo" width="25%">
   </a>
 </p>
 
