@@ -1,2 +1,0 @@
-Table creation handled in passwordmanager/database/PreparedStatementGenerator.java, activated by the first getting of the singleton instance of DatabaseAPI.
-Creation only if it does not exist is encoded into the SQL statement itself (passwordmanager/database/PreparedStatementGenerator.java).
