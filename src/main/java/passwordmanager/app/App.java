@@ -38,26 +38,8 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-//        // TODO: Adjust window size based on display
-//        DisplayExaminer examiner = new DisplayExaminer();
-//
-//        // Adjust the scaling of the window based on the display size
-//        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-//        double scalePercentage = Math.min(primaryScreenBounds.getWidth() / baseWidth, primaryScreenBounds.getHeight() / baseHeight);
-//
-//        // Scale the contents
-//        root.setScaleX(scalePercentage);
-//        root.setScaleY(scalePercentage);
-//
-//        // Adjust the stage size to fit the scaled contents
-//        stage.setWidth(baseWidth * scalePercentage);
-//        stage.setHeight(baseHeight * scalePercentage);
-//
-//        // Center the stage on the screen
-//        stage.setX((primaryScreenBounds.getWidth() - stage.getWidth()) / 2);
-//        stage.setY((primaryScreenBounds.getHeight() - stage.getHeight()) / 2);
-//
-//        stage.show();
+        // TODO: Adjust window size based on display
+
 
     }
 
