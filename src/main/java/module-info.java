@@ -1,15 +1,16 @@
 module passwordmanager {
+    requires javafx.fxml;
     requires javafx.controls;
+
     requires java.sql;
     requires java.datatransfer;
     requires java.desktop;
+
     requires org.xerial.sqlitejdbc;
-    requires javafx.fxml;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires com.sun.jna.platform;
     requires com.sun.jna;
-    requires java.compiler;
 
     exports passwordmanager.backend.local.database;
     exports passwordmanager.frontend.util;

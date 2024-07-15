@@ -1,6 +1,6 @@
 package passwordmanager.database;
 
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import passwordmanager.backend.encryption.windows.DPAPIUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,14 +12,15 @@ public class DPAPIUtilTest {
     public void EncryptionAndDecryptionTest() {
 
         String testString = "test";
-        byte[] encrypted = null;
+        byte[] encrypted;
         byte[] decrypted = null;
 
         // Encrypt test
         try {
             encrypted = DPAPIUtil.encrypt(testString.getBytes());
         } catch (Exception e) {
-            e.printStackTrace();
+            // TODO: Robust logging needed
+            // e.printStackTrace();
             fail("Failed to encrypt data");
             return;
         }
@@ -31,7 +32,8 @@ public class DPAPIUtilTest {
             }
             decrypted = DPAPIUtil.decrypt(encrypted);
         } catch (Exception e) {
-            e.printStackTrace();
+            // TODO: Robust logging needed
+            // e.printStackTrace();
             fail("Failed to decrypt data");
         }
 
