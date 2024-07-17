@@ -75,11 +75,11 @@
         </dependency>
 
 <!--REMOVE BEFORE RELEASE-->
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>DynamoDBLocal</artifactId>
-            <version>2.5.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>DynamoDBLocal</artifactId>-->
+<!--            <version>2.5.2</version>-->
+<!--        </dependency>-->
 <!--REMOVE BEFORE RELEASE-->
 
     </dependencies>
