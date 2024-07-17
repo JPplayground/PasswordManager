@@ -7,8 +7,6 @@ module passwordmanager {
     requires java.desktop;
 
     requires org.xerial.sqlitejdbc;
-    requires com.fasterxml.jackson.core;
-    requires com.fasterxml.jackson.databind;
     requires com.sun.jna.platform;
     requires com.sun.jna;
 
