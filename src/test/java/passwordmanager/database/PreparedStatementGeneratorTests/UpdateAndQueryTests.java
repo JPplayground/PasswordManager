@@ -1,4 +1,4 @@
-package passwordmanager.database.SQLStatementBulderTests;
+package passwordmanager.database.PreparedStatementGeneratorTests;
 
 import passwordmanager.backend.local.database.DatabaseConnection;
 import passwordmanager.backend.local.database.PreparedStatementGenerator;
@@ -13,11 +13,18 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for {@link PreparedStatementGenerator}
+ */
 public class UpdateAndQueryTests {
 
     private static Connection connection;
 
-
+    /**
+     * Sets up a new database connection and creates the necessary tables before each test.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @BeforeEach
     public void createNewConnectionAndTables() throws SQLException {
         DatabaseConnection.setConnection();
@@ -31,11 +38,21 @@ public class UpdateAndQueryTests {
         
     }
 
+    /**
+     * Closes the database connection after each test.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @AfterEach
     public void closeConnection() throws SQLException {
         DatabaseConnection.closeConnection();
     }
 
+    /**
+     * Tests that an entry can be inserted into the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @Test
     public void testInsertEntry() throws SQLException {
         
@@ -63,6 +80,11 @@ public class UpdateAndQueryTests {
         assertEquals(1, affectedRows, "One row should have been inserted.");
     }
 
+    /**
+     * Tests that an entry can be retrieved from the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @Test
     public void testGetEntry() throws SQLException {
         var psg = new PreparedStatementGenerator();
@@ -99,6 +121,11 @@ public class UpdateAndQueryTests {
 
     }
 
+    /**
+     * Tests that an entry can be updated in the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @Test
     public void testUpdateEntry() throws SQLException {
         var psg = new PreparedStatementGenerator();
@@ -127,7 +154,7 @@ public class UpdateAndQueryTests {
 
         // Update the entry with a new email
         PreparedStatement updateStatement = psg.prepareEntryUpdateStatement(
-                title, newEmail, null, null, null, null);
+                title, newEmail, null, null, null, null, null, null);
         affectedRows = updateStatement.executeUpdate();
         assertEquals(1, affectedRows, "Only one row should be affected.");
 
@@ -148,6 +175,11 @@ public class UpdateAndQueryTests {
         assertEquals(category, resultSet.getString("category"), "The category should match the queried category.");
     }
 
+    /**
+     * Tests that an entry can be removed from the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @Test
     public void testRemoveEntry() throws SQLException {
         var psg = new PreparedStatementGenerator();
@@ -175,8 +207,11 @@ public class UpdateAndQueryTests {
         assertFalse(resultSet.next());
     }
 
-
-
+    /**
+     * Tests that all entry titles can be retrieved from the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     @Test
     public void testGetAllEntryTitles() throws SQLException {
         var psg = new PreparedStatementGenerator();

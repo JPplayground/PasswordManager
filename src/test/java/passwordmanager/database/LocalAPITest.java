@@ -12,16 +12,25 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for verifying the functionality of the LocalAPI.
+ */
 public class LocalAPITest {
 
     private static LocalAPI localAPI;
 
+    /**
+     * Sets up the database connection and initializes the LocalAPI instance before all tests.
+     */
     @BeforeAll
     public static void setup() {
         DatabaseConnection.setConnection();
         localAPI = LocalAPI.getInstance();
     }
 
+    /**
+     * Tests inserting and removing an entry in the database.
+     */
     @Test
     public void testInsertAndRemoveEntry() {
         String title, email, password, username, link, category;
@@ -51,6 +60,9 @@ public class LocalAPITest {
         });
     }
 
+    /**
+     * Tests inserting and removing an entry with empty parameters in the database.
+     */
     @Test
     public void testInsertAndRemoveEntryWithEmptyParameters() {
         String title;
@@ -67,7 +79,11 @@ public class LocalAPITest {
         });
     }
 
-
+    /**
+     * Tests retrieving an entry from the database.
+     *
+     * @throws IllegalAccessException if the entry cannot be accessed.
+     */
     @Test
     public void testGetEntry() throws IllegalAccessException {
         String title, email, password, username, link, category;
@@ -104,6 +120,9 @@ public class LocalAPITest {
 
     }
 
+    /**
+     * Tests retrieving all entry titles from the database.
+     */
     @Test
     public void testGetEntryTitles() {
         String title1, email1, password1, username1, link1, category1;

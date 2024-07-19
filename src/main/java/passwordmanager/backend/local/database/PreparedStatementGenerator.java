@@ -115,24 +115,32 @@ public class PreparedStatementGenerator {
      *
      * <p>Parameters that do not require updating should be passed as {@code null}.
      *
-     * @param title     the title of the entry to identify the record to update; must not be null.
-     * @param email     the new email to update, or null if no update is needed.
-     * @param password  the new password to update, or null if no update is needed.
-     * @param username  the new username to update, or null if no update is needed.
-     * @param link      the new link to update, or null if no update is needed.
-     * @param category  the new category to update, or null if no update is needed.
+     * @param title             the title of the entry to identify the record to update; must not be null.
+     * @param email             the new email to update, or null if no update is needed.
+     * @param secondaryEmail    the new secondary email to update, or null if no update is needed.
+     * @param password          the new password to update, or null if no update is needed.
+     * @param phoneNumber       the new phone number to update, or null if no update is needed.
+     * @param username          the new username to update, or null if no update is needed.
+     * @param link              the new link to update, or null if no update is needed.
+     * @param category          the new category to update, or null if no update is needed.
      * @return a {@code PreparedStatement} object that contains the SQL query with placeholders.
      *         This prepared statement can then be executed after setting the appropriate parameter values.
      * @throws SQLException if there is an error during the database access or query preparation.
      */
-    public PreparedStatement prepareEntryUpdateStatement(String title, String email, String password, String username, String link, String category) throws SQLException {
+    public PreparedStatement prepareEntryUpdateStatement(String title, String email, String secondaryEmail, String password, String username, String phoneNumber, String link, String category) throws SQLException {
         StringBuilder sql = new StringBuilder("UPDATE " + DatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
 
         if (email != null) {
             sql.append(EntryFields.EMAIL + " = ?, ");
         }
+        if (secondaryEmail != null) {
+            sql.append(EntryFields.SECONDARY_EMAIL + " = ?, ");
+        }
         if (password != null) {
             sql.append(EntryFields.PASSWORD + " = ?, ");
+        }
+        if (phoneNumber != null) {
+            sql.append(EntryFields.PHONE_NUMBER + " = ?, ");
         }
         if (username != null) {
             sql.append(EntryFields.USERNAME + " = ?, ");
@@ -153,11 +161,17 @@ public class PreparedStatementGenerator {
         if (email != null) {
             pstmt.setString(paramIndex++, email);
         }
+        if (secondaryEmail != null) {
+            pstmt.setString(paramIndex++, secondaryEmail);
+        }
         if (password != null) {
             pstmt.setString(paramIndex++, password);
         }
         if (username != null) {
             pstmt.setString(paramIndex++, username);
+        }
+        if (phoneNumber != null) {
+            pstmt.setString(paramIndex++, phoneNumber);
         }
         if (link != null) {
             pstmt.setString(paramIndex++, link);

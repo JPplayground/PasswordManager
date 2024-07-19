@@ -6,8 +6,14 @@ import passwordmanager.backend.encryption.windows.DPAPIUtil;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test class for verifying the encryption and decryption functionality of DPAPIUtil.
+ */
 public class DPAPIUtilTest {
 
+    /**
+     * Tests the encryption and decryption of a string using DPAPIUtil.
+     */
     @Test
     public void EncryptionAndDecryptionTest() {
 

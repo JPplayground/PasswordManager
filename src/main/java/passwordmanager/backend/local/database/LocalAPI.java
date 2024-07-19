@@ -81,30 +81,38 @@ public class LocalAPI implements DatabaseAPI {
         }
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public void modifyEntry(String title, EntryFields field, String newValue) {
-        // TODO: IMPLEMENT
-    }
+        String email = null;
+        String secondaryEmail = null;
+        String password = null;
+        String username = null;
+        String phoneNumber = null;
+        String link = null;
+        String category = null;
 
-    /**
-     * Modifies an existing entry in the database.
-     * Parameters that do not need to be changed should be passed in as null.
-     *
-     * @param title    the title of the entry to modify.
-     * @param email    the new email to update.
-     * @param password the new password to update.
-     * @param username the new username to update.
-     * @param link     the new link to update.
-     * @param category the new category to update.
-     */
-    public void modifyEntry(String title, String email, String password, String username, String link, String category) {
+        switch (field) {
+            case EMAIL -> email = newValue;
+            case SECONDARY_EMAIL -> secondaryEmail = newValue;
+            case PASSWORD -> password = newValue;
+            case USERNAME -> username = newValue;
+            case PHONE_NUMBER -> phoneNumber = newValue;
+            case LINK -> link = newValue;
+            case CATEGORY -> category = newValue;
+            default -> throw new IllegalArgumentException("Invalid field: " + field);
+        }
+
         try {
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareEntryUpdateStatement(title, email, password, username, link, category)) {
+            try (PreparedStatement stmt = preparedStatementGenerator.prepareEntryUpdateStatement(title, email, secondaryEmail, password, username, phoneNumber, link, category)) {
                 stmt.execute();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     /**

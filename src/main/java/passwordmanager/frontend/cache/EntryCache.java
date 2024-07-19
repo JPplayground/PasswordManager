@@ -72,7 +72,7 @@ public class EntryCache {
     /**
      * Returns the list of cached entries.
      *
-     * @return an {@code ArrayList} containing the cached entries.
+     * @return a {@code List} containing the cached entries.
      */
     public List<Entry> getEntries() {
         return entries;
@@ -81,8 +81,8 @@ public class EntryCache {
     /**
      * Returns a boolean value indicating if an Entry with the supplied title already exists.
      *
-     * @param title the title of the entry to retrieve.
-     * @return {@code true} if entry already exists, {@code false} otherwise.
+     * @param title the title of the entry to check.
+     * @return {@code true} if the entry already exists, {@code false} otherwise.
      */
     public boolean contains(String title) {
         for (Entry entry : entries) {

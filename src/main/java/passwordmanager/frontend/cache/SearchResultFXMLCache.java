@@ -10,9 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * The {@code SearchResultFXMLCache} class is a singleton that provides a cache for search results in the password manager application.
+ * This class loads and caches search results as JavaFX nodes upon initialization and provides methods to access and refresh the cached results.
+ *
+ * <p>This class ensures that the search results are loaded efficiently and provides logging information for these operations.
+ *
+ * <p>Usage example:
+ * <pre>
+ * {@code
+ * SearchResultFXMLCache cache = SearchResultFXMLCache.getInstance();
+ * List<Node> searchResults = cache.getSearchResults();
+ * }
+ * </pre>
+ *
+ * @see EntryCache
+ * @see Entry
+ * @see SearchResultController
+ */
 public class SearchResultFXMLCache {
 
-    // Logger
+    // Logger for logging purposes
     private static final Logger logger = Logger.getLogger(SearchResultFXMLCache.class.getName());
 
     // Singleton instance
@@ -21,7 +39,11 @@ public class SearchResultFXMLCache {
     // Cached list of search results
     private List<Node> searchResults = new ArrayList<>();
 
-    // Get singleton instance of the SearchResultCache
+    /**
+     * Returns the singleton instance of the {@code SearchResultFXMLCache} class.
+     *
+     * @return the singleton instance of the {@code SearchResultFXMLCache}.
+     */
     public static SearchResultFXMLCache getInstance() {
         if (instance == null) {
             logger.info("Creating new SearchResultCache instance");
@@ -30,7 +52,9 @@ public class SearchResultFXMLCache {
         return instance;
     }
 
-    // Load the search result cache (call this on app startup or when the cache needs to be refreshed)
+    /**
+     * Loads the search result cache. This method should be called on app startup or when the cache needs to be refreshed.
+     */
     public void loadSearchResults() {
         logger.info("Initializing search result cache");
 
@@ -48,24 +72,26 @@ public class SearchResultFXMLCache {
 
                 searchResults.add(searchResult);
             } catch (IOException e) {
-                logger.severe("Failed to load SearchResult.fxml");
+                logger.severe("Failed to load SearchResult.fxml: " + e.getMessage());
             }
         }
     }
 
-    // Refresh the search results cache
+    /**
+     * Refreshes the search results cache.
+     */
     public void refreshSearchResults() {
         logger.info("Refreshing search result cache");
         searchResults.clear();
         loadSearchResults();
     }
 
+    /**
+     * Returns the list of cached search results.
+     *
+     * @return a {@code List} containing the cached search results.
+     */
     public List<Node> getSearchResults() {
         return searchResults;
     }
-
-
-
-
-
 }
