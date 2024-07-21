@@ -1,6 +1,7 @@
 package passwordmanager.backend.local.database;
 
 import passwordmanager.backend.DatabaseAPI;
+import passwordmanager.backend.EntryFields;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
 
@@ -32,7 +33,7 @@ import java.util.Set;
  */
 public class LocalAPI implements DatabaseAPI {
 
-    private PreparedStatementGenerator preparedStatementGenerator;
+    private LocalPreparedStatementGenerator LocalPreparedStatementGenerator;
 
     // Singleton Instance
     private static LocalAPI instance;
@@ -44,9 +45,9 @@ public class LocalAPI implements DatabaseAPI {
      */
     private LocalAPI() {
         try {
-            this.preparedStatementGenerator = new PreparedStatementGenerator();
+            this.LocalPreparedStatementGenerator = new LocalPreparedStatementGenerator();
 
-            try (PreparedStatement createEntryTable = preparedStatementGenerator. prepareEntryTableCreationStatement()) {
+            try (PreparedStatement createEntryTable = LocalPreparedStatementGenerator. prepareEntryTableCreationStatement()) {
                 createEntryTable.execute();
             }
 
@@ -73,7 +74,7 @@ public class LocalAPI implements DatabaseAPI {
     @Override
     public void newEntry(Entry entry) {
         try {
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareInsertEntryStatement(entry)) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareInsertEntryStatement(entry)) {
                 stmt.execute();
             }
         } catch (SQLException e) {
@@ -106,7 +107,7 @@ public class LocalAPI implements DatabaseAPI {
         }
 
         try {
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareEntryUpdateStatement(title, email, secondaryEmail, password, username, phoneNumber, link, category)) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareEntryUpdateStatement(title, email, secondaryEmail, password, username, phoneNumber, link, category)) {
                 stmt.execute();
             }
         } catch (SQLException e) {
@@ -121,7 +122,7 @@ public class LocalAPI implements DatabaseAPI {
     @Override
     public void removeEntry(String title) {
         try {
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(title)) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareRemoveEntryStatement(title)) {
                 stmt.execute();
             }
         } catch (SQLException e) {
@@ -136,7 +137,7 @@ public class LocalAPI implements DatabaseAPI {
     public void removeEntry(Entry entry) {
         try {
             // Uses removeEntry(String) by getting title from entry
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareRemoveEntryStatement(entry.getTitle())) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareRemoveEntryStatement(entry.getTitle())) {
                 stmt.execute();
             }
         } catch (SQLException e) {
@@ -151,7 +152,7 @@ public class LocalAPI implements DatabaseAPI {
     public Entry getEntry(String titleKey) {
         try {
             ResultSet resultSet;
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetEntryStatement(titleKey)) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareGetEntryStatement(titleKey)) {
                 resultSet = stmt.executeQuery();
                 if (resultSet.next()) {
 
@@ -213,7 +214,7 @@ public class LocalAPI implements DatabaseAPI {
         ArrayList<String> entries = new ArrayList<>();
         try {
             ResultSet resultSet;
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetAllEntryTitlesStatement()) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareGetAllEntryTitlesStatement()) {
                 resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     entries.add(resultSet.getString(1));
@@ -234,7 +235,7 @@ public class LocalAPI implements DatabaseAPI {
         Set<String> groups = new HashSet<>();
         try {
             ResultSet resultSet;
-            try (PreparedStatement stmt = preparedStatementGenerator.prepareGetListOfGroupsStatement()) {
+            try (PreparedStatement stmt = LocalPreparedStatementGenerator.prepareGetListOfGroupsStatement()) {
                 resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     groups.add(resultSet.getString(1));

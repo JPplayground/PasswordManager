@@ -1,8 +1,8 @@
 package passwordmanager.database.PreparedStatementGeneratorTests;
 
-import passwordmanager.backend.local.database.DatabaseConnection;
-import passwordmanager.backend.local.database.DatabaseConstants;
-import passwordmanager.backend.local.database.PreparedStatementGenerator;
+import passwordmanager.backend.DatabaseConnection;
+import passwordmanager.backend.local.database.LocalDatabaseConstants;
+import passwordmanager.backend.local.database.LocalPreparedStatementGenerator;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;
@@ -44,8 +44,8 @@ public class TableCreationTest {
      */
     @Test
     public void testEntryTableCreation() throws SQLException {
-        PreparedStatementGenerator preparedStatementGenerator = new PreparedStatementGenerator();
-        PreparedStatement createTable = preparedStatementGenerator.prepareEntryTableCreationStatement();
+        LocalPreparedStatementGenerator LocalPreparedStatementGenerator = new LocalPreparedStatementGenerator();
+        PreparedStatement createTable = LocalPreparedStatementGenerator.prepareEntryTableCreationStatement();
 
         // Execute the table creation statement and ensure no exceptions are thrown
         assertDoesNotThrow(() -> createTable.executeUpdate());
@@ -53,7 +53,7 @@ public class TableCreationTest {
         // Verify the table was created successfully
         String sql = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?;";
         PreparedStatement checkTable = connection.prepareStatement(sql);
-        checkTable.setString(1, DatabaseConstants.ENTRIES_TABLE_NAME);
+        checkTable.setString(1, LocalDatabaseConstants.ENTRIES_TABLE_NAME);
 
         ResultSet resultSet = checkTable.executeQuery();
         assertTrue(resultSet.next());

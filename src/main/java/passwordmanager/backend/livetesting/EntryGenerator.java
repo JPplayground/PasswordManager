@@ -1,4 +1,4 @@
-package passwordmanager.backend.local.livetesting;
+package passwordmanager.backend.livetesting;
 
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;

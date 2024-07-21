@@ -9,6 +9,7 @@ module passwordmanager {
     requires org.xerial.sqlitejdbc;
     requires com.sun.jna.platform;
     requires com.sun.jna;
+    requires java.xml.crypto;
 
     exports passwordmanager.app;
     opens passwordmanager.frontend.controller to javafx.fxml;

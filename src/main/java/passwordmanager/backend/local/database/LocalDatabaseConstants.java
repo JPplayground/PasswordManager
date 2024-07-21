@@ -1,7 +1,7 @@
 package passwordmanager.backend.local.database;
 
 /**
- * The {@code DatabaseConstants} class contains constants used for database configuration and table/column names.
+ * The {@code LocalDatabaseConstants} class contains constants used for database configuration and table/column names.
  * This class includes the database driver URL, connection URLs, table names, and column names.
  *
  * <p>This class is designed to provide a single source of truth for all database-related constants,
@@ -10,12 +10,13 @@ package passwordmanager.backend.local.database;
  * <p>Usage example:
  * <pre>
  * {@code
- * String driverUrl = DatabaseConstants.DRIVER_URL;
- * String appConnectionUrl = DatabaseConstants.APP_CONNECTION_URL;
+ * String appConnectionUrl = LocalDatabaseConstants.APP_CONNECTION_URL;
+ * String testConnectionUrl = LocalDatabaseConstants.TEST_CONNECTION_URL;
+ * String entriesTableName = LocalDatabaseConstants.ENTRIES_TABLE_NAME;
  * }
  * </pre>
  */
-public class DatabaseConstants {
+public class LocalDatabaseConstants {
 
     /**
      * The connection URL for the application database.

@@ -1,5 +1,7 @@
 package passwordmanager.backend.local.database;
 
+import passwordmanager.backend.DatabaseConnection;
+import passwordmanager.backend.EntryFields;
 import passwordmanager.model.Entry;
 
 import java.sql.Connection;
@@ -36,7 +38,7 @@ import java.sql.SQLException;
  * @see PreparedStatement
  * @see Connection
  */
-public class PreparedStatementGenerator {
+public class LocalPreparedStatementGenerator {
 
     private final Connection connection;
 
@@ -44,7 +46,7 @@ public class PreparedStatementGenerator {
      * Constructs an instance of {@code PreparedStatementGenerator}.
      * Retrieves the database connection from {@link DatabaseConnection}.
      */
-    public PreparedStatementGenerator() {
+    public LocalPreparedStatementGenerator() {
         this.connection = DatabaseConnection.getConnection();
     }
 
@@ -58,7 +60,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareEntryTableCreationStatement() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.ENTRIES_TABLE_NAME + "(" +
+        String sql = "CREATE TABLE IF NOT EXISTS " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + "(" +
                 EntryFields.TITLE + " VARCHAR(255) PRIMARY KEY, " +
                 EntryFields.EMAIL + " VARCHAR(255), " +
                 EntryFields.SECONDARY_EMAIL + " VARCHAR(255), " +
@@ -84,7 +86,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareInsertEntryStatement(Entry entry) throws SQLException {
-        String sql = "INSERT INTO " + DatabaseConstants.ENTRIES_TABLE_NAME + " (" +
+        String sql = "INSERT INTO " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " (" +
                 EntryFields.TITLE + ", " +
                 EntryFields.EMAIL + ", " +
                 EntryFields.SECONDARY_EMAIL + ", " +
@@ -128,7 +130,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during the database access or query preparation.
      */
     public PreparedStatement prepareEntryUpdateStatement(String title, String email, String secondaryEmail, String password, String username, String phoneNumber, String link, String category) throws SQLException {
-        StringBuilder sql = new StringBuilder("UPDATE " + DatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
+        StringBuilder sql = new StringBuilder("UPDATE " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
 
         if (email != null) {
             sql.append(EntryFields.EMAIL + " = ?, ");
@@ -195,7 +197,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during the database access or the query preparation process.
      */
     public PreparedStatement prepareRemoveEntryStatement(String title) throws SQLException {
-        String sql = "DELETE FROM " + DatabaseConstants.ENTRIES_TABLE_NAME +
+        String sql = "DELETE FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME +
                 " WHERE " + EntryFields.TITLE + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
@@ -214,7 +216,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetEntryStatement(String title) throws SQLException {
-        String sql = "SELECT * FROM " + DatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + EntryFields.TITLE + " = ?";
+        String sql = "SELECT * FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + EntryFields.TITLE + " = ?";
 
         PreparedStatement pstmt = this.connection.prepareStatement(sql);
         pstmt.setString(1, title);
@@ -229,7 +231,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetAllEntryTitlesStatement() throws SQLException {
-        String sql = "SELECT " + EntryFields.TITLE + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
+        String sql = "SELECT " + EntryFields.TITLE + " FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME;
 
         return this.connection.prepareStatement(sql);
     }
@@ -243,7 +245,7 @@ public class PreparedStatementGenerator {
      * @throws SQLException if there is an error during database access or query preparation.
      */
     public PreparedStatement prepareGetListOfGroupsStatement() throws SQLException {
-        String sql = "SELECT DISTINCT " + EntryFields.CATEGORY + " FROM " + DatabaseConstants.ENTRIES_TABLE_NAME;
+        String sql = "SELECT DISTINCT " + EntryFields.CATEGORY + " FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME;
 
         return this.connection.prepareStatement(sql);
     }

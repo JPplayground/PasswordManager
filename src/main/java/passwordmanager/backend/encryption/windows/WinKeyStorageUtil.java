@@ -1,6 +1,6 @@
 package passwordmanager.backend.encryption.windows;
 
-import passwordmanager.app.DevelopmentSettings;
+import passwordmanager.app.ApplicationSettings;
 import passwordmanager.backend.encryption.UserKeyGenerator;
 
 import javax.crypto.SecretKey;
@@ -29,7 +29,7 @@ public class WinKeyStorageUtil {
     private static final Path USER_KEY_FILEPATH;
 
     static {
-        if (DevelopmentSettings.getApplicationMode() == DevelopmentSettings.ApplicationMode.PRODUCTION) {
+        if (ApplicationSettings.getApplicationMode() == ApplicationSettings.ApplicationMode.PRODUCTION) {
             USER_KEY_FILE = "userKey.dat";
             APP_DATA_PATH = System.getenv("LOCALAPPDATA");
         } else {

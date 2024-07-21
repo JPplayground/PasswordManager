@@ -1,4 +1,4 @@
-package passwordmanager.backend.local.database;
+package passwordmanager.backend;
 
 /**
  * Enum representing the columns in the entries table.

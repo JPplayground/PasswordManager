@@ -1,8 +1,8 @@
 package passwordmanager.database.PreparedStatementGeneratorTests;
 
-import passwordmanager.backend.local.database.DatabaseConnection;
-import passwordmanager.backend.local.database.PreparedStatementGenerator;
-import passwordmanager.backend.local.database.EntryFields;
+import passwordmanager.backend.DatabaseConnection;
+import passwordmanager.backend.local.database.LocalPreparedStatementGenerator;
+import passwordmanager.backend.EntryFields;
 import org.junit.jupiter.api.*;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for {@link PreparedStatementGenerator}
+ * Tests for {@link LocalPreparedStatementGenerator}
  */
 public class UpdateAndQueryTests {
 
@@ -31,7 +31,7 @@ public class UpdateAndQueryTests {
 
         {
             // Create Table 'ENTRIES'
-            var psg = new PreparedStatementGenerator();
+            var psg = new LocalPreparedStatementGenerator();
             PreparedStatement statement = psg.prepareEntryTableCreationStatement();
             statement.executeUpdate();
         }
@@ -73,7 +73,7 @@ public class UpdateAndQueryTests {
                 .build();
         
         // Insert an entry
-        var psg = new PreparedStatementGenerator();
+        var psg = new LocalPreparedStatementGenerator();
         PreparedStatement statement = psg.prepareInsertEntryStatement(entry);
 
         int affectedRows = statement.executeUpdate();
@@ -87,7 +87,7 @@ public class UpdateAndQueryTests {
      */
     @Test
     public void testGetEntry() throws SQLException {
-        var psg = new PreparedStatementGenerator();
+        var psg = new LocalPreparedStatementGenerator();
 
         // Constant vars for this entry
         String title = "getTestTitle", email = "test@example.com", password = "password123";
@@ -128,7 +128,7 @@ public class UpdateAndQueryTests {
      */
     @Test
     public void testUpdateEntry() throws SQLException {
-        var psg = new PreparedStatementGenerator();
+        var psg = new LocalPreparedStatementGenerator();
         int affectedRows;
 
         // Constant vars for this entry
@@ -182,7 +182,7 @@ public class UpdateAndQueryTests {
      */
     @Test
     public void testRemoveEntry() throws SQLException {
-        var psg = new PreparedStatementGenerator();
+        var psg = new LocalPreparedStatementGenerator();
         int affectedRows;
 
         // Constant vars for this entry
@@ -214,7 +214,7 @@ public class UpdateAndQueryTests {
      */
     @Test
     public void testGetAllEntryTitles() throws SQLException {
-        var psg = new PreparedStatementGenerator();
+        var psg = new LocalPreparedStatementGenerator();
 
         String title1 = "getAllTestTitle1", email1 = "test@example.com1", password1 = "password1";
         String username1 = "testUser1", link1 = "http://example.com1", category1 = "General1";

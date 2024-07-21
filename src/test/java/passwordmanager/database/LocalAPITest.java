@@ -3,7 +3,7 @@ package passwordmanager.database;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import passwordmanager.backend.local.database.LocalAPI;
-import passwordmanager.backend.local.database.DatabaseConnection;
+import passwordmanager.backend.DatabaseConnection;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryBuilder;
 

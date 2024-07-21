@@ -6,9 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import passwordmanager.backend.local.livetesting.LiveTestSetup;
+import passwordmanager.backend.livetesting.LiveTestSetup;
 import passwordmanager.frontend.cache.EntryCache;
-import passwordmanager.backend.local.database.DatabaseConnection;
+import passwordmanager.backend.DatabaseConnection;
 import passwordmanager.frontend.cache.SearchResultFXMLCache;
 
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class App extends Application {
         DatabaseConnection.setConnection();
 
         // Sets testing data for UI components
-        if (DevelopmentSettings.getApplicationMode() == DevelopmentSettings.ApplicationMode.TESTING) {
+        if (ApplicationSettings.getApplicationMode() == ApplicationSettings.ApplicationMode.TESTING) {
             LiveTestSetup.setup();
         }
 
