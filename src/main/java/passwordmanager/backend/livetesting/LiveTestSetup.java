@@ -1,6 +1,6 @@
 package passwordmanager.backend.livetesting;
 
-import passwordmanager.backend.local.database.LocalAPI;
+import passwordmanager.backend.local.SQLLite.LocalAPI;
 import passwordmanager.model.Entry;
 
 import java.util.List;

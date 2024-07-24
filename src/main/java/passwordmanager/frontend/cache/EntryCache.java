@@ -1,7 +1,7 @@
 package passwordmanager.frontend.cache;
 
 import passwordmanager.backend.DatabaseAPI;
-import passwordmanager.backend.local.database.LocalAPI;
+import passwordmanager.backend.local.SQLLite.LocalAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.model.EntryTitleComparator;
 

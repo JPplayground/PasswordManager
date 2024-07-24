@@ -1,8 +1,8 @@
-package passwordmanager.database.PreparedStatementGeneratorTests;
+package passwordmanager.backend.local.SQLLite.PreparedStatementGeneratorTests;
 
 import passwordmanager.backend.DatabaseConnection;
-import passwordmanager.backend.local.database.LocalDatabaseConstants;
-import passwordmanager.backend.local.database.LocalPreparedStatementGenerator;
+import passwordmanager.backend.local.SQLLite.LocalDatabaseConstants;
+import passwordmanager.backend.local.SQLLite.LocalPreparedStatementGenerator;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;

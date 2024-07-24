@@ -1,7 +1,8 @@
-package passwordmanager.backend.local.database;
+package passwordmanager.backend.local.SQLLite;
 
 import passwordmanager.backend.DatabaseConnection;
 import passwordmanager.backend.EntryFields;
+import passwordmanager.backend.PreparedStatementGenerator;
 import passwordmanager.model.Entry;
 
 import java.sql.Connection;
@@ -38,7 +39,7 @@ import java.sql.SQLException;
  * @see PreparedStatement
  * @see Connection
  */
-public class LocalPreparedStatementGenerator {
+public class LocalPreparedStatementGenerator implements PreparedStatementGenerator {
 
     private final Connection connection;
 
@@ -59,6 +60,7 @@ public class LocalPreparedStatementGenerator {
      * @return a {@code PreparedStatement} that, when executed, will ensure the entries table exists with the correct schema.
      * @throws SQLException if there is an error during the database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareEntryTableCreationStatement() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + "(" +
                 EntryFields.TITLE + " VARCHAR(255) PRIMARY KEY, " +
@@ -85,6 +87,7 @@ public class LocalPreparedStatementGenerator {
      * @return a {@code PreparedStatement} object ready for execution to insert the entry data.
      * @throws SQLException if there is an error during the database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareInsertEntryStatement(Entry entry) throws SQLException {
         String sql = "INSERT INTO " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " (" +
                 EntryFields.TITLE + ", " +
@@ -129,6 +132,7 @@ public class LocalPreparedStatementGenerator {
      *         This prepared statement can then be executed after setting the appropriate parameter values.
      * @throws SQLException if there is an error during the database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareEntryUpdateStatement(String title, String email, String secondaryEmail, String password, String username, String phoneNumber, String link, String category) throws SQLException {
         StringBuilder sql = new StringBuilder("UPDATE " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " SET ");
 
@@ -196,6 +200,7 @@ public class LocalPreparedStatementGenerator {
      *         The statement includes a single placeholder for the title of the entry to be deleted.
      * @throws SQLException if there is an error during the database access or the query preparation process.
      */
+    @Override
     public PreparedStatement prepareRemoveEntryStatement(String title) throws SQLException {
         String sql = "DELETE FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME +
                 " WHERE " + EntryFields.TITLE + " = ?";
@@ -215,6 +220,7 @@ public class LocalPreparedStatementGenerator {
      *         The statement includes a placeholder for the title of the entry.
      * @throws SQLException if there is an error during database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareGetEntryStatement(String title) throws SQLException {
         String sql = "SELECT * FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME + " WHERE " + EntryFields.TITLE + " = ?";
 
@@ -230,6 +236,7 @@ public class LocalPreparedStatementGenerator {
      * @return a {@code PreparedStatement} that can be executed to fetch all entry titles from the database.
      * @throws SQLException if there is an error during database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareGetAllEntryTitlesStatement() throws SQLException {
         String sql = "SELECT " + EntryFields.TITLE + " FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME;
 
@@ -244,6 +251,7 @@ public class LocalPreparedStatementGenerator {
      *         containing all distinct categories from the entries table.
      * @throws SQLException if there is an error during database access or query preparation.
      */
+    @Override
     public PreparedStatement prepareGetListOfGroupsStatement() throws SQLException {
         String sql = "SELECT DISTINCT " + EntryFields.CATEGORY + " FROM " + LocalDatabaseConstants.ENTRIES_TABLE_NAME;
 

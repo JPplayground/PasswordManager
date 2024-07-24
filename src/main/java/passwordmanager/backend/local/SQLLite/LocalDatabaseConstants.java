@@ -1,4 +1,4 @@
-package passwordmanager.backend.local.database;
+package passwordmanager.backend.local.SQLLite;
 
 /**
  * The {@code LocalDatabaseConstants} class contains constants used for database configuration and table/column names.

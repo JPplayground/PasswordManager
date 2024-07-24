@@ -6,7 +6,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
-import passwordmanager.backend.local.database.LocalAPI;
+import passwordmanager.backend.local.SQLLite.LocalAPI;
 import passwordmanager.model.Entry;
 import passwordmanager.frontend.cache.EntryCache;
 import passwordmanager.frontend.cache.SearchResultFXMLCache;

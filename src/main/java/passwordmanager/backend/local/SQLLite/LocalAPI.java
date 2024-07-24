@@ -1,4 +1,4 @@
-package passwordmanager.backend.local.database;
+package passwordmanager.backend.local.SQLLite;
 
 import passwordmanager.backend.DatabaseAPI;
 import passwordmanager.backend.EntryFields;

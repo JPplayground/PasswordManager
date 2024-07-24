@@ -1,7 +1,7 @@
 package passwordmanager.backend;
 
 import passwordmanager.app.ApplicationSettings;
-import passwordmanager.backend.local.database.LocalDatabaseConstants;
+import passwordmanager.backend.local.SQLLite.LocalDatabaseConstants;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
