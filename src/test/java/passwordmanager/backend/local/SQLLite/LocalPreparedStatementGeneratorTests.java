@@ -1,7 +1,6 @@
-package passwordmanager.backend.local.SQLLite.PreparedStatementGeneratorTests;
+package passwordmanager.backend.local.SQLLite;
 
 import passwordmanager.backend.DatabaseConnection;
-import passwordmanager.backend.local.SQLLite.LocalPreparedStatementGenerator;
 import passwordmanager.backend.EntryFields;
 import org.junit.jupiter.api.*;
 import passwordmanager.model.Entry;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for {@link LocalPreparedStatementGenerator}
  */
-public class UpdateAndQueryTests {
+public class LocalPreparedStatementGeneratorTests {
 
     private static Connection connection;
 
@@ -46,6 +45,21 @@ public class UpdateAndQueryTests {
     @AfterEach
     public void closeConnection() throws SQLException {
         DatabaseConnection.closeConnection();
+    }
+
+    /**
+     * Tests the creation of the 'ENTRIES' table in the database.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
+    @Test
+    public void testEntryTableCreation() throws SQLException {
+        LocalPreparedStatementGenerator LocalPreparedStatementGenerator = new LocalPreparedStatementGenerator();
+        PreparedStatement createTable = LocalPreparedStatementGenerator.prepareEntryTableCreationStatement();
+
+        // Execute the table creation statement and ensure no exceptions are thrown
+        // (Simulates creating an already existing table)
+        assertDoesNotThrow(() -> createTable.executeUpdate());
     }
 
     /**
