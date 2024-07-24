@@ -10,6 +10,7 @@ module passwordmanager {
     requires com.sun.jna.platform;
     requires com.sun.jna;
     requires java.xml.crypto;
+    requires aws.java.sdk.dynamodb;
 
     exports passwordmanager.app;
     opens passwordmanager.frontend.controller to javafx.fxml;
