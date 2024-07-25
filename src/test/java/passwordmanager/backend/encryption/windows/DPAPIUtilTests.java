@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Test class for verifying the encryption and decryption functionality of DPAPIUtil.
  */
-public class DPAPIUtilTest {
+public class DPAPIUtilTests {
 
     /**
      * Tests the encryption and decryption of a string using DPAPIUtil.

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test class for verifying the functionality of the LocalAPI.
  */
-public class LocalAPITest {
+public class LocalAPITests {
 
     private static LocalAPI localAPI;
 
